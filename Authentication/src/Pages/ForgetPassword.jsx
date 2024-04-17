@@ -10,28 +10,61 @@ function ForgetPassword() {
   }
 
   return (
-    <form className="ForgetPage">
-      <h1>Reset your Page</h1>
-      <br />
-      <label for="username">UserName: </label>
-      <input
-        type="username"
-        placeholder="Enter UserName"
-        value={email}
-        required
-        onChange={getEmail}
-      />
-      <br />
-      <br />
+    <div className="flex ">
+      <div className="w-1/2 h-screen bg-[#4BCBEB]">
+        <h1>Task List Manager</h1>
+      </div>
 
-      <Link to={"/Reset"}>
-        <button>Continue</button>
-      </Link>
-      <br />
-      <Link to={"/Login"}>
-        <p> Back to Sign.In</p>
-      </Link>
-    </form>
+      <div className="w-1/2 h-screen">
+        <div className="flex items-center justify-center">
+          <form>
+            <h1 className="mt-44 text-center font-bold">Reset your Password</h1>
+
+            <text className="text-xs mx-12">
+              Enter the email address associated with your account <br />{" "}
+            </text>
+            <text className="text-xs mx-12">
+              and we will send you a link to reset your password.
+            </text>
+            <br />
+            <br />
+            <input
+              className="w-64 px-2 py-3 rounded border border-slate-300 mx-12 mt-1"
+              type="text"
+              placeholder="Enter UserName"
+              value={email}
+              onChange={getEmail}
+              required
+            />
+            <br />
+            <br />
+
+            <Link to={"/Reset"}>
+              <button className="w-64 rounded-2xl bg-[#4BCBEB] mx-12">
+                Continue
+              </button>
+            </Link>
+            <br />
+            <br />
+            <Link to={"/Login"}>
+              <text className="text-blue-800 px-32"> Back to Sign.In</text>
+            </Link>
+
+            <br />
+            <br />
+            <br />
+            <br />
+
+            <text className="text-xs px-24">
+              Don't have an Account?
+              <Link to={"/"}>
+                <button className="text-blue-900">SignUp</button>
+              </Link>
+            </text>
+          </form>
+        </div>
+      </div>
+    </div>
   );
 }
 

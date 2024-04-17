@@ -6,6 +6,7 @@ import Signup from "./Pages/SignUp";
 import Login from "./Pages/LogIn";
 import Forget from "./Pages/ForgetPassword";
 import Reset from "./Pages/Reset";
+import AdminBoard from "./Dashboard/AdminDashboard";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Login" element={<Login />} />
         <Route path="/Forget" element={<Forget />} />
         <Route path="/Reset" element={<Reset />} />
+        <Route path="/Dashboard" element={<AdminBoard />} />
       </Routes>
     </Router>
   );
