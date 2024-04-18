@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -32,17 +33,20 @@ function SignUp() {
   }
 
   return (
-    <div className="flex h-screen">
-      <div className="w-1/2 h-screen bg-[#4BCBEB]">
-        <h1 className="text-center">Task List Manager</h1>
+    <div className="flex h-full">
+      <div className="w-1/2 h-full bg-[#4BCBEB]">
+        
+        <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\Signup.PNG"></img>
       </div>
       <div className="w-1/2  ">
-        <h1 className="text text-center text-lg font-bold mt-44">
+        <h1 className="text text-center text-lg font-bold mt-36">
           Sign Up for an Account
         </h1>
 
         <div className="flex items-center justify-center ">
+       
           <form>
+            
             <br />
 
             <input
@@ -50,7 +54,7 @@ function SignUp() {
               type="text"
               placeholder="Enter Name"
               onChange={getName}
-              required
+              required={true}
             />
             <br />
             <br />
@@ -85,18 +89,20 @@ function SignUp() {
             <br />
             <br />
             <Link to="/Login">
-              <button className="bg-[#4BCBEB] px-2 py-2 w-60 rounded-2xl">
+              <button type="submit" className="bg-[#4BCBEB] px-2 py-2 w-60 rounded-2xl">
                 Sign Up
               </button>
             </Link>
             <br />
             <br />
 
-            <Link to="/Signup">
+            <Link to="/Login">
               <text>Already have an Account?</text>
               <button className="text-blue-800">Login</button>{" "}
             </Link>
+            
           </form>
+         
         </div>
       </div>
     </div>

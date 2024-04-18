@@ -14,9 +14,9 @@ function Reset() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-full">
       <div className="w-1/2 bg-[#4BCBEB]">
-        <h1 className="text-center">Task List Manager</h1>
+      <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\ResetPassword.jpg"></img>
       </div>
       <div className="w-1/2">
         <div className="flex items-center justify-center">

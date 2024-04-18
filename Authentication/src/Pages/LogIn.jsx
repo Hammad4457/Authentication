@@ -3,8 +3,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function LogIn() {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   function getPassword(e) {
     e.preventDefault();
@@ -17,14 +17,14 @@ function LogIn() {
 
   return (
     <div className="flex">
-      <div className="w-1/2 h-screen bg-[#4BCBEB]">
-        <h1 className="text-center">Task List Manger</h1>
+      <div className="w-1/2 h-full bg-[#4BCBEB]">
+      <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\SignIn.jpg"></img>
       </div>
       <div className="w-1/2">
         <div className="flex items-center justify-center ">
           <form>
             <h1 className="text text-center text-lg font-bold mt-44">
-              Login Here
+              Sign In to your Account
             </h1>
             <p className="text-xs text-center mt-2">
               Welcome back! please enter your detail
@@ -36,8 +36,8 @@ function LogIn() {
               type="text"
               placeholder="Enter UserName"
               value={email}
-              required
               onChange={getEmail}
+              required
             />
             <br />
             <br />
@@ -47,8 +47,8 @@ function LogIn() {
               type="password"
               placeholder="Enter Password"
               value={password}
-              required
               onChange={getPassword}
+              required
             />
             <br />
             <br />

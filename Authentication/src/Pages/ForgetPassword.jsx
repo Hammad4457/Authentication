@@ -11,11 +11,11 @@ function ForgetPassword() {
 
   return (
     <div className="flex ">
-      <div className="w-1/2 h-screen bg-[#4BCBEB]">
-        <h1>Task List Manager</h1>
+      <div className="w-1/2 h-full bg-[#4BCBEB]">
+      <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\ForgotPassword.jpg"></img>
       </div>
 
-      <div className="w-1/2 h-screen">
+      <div className="w-1/2 h-full">
         <div className="flex items-center justify-center">
           <form>
             <h1 className="mt-44 text-center font-bold">Reset your Password</h1>
