@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import MenuComponent from "../General Components/MenuComponent";
 import AnalyticsUser from "../General Components/Analytics_User";
 import Header from "../General Components/Header";
-import Chart from "../General Components/Chart";
+
 
 function AdminDashboard() {
   return (
@@ -14,7 +14,7 @@ function AdminDashboard() {
     <MenuComponent/>
     </div>
     <div className="w-[84.4%] h-auto">
-    <AnalyticsUser><Chart></Chart></AnalyticsUser>
+    <AnalyticsUser></AnalyticsUser>
     </div>
     </div>
     </div>

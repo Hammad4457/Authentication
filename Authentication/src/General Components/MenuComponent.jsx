@@ -9,7 +9,7 @@ function MenuComponent() {
         <h2 className="font-bold mt-10 mx-2">Menu</h2>
         
         <br />
-        <button className="relative mt-2 w-[88%] mx-2 h-8  rounded border border-800-slate">
+        <button className="relative mt-2 w-[88%] mx-2 h-8 shadow  rounded ">
           <svg
             class="h-6 w-8 text-black absolute  top-1/2 transform -translate-y-1/2 ml-2"
             fill="none"
@@ -26,7 +26,7 @@ function MenuComponent() {
           <span className="mr-8">Dashboard</span>
         </button>
         <Link to={"/Users"}>
-        <button className="relative h-8 mx-2 w-[88%] mt-5 rounded  border border-800-slate">
+        <button className="relative h-8 mx-2 w-[88%] shadow mt-5 rounded  border ">
           <svg
             className="h-6  w-8 text-black absolute  top-1/2 transform -translate-y-1/2 ml-2"
             viewBox="0 0 24 24"
@@ -43,7 +43,7 @@ function MenuComponent() {
         </button>
         </Link>
 
-        <button className="relative h-8 mx-2 w-[88%] mt-5 rounded border border-800-slate">
+        <button className="relative h-8 mx-2 w-[88%] mt-5 shadow rounded border">
           {" "}
           <svg
             className="h-6 w-8 text-black absolute  top-1/2 transform -translate-y-1/2 ml-2"
@@ -66,7 +66,7 @@ function MenuComponent() {
           </svg>
           <span className="mr-20">Task</span>
         </button>
-        <button className="relative w-[88%] h-8 mx-2 mt-5 rounded border border-800-slate ">
+        <button className="relative w-[88%] h-8 mx-2 mt-5 shadow rounded border  ">
           <svg
             class="h-6 w-8 text-black absolute ml-2"
             viewBox="0 0 24 24"
