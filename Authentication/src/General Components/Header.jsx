@@ -10,7 +10,7 @@ function Header({ pageName }) {
           </h1>
         </div>
         <div className="ml-auto flex items-center justify-center w-[84.4%] bg-white-100 h-12 border-2 rounded-md content-center">
-          <h2 className="font-bold text-left px-3">{pageName}</h2>
+          <h2 className="font-bold text-left px-12 text-xl">{pageName}</h2>
           <img className="mt-2 mr-2 ml-auto" src="src\assets\bell.png"></img>
         </div>
       </div>

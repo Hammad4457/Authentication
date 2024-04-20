@@ -9,6 +9,7 @@ import Reset from "./Pages/Reset";
 import AdminBoard from "./Dashboard/AdminDashboard";
 import Users from "./Dashboard/Users";
 import Task from "./Tasks/Task";
+import Notification from "./Notification/Notification";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/Dashboard" element={<AdminBoard />} />
         <Route path="/Users" element={<Users />} />
         <Route path="/Task" element={<Task />} />
+        <Route path="/Notifications" element={<Notification />} />
       </Routes>
     </Router>
   );

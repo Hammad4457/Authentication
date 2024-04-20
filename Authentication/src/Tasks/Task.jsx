@@ -5,7 +5,7 @@ import MenuComponent from "../General Components/MenuComponent";
 function Task() {
   return (
     <div>
-      <Header></Header>
+      <Header pageName="Tasks"></Header>
       <div className="flex h-auto">
         <div className="flex h-screen w-[16.6%] ">
           <MenuComponent color3={"blue-700"}></MenuComponent>

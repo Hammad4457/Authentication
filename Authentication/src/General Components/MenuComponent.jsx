@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function MenuComponent({ color1, color2, color3 }) {
-  // let task = true;
-  // if (taskBoolean) {
-  //   task = false;
-  // }
+function MenuComponent({ color1, color2, color3, userOff }) {
   return (
     <div className="relative ">
       <h2 className="font-bold mt-10 mx-2">Menu</h2>
@@ -29,26 +25,27 @@ function MenuComponent({ color1, color2, color3 }) {
           <span className={`mr-8 text-${color1}`}>Dashboard</span>
         </button>
       </Link>
-
-      <Link to={"/Users"}>
-        <button
-          className={`relative h-8 mx-2 w-[88%] shadow mt-5 rounded  border  `}
-        >
-          <svg
-            className={`h-6  w-8 text-${color2} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
+      {!userOff && (
+        <Link to={"/Users"}>
+          <button
+            className={`relative h-8 mx-2 w-[88%] shadow mt-5 rounded  border  `}
           >
-            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-            <circle cx="12" cy="7" r="4" />
-          </svg>
-          <span className={`mr-20 text-${color2}`}>User</span>
-        </button>
-      </Link>
+            <svg
+              className={`h-6  w-8 text-${color2} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+              <circle cx="12" cy="7" r="4" />
+            </svg>
+            <span className={`mr-20 text-${color2}`}>User</span>
+          </button>
+        </Link>
+      )}
 
       <Link to={"/Task"}>
         <button
@@ -93,6 +90,9 @@ function MenuComponent({ color1, color2, color3 }) {
         </svg>
         <span className="mr-14">Setting</span>
       </button>
+      <Link to="/Notifications">
+        <button>Noti</button>
+      </Link>
     </div>
   );
 }
