@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function MenuComponent({ color1, color2 }) {
+function MenuComponent({ color1, color2, color3 }) {
   // let task = true;
   // if (taskBoolean) {
   //   task = false;
@@ -32,10 +32,10 @@ function MenuComponent({ color1, color2 }) {
 
       <Link to={"/Users"}>
         <button
-          className={`relative h-8 mx-2 w-[88%] shadow mt-5 rounded  border text-${color2} `}
+          className={`relative h-8 mx-2 w-[88%] shadow mt-5 rounded  border  `}
         >
           <svg
-            className="h-6  w-8 text-${black} absolute  top-1/2 transform -translate-y-1/2 ml-2"
+            className={`h-6  w-8 text-${color2} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -50,10 +50,12 @@ function MenuComponent({ color1, color2 }) {
         </button>
       </Link>
 
-      <Link to={"./Task"}>
-        <button className="relative h-8 mx-2 w-[88%] mt-5 shadow rounded border">
+      <Link to={"/Task"}>
+        <button
+          className={`relative h-8 mx-2 w-[88%] mt-5 shadow rounded border `}
+        >
           <svg
-            className="h-6 w-8 text-black absolute  top-1/2 transform -translate-y-1/2 ml-2"
+            className={`h-6 w-8 text-${color3} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -71,7 +73,7 @@ function MenuComponent({ color1, color2 }) {
             <line x1="11" y1="12" x2="20" y2="12" />
             <line x1="11" y1="18" x2="20" y2="18" />
           </svg>
-          <span className="mr-20">Task</span>
+          <span className={`mr-20 text-${color3}`}>Task</span>
         </button>
       </Link>
 
