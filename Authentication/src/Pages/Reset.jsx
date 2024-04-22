@@ -16,7 +16,10 @@ function Reset() {
   return (
     <div className="flex h-full">
       <div className="w-1/2 bg-[#4BCBEB]">
-      <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\ResetPassword.jpg"></img>
+        <img
+          className=" py-28  w-96  mx-auto max-w-full"
+          src="src\assets\ResetPassword.jpg"
+        ></img>
       </div>
       <div className="w-1/2">
         <div className="flex items-center justify-center">
@@ -30,7 +33,7 @@ function Reset() {
             <br />
             <br />
             <input
-              className="w-64 mx-12 py-1 px-2 border border-300-slate"
+              className="w-64 mx-12 py-2 px-2 border border-300-slate rounded"
               type="password"
               placeholder="Enter Password"
               value={password}
@@ -39,7 +42,7 @@ function Reset() {
             />
             <br /> <br />
             <input
-              className="w-64 mx-12 py-1 px-2 border border-300-slate"
+              className="w-64 mx-12 py-2 px-2 border border-300-slate rounded"
               type="password"
               placeholder="Confrim Password"
               value={confirmPassword}
@@ -50,7 +53,7 @@ function Reset() {
             <br />
             <br />
             <Link to={"/Login"}>
-              <button className="w-64 mx-12 rounded bg-[#4BCBEB]">
+              <button className="bg-[#4BCBEB] mx-12 px-2 py-2 w-64 rounded-2xl">
                 Update
               </button>
             </Link>

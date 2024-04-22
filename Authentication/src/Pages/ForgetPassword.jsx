@@ -12,7 +12,10 @@ function ForgetPassword() {
   return (
     <div className="flex ">
       <div className="w-1/2 h-full bg-[#4BCBEB]">
-      <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\ForgotPassword.jpg"></img>
+        <img
+          className=" py-28  w-96  mx-auto max-w-full"
+          src="src\assets\ForgotPassword.jpg"
+        ></img>
       </div>
 
       <div className="w-1/2 h-full">
@@ -40,7 +43,7 @@ function ForgetPassword() {
             <br />
 
             <Link to={"/Reset"}>
-              <button className="w-64 rounded-2xl bg-[#4BCBEB] mx-12">
+              <button className="bg-[#4BCBEB] mx-12 px-2 py-2 w-64 rounded-2xl">
                 Continue
               </button>
             </Link>
