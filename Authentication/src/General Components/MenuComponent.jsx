@@ -90,9 +90,9 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         </svg>
         <span className="mr-14">Setting</span>
       </button>
-      <Link to="/Notifications">
+      {/* <Link to="/Notifications">
         <button>Noti</button>
-      </Link>
+      </Link> */}
     </div>
   );
 }

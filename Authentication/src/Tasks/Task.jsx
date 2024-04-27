@@ -35,7 +35,7 @@ function Task() {
             <h2 className="font-bold ml-52 text-xl">End date:</h2>
 
             <button className="mx-auto" onClick={display}>
-              <img className="ml-96" src="src\assets\Add Task.png"></img>
+              <img className="ml-96 " src="src\assets\Add Task.png"></img>
             </button>
           </div>
           <div className="flex  ">
