@@ -4,9 +4,9 @@ import Calendar from "../General Components/Calendar";
 
 function Analytics_User() {
   return (
-    <div className=" bg-gray-300 w-auto h-[93.6%] border ">
+    <div className=" bg-gray-300 w-auto h-[100%] border ">
       <div className=" bg-white border-1 h-[92%] mt-8 py-12 mx-16 mb-4 ">
-        <div className="grid grid-cols-4  ">
+        <div className="grid grid-cols-4 px-4 space-x-4 ">
           <div className="h-32  rounded-md  border-1 bg-pink-100">
             <p className="mx-8">Total Task</p>
             <p className="text-xl mt-2 px-4 text-gray-600">90/100</p>
@@ -24,7 +24,7 @@ function Analytics_User() {
             <p className="text-xl px-4 mt-2 text-gray-600">10/100</p>
           </div>
         </div>
-        <div className="grid grid-cols-2 space-x-4 mb-32 px-4 mt-4 bg-white">
+        <div className="grid grid-cols-2 space-x-4 mb-32 px-4 mt-10 bg-white">
           <div className="h-52 rounded-md   border-1 bg-white">
             <p className="mx-40 font-bold  ">Total Task Ratio</p>
             <div className="px-8">

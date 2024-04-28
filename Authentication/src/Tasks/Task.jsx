@@ -6,6 +6,11 @@ import AddModal from "../General Components/AddModal";
 function Task() {
   const [submittedData, setSubmittedData] = useState([]);
   let [showModal, setShowModal] = useState(false);
+  const [showImage, setShowImage] = useState(false);
+
+  function handleClick() {
+    setShowImage(!showImage);
+  }
 
   function display() {
     setShowModal(!showModal);
@@ -21,6 +26,7 @@ function Task() {
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   }
+  // console.log(getRandomColor());
 
   return (
     <div>
@@ -29,7 +35,7 @@ function Task() {
         <div className="flex h-screen w-[16.6%] ">
           <MenuComponent color3={"blue-700"}></MenuComponent>
         </div>
-        <div className="w-[84.4%]  border-1   bg-[gray]">
+        <div className="w-[84.4%]  border-1  bg-gray-200">
           <div className="flex mt-12 ml-8">
             <h1 className="font-bold text-xl ">Start date:</h1>
             <h2 className="font-bold ml-52 text-xl">End date:</h2>
@@ -69,9 +75,20 @@ function Task() {
             {submittedData.map((data, index) => (
               <div key={index} className="h-64 border-2 border-black rounded">
                 <div
-                  className={`p-4 bg-${getRandomColor()}-500 overlay border-2 border-black`}
+                  className={"p-4 bg-" + getRandomColor() + "-500 overlay "}
                 ></div>
-                <h4 className="font-bold px-2">Title:</h4>
+                <div className="flex">
+                  <h4 className="font-bold px-2">Title:</h4>
+
+                  <button className="ml-auto" onClick={handleClick}>
+                    <img src="src\assets\Frame.png"></img>
+                  </button>
+                  {showImage && (
+                    <div className="w-auto h-auto ">
+                      <img src="src\assets\Actions.png"></img>
+                    </div>
+                  )}
+                </div>
                 <p className="px-2">{data.title}</p>
                 <h5 className="font-bold px-2">Description:</h5>
                 <p className="px-2"> {data.description}</p>

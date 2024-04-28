@@ -68,15 +68,19 @@ function Users() {
   const renderedData = data.map((item, index) => {
     return (
       <div key={index} className="flex">
-        <p className="w-1/5 px-12 mt-8 text-blue-700 underline">
+        <img
+          className="h-6 rounded ml-10 mt-8"
+          src="src\assets\Avatar.png"
+        ></img>
+        <p className="w-1/5 px-2 mt-8 text-blue-700 underline">
           {item.CustomerName}
         </p>
-        <p className="w-1/5 px-12 mt-8">{item.ProjectName}</p>
-        <p className="w-1/5 px-14 mt-8">{item.TaskStartDate}</p>
+        <p className="w-1/5 px-2 mt-8">{item.ProjectName}</p>
+        <p className="w-1/5 px-12 mt-8">{item.TaskStartDate}</p>
         <p className="w-1/5 px-10 mt-8">{item.TaskEndDate}</p>
         <p className="w-1/5 px-20 mt-8">{item.OverdueDay}</p>
 
-        <button className="mt-4 " onClick={dotButton}>
+        <button className="mt-8 " onClick={dotButton}>
           <img className="mr-28" src="src\assets\Frame.png"></img>
         </button>
       </div>
@@ -90,8 +94,8 @@ function Users() {
         <div className="flex h-screen w-[16.6%] ">
           <MenuComponent color2={"blue-700"}></MenuComponent>
         </div>
-        <div className="w-[84.4%]  border-1   bg-[gray]">
-          <div className=" h-screen w-[82%] mx-auto mt-12 mb-12 bg-white">
+        <div className="w-[84.4%]  border-1 h-[100%]  bg-gray-200">
+          <div className="  w-[82%] mx-auto mt-12 mb-12 bg-white">
             <h1 className="font-bold mx-2">Online User</h1>
             <div className="flex mt-4 ">
               <text className="font-bold px-8">Customer Name</text>
