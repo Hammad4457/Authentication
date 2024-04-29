@@ -8,20 +8,24 @@ function Analytics_User() {
       <div className=" bg-white border-1 h-[92%] mt-8 py-12 mx-16 mb-4 ">
         <div className="grid grid-cols-4 px-4 space-x-4 ">
           <div className="h-32  rounded-md  border-1 bg-pink-100">
-            <p className="mx-8">Total Task</p>
-            <p className="text-xl mt-2 px-4 text-gray-600">90/100</p>
+            <p className="mx-6 mt-2">Total Task</p>
+            <p className="text-xl mt-2 px-6 text-gray-600">90/100</p>
+            <img className="mt-4 mx-auto" src="src\assets\Line1.png"></img>
           </div>
           <div className="h-32 rounded-md  border-1 bg-sky-200">
-            <p className="mx-8">Completed Task</p>
-            <p className="text-xl px-4 mt-2 text-gray-600">80/100</p>
+            <p className="mx-6 mt-2">Completed Task</p>
+            <p className="text-xl px-6 mt-2 text-gray-600">80/100</p>
+            <img className="mt-4 mx-auto" src="src\assets\Line2.png"></img>
           </div>
           <div className="h-32  rounded-md   border-1 bg-orange-100">
-            <p className="mx-8">Pending Task</p>
-            <p className="text-xl px-4 mt-2 text-gray-600">50/100</p>
+            <p className="mx-6 mt-2">Pending Task</p>
+            <p className="text-xl px-6 mt-2 text-gray-600">50/100</p>
+            <img className="mt-4 mx-auto" src="src\assets\Line3.png"></img>
           </div>
           <div className="h-32 rounded-md  border-1 bg-emerald-100">
-            <p className="mx-8">Decline Task</p>
-            <p className="text-xl px-4 mt-2 text-gray-600">10/100</p>
+            <p className="mx-6 mt-2">Decline Task</p>
+            <p className="text-xl px-6 mt-2 text-gray-600">10/100</p>
+            <img className="mt-4 mx-auto" src="src\assets\Line4.png"></img>
           </div>
         </div>
         <div className="grid grid-cols-2 space-x-4 mb-32 px-4 mt-10 bg-white">

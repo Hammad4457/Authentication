@@ -1,32 +1,31 @@
-import { useState, React } from "react";
+import React, { useState } from "react";
 
 function AddModal({ onSubmit }) {
-  const [data, setData] = useState();
+  const [formData, setFormData] = useState({
+    title: "",
+    description: "",
+    attachment: "",
+    startDate: "",
+    endDate: ""
+  });
   const [cross, setCross] = useState(true);
+
   function crossDisplay() {
     setCross(!cross);
   }
-  const modalData = [
-    {
-      title: "",
-      description: "",
-      attachemnt: "",
-      startDate: "",
-      endDate: "",
-    },
-  ];
+
   function handleChange(e) {
     const { name, value } = e.target;
-    setData((prevData) => ({
+    setFormData((prevData) => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   }
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
 
-    onSubmit(data);
-  };
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    onSubmit(formData);
+  }
 
   return (
     <>
@@ -57,7 +56,7 @@ function AddModal({ onSubmit }) {
             </div>
 
             <p>
-              Fill the information below to add new task as per your requirment.
+              Fill the information below to add a new task as per your requirement.
             </p>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
@@ -67,43 +66,43 @@ function AddModal({ onSubmit }) {
                 <input
                   type="text"
                   name="title"
-                  value={modalData.title}
+                  value={formData.title}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="value2" className="block mb-1 font-bold">
+                <label htmlFor="description" className="block mb-1 font-bold">
                   Description:
                 </label>
                 <input
                   type="text"
                   name="description"
-                  value={modalData.description}
+                  value={formData.description}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
-              <label htmlFor="value3" className="block mb-1 font-bold">
+              <label htmlFor="attachment" className="block mb-1 font-bold">
                 Attachment:
               </label>
               <input
                 type="file"
                 name="attachment"
-                value={modalData.attachemnt}
+                value={formData.attachment}
                 onChange={handleChange}
                 className="w-full h-40 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">
-                <p className="text-xs">Support format PNG, JPEJ</p>
-                <p className="text-xs ml-48">Support format PNG, JPEJ</p>
+                <p className="text-xs">Supports PNG, JPEG formats</p>
               </div>
               <label className="block mb-1 font-bold">Start Date:</label>
               <input
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="startDate"
-                value={modalData.startDate}
+                value={formData.startDate}
+                onChange={handleChange}
                 required
               ></input>
               <label className="block mb-1 font-bold">End Date:</label>
@@ -111,7 +110,8 @@ function AddModal({ onSubmit }) {
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="endDate"
-                value={modalData.endDate}
+                value={formData.endDate}
+                onChange={handleChange}
                 required
               ></input>
               <button
@@ -127,4 +127,5 @@ function AddModal({ onSubmit }) {
     </>
   );
 }
+
 export default AddModal;
