@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function AddModal({ onSubmit }) {
-  const [formData, setFormData] = useState({
+  const [data, setData] = useState({
     title: "",
     description: "",
     attachment: "",
@@ -16,7 +16,7 @@ function AddModal({ onSubmit }) {
 
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setData((prevData) => ({
       ...prevData,
       [name]: value
     }));
@@ -24,7 +24,7 @@ function AddModal({ onSubmit }) {
 
   function handleFormSubmit(e) {
     e.preventDefault();
-    onSubmit(formData);
+    onSubmit(data);
   }
 
   return (
@@ -66,7 +66,7 @@ function AddModal({ onSubmit }) {
                 <input
                   type="text"
                   name="title"
-                  value={formData.title}
+                  value={data.title}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
@@ -78,7 +78,7 @@ function AddModal({ onSubmit }) {
                 <input
                   type="text"
                   name="description"
-                  value={formData.description}
+                  value={data.description}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
@@ -89,7 +89,7 @@ function AddModal({ onSubmit }) {
               <input
                 type="file"
                 name="attachment"
-                value={formData.attachment}
+                value={data.attachment}
                 onChange={handleChange}
                 className="w-full h-40 border border-gray-300 rounded-md py-1 px-3"
               />
@@ -101,7 +101,7 @@ function AddModal({ onSubmit }) {
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="startDate"
-                value={formData.startDate}
+                value={data.startDate}
                 onChange={handleChange}
                 required
               ></input>
@@ -110,7 +110,7 @@ function AddModal({ onSubmit }) {
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="endDate"
-                value={formData.endDate}
+                value={data.endDate}
                 onChange={handleChange}
                 required
               ></input>

@@ -1,4 +1,5 @@
 import React from "react";
+import PasswordSvg from "../svg Components/PasswordSvg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -25,35 +26,53 @@ function Reset() {
         <div className="flex items-center justify-center">
           <form>
             <h1 className="font-bold text-center mt-44">Reset your Page</h1>
-            <p className="text-xs px-6 mt-1">
+            <p className="text-xs px-16 mt-1">
               To set a new password, please enter your new password <br />{" "}
               below.Make sure it's secure,containing a combination of <br />
               letters,numbers, and special characters.
             </p>
             <br />
             <br />
-            <input
-              className="w-64 mx-12 py-2 px-2 border border-300-slate rounded"
-              type="password"
-              placeholder="Enter Password"
-              value={password}
-              onChange={getPassword}
-              required
-            />
+            <div className="relative">
+              <div className="flex items-center px-14">
+                <div className="absolute items-center pl-3">
+                <PasswordSvg />
+                </div>
+              
+              <input
+                className={`mt-0.1 w-80 pl-10 px-3  py-2 rounded border border-slate-300`}
+                
+                type="password"
+                placeholder="Your New Password"
+                onChange={getPassword}
+                
+                required
+              />
+            </div>
+            </div>
             <br /> <br />
-            <input
-              className="w-64 mx-12 py-2 px-2 border border-300-slate rounded"
-              type="password"
-              placeholder="Confrim Password"
-              value={confirmPassword}
-              onChange={getConfirmPassword}
-              required
-            />
+            <div className="relative">
+              <div className="flex items-center px-14">
+                <div className="absolute items-center pl-3">
+                <PasswordSvg />
+                </div>
+              
+              <input
+                className={`mt-0.1 w-80 pl-10 px-3  py-2 rounded border border-slate-300`}
+                
+                type="password"
+                placeholder="Confirm Your New Password"
+                onChange={getPassword}
+                
+                required
+              />
+            </div>
+            </div>
             <br />
             <br />
             <br />
             <Link to={"/Login"}>
-              <button className="bg-[#4BCBEB] mx-12 px-2 py-2 w-64 rounded-2xl">
+              <button className="bg-[#4BCBEB] mx-12 px-2 py-2 w-80 rounded-2xl">
                 Update
               </button>
             </Link>

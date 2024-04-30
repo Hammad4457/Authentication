@@ -1,4 +1,5 @@
 import React from "react";
+import EmailSvg from "../svg Components/EmailSvg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -31,14 +32,20 @@ function ForgetPassword() {
             </text>
             <br />
             <br />
+            <div className="relative ">
+            <div className="flex items-center px-14">
+            <div className="absolute itmes-center pl-3 ">
+              <EmailSvg />
+            </div>
             <input
-              className="w-64 px-2 py-3 rounded border border-slate-300 mx-12 mt-1"
+              className=" w-60 px-3 pl-10  py-2 rounded border border-slate-300"
               type="text"
-              placeholder="Enter UserName"
-              value={email}
+              placeholder="Enter Email"
               onChange={getEmail}
               required
             />
+            </div>
+            </div>
             <br />
             <br />
 
