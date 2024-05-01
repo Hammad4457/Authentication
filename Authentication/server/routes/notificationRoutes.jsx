@@ -18,3 +18,4 @@ router.put("/:id", notificationController.updateNotification);
 router.delete("/:id", notificationController.deleteNotification);
 
 module.exports = router;
+

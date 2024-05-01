@@ -1,5 +1,5 @@
 // taskController.js
-const Task = require("../models/taskModel");
+const Task = require("../modals/taskModal");
 
 // Get all tasks
 exports.getAllTasks = async (req, res) => {
