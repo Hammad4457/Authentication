@@ -36,43 +36,39 @@ function Reset() {
             <div className="relative">
               <div className="flex items-center px-14">
                 <div className="absolute items-center pl-3">
-                <PasswordSvg />
+                  <PasswordSvg />
                 </div>
-              
-              <input
-                className={`mt-0.1 w-80 pl-10 px-3  py-2 rounded border border-slate-300`}
-                
-                type="password"
-                placeholder="Your New Password"
-                onChange={getPassword}
-                
-                required
-              />
-            </div>
+
+                <input
+                  className={`mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300`}
+                  type="password"
+                  placeholder="Your New Password"
+                  onChange={getPassword}
+                  required
+                />
+              </div>
             </div>
             <br /> <br />
             <div className="relative">
               <div className="flex items-center px-14">
                 <div className="absolute items-center pl-3">
-                <PasswordSvg />
+                  <PasswordSvg />
                 </div>
-              
-              <input
-                className={`mt-0.1 w-80 pl-10 px-3  py-2 rounded border border-slate-300`}
-                
-                type="password"
-                placeholder="Confirm Your New Password"
-                onChange={getPassword}
-                
-                required
-              />
-            </div>
+
+                <input
+                  className={`mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300`}
+                  type="password"
+                  placeholder="Confirm Your New Password"
+                  onChange={getPassword}
+                  required
+                />
+              </div>
             </div>
             <br />
             <br />
             <br />
             <Link to={"/Login"}>
-              <button className="bg-[#4BCBEB] mx-12 px-2 py-2 w-80 rounded-2xl">
+              <button className="bg-[#4BCBEB] mx-12 px-2 py-2 w-72 rounded-2xl">
                 Update
               </button>
             </Link>

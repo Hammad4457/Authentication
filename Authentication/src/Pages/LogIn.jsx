@@ -20,7 +20,10 @@ function LogIn() {
   return (
     <div className="flex">
       <div className="w-1/2 h-full bg-[#4BCBEB]">
-      <img className=" py-28  w-96  mx-auto max-w-full" src="src\assets\SignIn.jpg"></img>
+        <img
+          className=" py-28  w-96  mx-auto max-w-full"
+          src="src\assets\SignIn.jpg"
+        ></img>
       </div>
       <div className="w-1/2">
         <div className="flex items-center justify-center ">
@@ -34,18 +37,18 @@ function LogIn() {
             <br />
 
             <div className="relative">
-            <div className="flex items-center">
-            <div className="absolute itmes-center pl-3 ">
-              <EmailSvg />
-            </div>
-            <input
-              className=" w-60 px-3 pl-10  py-2 rounded border border-slate-300"
-              type="text"
-              placeholder="Enter Email"
-              onChange={getEmail}
-              required
-            />
-            </div>
+              <div className="flex items-center">
+                <div className="absolute itmes-center pl-3 ">
+                  <EmailSvg />
+                </div>
+                <input
+                  className=" w-60 px-3 pl-10  py-2 rounded border border-slate-300"
+                  type="text"
+                  placeholder="Enter Email"
+                  onChange={getEmail}
+                  required
+                />
+              </div>
             </div>
             <br />
             <br />
@@ -53,32 +56,30 @@ function LogIn() {
             <div className="relative">
               <div className="flex items-center">
                 <div className="absolute items-center pl-3">
-                <PasswordSvg />
+                  <PasswordSvg />
                 </div>
-              
-              <input
-                className={`mt-0.1 w-60 pl-10 px-3  py-2 rounded border border-slate-300`}
-                
-                type="password"
-                placeholder="Enter Password"
-                onChange={getPassword}
-                
-                required
-              />
-            </div>
+
+                <input
+                  className={`mt-0.1 w-60 pl-10 px-3  py-2 rounded border border-slate-300`}
+                  type="password"
+                  placeholder="Enter Password"
+                  onChange={getPassword}
+                  required
+                />
+              </div>
             </div>
             <br />
             <br />
             <div className="flex">
-            <input type="checkbox" for="checkbox" />
-            <text className="text-xs   font-bold" for="checkbox">
-              Remember me{"  "}
-              <Link to={"/Forget"}>
-                <button className="text-blue-800 text-xs mx-8 ">
-                  Forget Password?
-                </button>
-              </Link>
-            </text>
+              <input type="checkbox" for="checkbox" />
+              <text className="text-xs ml-1   font-bold" for="checkbox">
+                Remember me{"  "}
+                <Link to={"/Forget"}>
+                  <button className="text-blue-800 text-xs ml-10 ">
+                    Forget Password?
+                  </button>
+                </Link>
+              </text>
             </div>
 
             <br />

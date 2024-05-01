@@ -47,16 +47,16 @@ function SignUp() {
           Sign Up for an Account
         </h1>
 
-        <div className="flex items-center justify-center ">
+        <div className="flex  justify-center ">
           <form>
             <br />
-            <div className="relative">
+            <div className="relative ">
               <div className="flex items-center">
-                <div className="absolute left-0 flex items-center pl-3">
+                <div className="absolute left-0  pl-3">
                   <NameSvg />
                 </div>
                 <input
-                  className="pl-10 w-72 px-3 py-2 rounded border border-slate-300"
+                  className="pl-10 w-72 px-3 py-2  rounded border border-slate-300"
                   type="text"
                   placeholder="Enter Name"
                   onChange={getName}
@@ -67,43 +67,42 @@ function SignUp() {
 
             <br />
             <br />
-            <div className="relative">
-            <div className="flex items-center">
-            <div className="absolute itmes-center pl-3 ">
-              <EmailSvg />
+            <div>
+              <div className="flex items-center">
+                <div className="absolute  pl-3 ">
+                  <EmailSvg />
+                </div>
+                <input
+                  className=" w-72 px-3 pl-10  py-2 rounded border border-slate-300"
+                  type="text"
+                  placeholder="Enter Email"
+                  onChange={getEmail}
+                  required
+                />
+              </div>
             </div>
-            <input
-              className=" w-72 px-3 pl-10  py-2 rounded border border-slate-300"
-              type="text"
-              placeholder="Enter Email"
-              onChange={getEmail}
-              required
-            />
-            </div>
-            </div>
-           
+
             <br />
             <br />
 
             <div className="relative">
               <div className="flex items-center">
-                <div className="absolute items-center pl-3">
-                <PasswordSvg />
+                <div className="absolute  pl-3">
+                  <PasswordSvg />
                 </div>
-              
-              <input
-                className={`mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300
+
+                <input
+                  className={`mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300
                 ${passwordError ? "border-red-500" : "border-slate-300"}`}
-                type="password"
-                placeholder="Enter Password"
-                onChange={getPassword}
-                onClick={togglePassword}
-                required
-              />
-            </div>
+                  type="password"
+                  placeholder="Enter Password"
+                  onChange={getPassword}
+                  onClick={togglePassword}
+                  required
+                />
+              </div>
             </div>
 
-           
             {passwordError && (
               <p className="text-xs">Password must be 8 characters</p>
             )}
@@ -111,13 +110,20 @@ function SignUp() {
             <br />
             <div className="flex">
               <div>
-              <input type="checkbox" for="checkbox" />
+                <input type="checkbox" />
               </div>
               <div className="flex">
-              <text for="checkbox " className="text-xs px-1">By creating an account means you to the <b>Terms<br/> & Conditions</b> and out Privacy Policy
-             & Conditions <br/> and our <b>Privacy Policy</b></text>
-             </div>
-             </div>
+                <text className="text-xs px-1">
+                  By creating an account means you to the{" "}
+                  <b>
+                    Terms
+                    <br /> & Conditions
+                  </b>{" "}
+                  and out Privacy Policy & Conditions <br /> and our{" "}
+                  <b>Privacy Policy</b>
+                </text>
+              </div>
+            </div>
             <br />
             <br />
             <Link to="/Login">
@@ -130,8 +136,8 @@ function SignUp() {
             </Link>
             <br />
             <br />
-            
-              <text className="px-3">Already have an Account?</text>
+
+            <text className="px-3">Already have an Account?</text>
             <Link to="/Login">
               <button className="text-blue-800">Login</button>
             </Link>
