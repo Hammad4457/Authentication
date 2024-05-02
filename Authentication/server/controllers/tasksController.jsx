@@ -1,8 +1,7 @@
-// taskController.js
-const Task = require("../modals/taskModal");
+import Task from "../models/taskModel";
 
 // Get all tasks
-exports.getAllTasks = async (req, res) => {
+export const getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find();
     res.json(tasks);
@@ -12,7 +11,7 @@ exports.getAllTasks = async (req, res) => {
 };
 
 // Get a single task by ID
-exports.getTaskById = async (req, res) => {
+export const getTaskById = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     if (task) {
@@ -26,7 +25,7 @@ exports.getTaskById = async (req, res) => {
 };
 
 // Create a new task
-exports.createTask = async (req, res) => {
+export const createTask = async (req, res) => {
   const task = new Task({
     title: req.body.title,
     description: req.body.description,
@@ -42,7 +41,7 @@ exports.createTask = async (req, res) => {
 };
 
 // Update a task by ID
-exports.updateTask = async (req, res) => {
+export const updateTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     if (task) {
@@ -61,7 +60,7 @@ exports.updateTask = async (req, res) => {
 };
 
 // Delete a task by ID
-exports.deleteTask = async (req, res) => {
+export const deleteTask = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
     if (task) {

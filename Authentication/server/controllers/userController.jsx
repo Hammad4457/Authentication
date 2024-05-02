@@ -1,8 +1,7 @@
-// userController.js
-const User = require("../modals/userModal");
+import User from "../models/userModel";
 
 // Get all users
-exports.getAllUsers = async (req, res) => {
+export const getAllUsers = async (req, res) => {
   try {
     const users = await User.find();
     res.json(users);
@@ -12,7 +11,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // Get a single user by ID
-exports.getUserById = async (req, res) => {
+export const getUserById = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -26,7 +25,7 @@ exports.getUserById = async (req, res) => {
 };
 
 // Create a new user
-exports.createUser = async (req, res) => {
+export const createUser = async (req, res) => {
   const user = new User(req.body);
 
   try {
@@ -38,7 +37,7 @@ exports.createUser = async (req, res) => {
 };
 
 // Update a user by ID
-exports.updateUser = async (req, res) => {
+export const updateUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {
@@ -57,7 +56,7 @@ exports.updateUser = async (req, res) => {
 };
 
 // Delete a user by ID
-exports.deleteUser = async (req, res) => {
+export const deleteUser = async (req, res) => {
   try {
     const user = await User.findById(req.params.id);
     if (user) {

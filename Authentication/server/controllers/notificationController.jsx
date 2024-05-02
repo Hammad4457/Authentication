@@ -1,8 +1,7 @@
-// notificationController.js
-const Notification = require("../modals/notificationModal");
+import Notification from "../models/notificationModel";
 
 // Get all notifications
-exports.getAllNotifications = async (req, res) => {
+export const getAllNotifications = async (req, res) => {
   try {
     const notifications = await Notification.find();
     res.json(notifications);
@@ -12,7 +11,7 @@ exports.getAllNotifications = async (req, res) => {
 };
 
 // Get a single notification by ID
-exports.getNotificationById = async (req, res) => {
+export const getNotificationById = async (req, res) => {
   try {
     const notification = await Notification.findById(req.params.id);
     if (notification) {
@@ -26,7 +25,7 @@ exports.getNotificationById = async (req, res) => {
 };
 
 // Create a new notification
-exports.createNotification = async (req, res) => {
+export const createNotification = async (req, res) => {
   const notification = new Notification({
     message: req.body.message,
     // Add other notification properties here
@@ -41,7 +40,7 @@ exports.createNotification = async (req, res) => {
 };
 
 // Update a notification by ID
-exports.updateNotification = async (req, res) => {
+export const updateNotification = async (req, res) => {
   try {
     const notification = await Notification.findById(req.params.id);
     if (notification) {
@@ -59,7 +58,7 @@ exports.updateNotification = async (req, res) => {
 };
 
 // Delete a notification by ID
-exports.deleteNotification = async (req, res) => {
+export const deleteNotification = async (req, res) => {
   try {
     const notification = await Notification.findById(req.params.id);
     if (notification) {
