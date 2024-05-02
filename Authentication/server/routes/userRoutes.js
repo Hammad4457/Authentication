@@ -1,6 +1,6 @@
 import express from "express";
 const router = express.Router();
-import * as userController from "../Controllers/userModal.js";
+import * as userController from "../controllers/userController.js";
 
 // Get all users
 router.get("/", userController.getAllUsers);
