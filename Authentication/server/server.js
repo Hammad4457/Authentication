@@ -13,6 +13,8 @@ connectDB();
 // Apply CORS middleware
 // app.use(corsMiddleware);
 app.use(express.json());
+console.log("Hammad");
+console.log("Here");
 
 // Routes
 import userRoutes from "./routes/userRoutes.js";

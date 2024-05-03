@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import NameSvg from "../svg Components/NameSvg";
 import EmailSvg from "../svg Components/EmailSvg";
 import PasswordSvg from "../svg Components/PasswordSvg";
+import axios from "axios";
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -34,6 +35,15 @@ function SignUp() {
     passwordField.type === "password";
   }
 
+  function handelSubmit(e){
+    e.preventDefault();
+
+    axios.post('http://localhost:5000/api/users/register',{name,email,password})
+    .then(result => console.log(result))
+    .catch(err=>console.log(err))
+
+  }
+
   return (
     <div className="flex h-full">
       <div className="w-1/2 h-full bg-[#4BCBEB]">
@@ -48,7 +58,7 @@ function SignUp() {
         </h1>
 
         <div className="flex  justify-center ">
-          <form>
+          <form onSubmit={handelSubmit}>
             <br />
             <div className="relative ">
               <div className="flex items-center">
@@ -126,14 +136,14 @@ function SignUp() {
             </div>
             <br />
             <br />
-            <Link to="/Login">
+            
               <button
                 type="submit"
                 className="bg-[#4BCBEB] px-2 py-2 w-72 rounded-2xl"
               >
                 Sign Up
               </button>
-            </Link>
+            
             <br />
             <br />
 

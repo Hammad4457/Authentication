@@ -1,4 +1,16 @@
-import User from "../models/userModal.js";
+import User from '../models/userModal.js'
+
+// Create a new user
+export const createUser = async (req, res) => {
+  const user = new User(req.body);
+  try {
+    const newUser = await user.save();
+    const token = newUser.createJWT()
+    res.status(201).json({newUser:{email:newUser.email,name: newUser.name} ,token});
+  } catch (err) {
+    res.status(400).json({ message: err.message });
+  }
+};
 
 // Get all users
 export const getAllUsers = async (req, res) => {
@@ -24,17 +36,7 @@ export const getUserById = async (req, res) => {
   }
 };
 
-// Create a new user
-export const createUser = async (req, res) => {
-  const user = new User(req.body);
 
-  try {
-    const newUser = await user.save();
-    res.status(201).json(newUser);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
-  }
-};
 
 // Update a user by ID
 export const updateUser = async (req, res) => {
