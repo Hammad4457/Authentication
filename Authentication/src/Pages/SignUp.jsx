@@ -9,7 +9,6 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
 
   function getName(e) {
     setName(e.target.value);
@@ -18,30 +17,20 @@ function SignUp() {
     setEmail(e.target.value);
   }
   function getPassword(e) {
-    const newPassword = e.target.value;
-    if (newPassword.lenght > 8) {
-      setPassword(newPassword);
-      setPasswordError(false);
-    } else {
-      setPassword("");
-      setPasswordError(true);
-    }
-  }
-  function togglePassword() {
-    var passwordField = document.getElementById("password");
-    if (passwordField.type === "password") {
-      passwordField.type = "text";
-    }
-    passwordField.type === "password";
+    setPassword(e.target.value);
   }
 
-  function handelSubmit(e){
+  function handelSubmit(e) {
     e.preventDefault();
 
-    axios.post('http://localhost:5000/api/users/register',{name,email,password})
-    .then(result => console.log(result))
-    .catch(err=>console.log(err))
-
+    axios
+      .post("http://localhost:3000/api/users/register", {
+        name: name,
+        email: email,
+        password: password,
+      })
+      .then((result) => console.log(result))
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -102,20 +91,15 @@ function SignUp() {
                 </div>
 
                 <input
-                  className={`mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300
-                ${passwordError ? "border-red-500" : "border-slate-300"}`}
+                  className="mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300"
                   type="password"
                   placeholder="Enter Password"
                   onChange={getPassword}
-                  onClick={togglePassword}
                   required
                 />
               </div>
             </div>
 
-            {passwordError && (
-              <p className="text-xs">Password must be 8 characters</p>
-            )}
             <br />
             <br />
             <div className="flex">
@@ -136,14 +120,14 @@ function SignUp() {
             </div>
             <br />
             <br />
-            
-              <button
-                type="submit"
-                className="bg-[#4BCBEB] px-2 py-2 w-72 rounded-2xl"
-              >
-                Sign Up
-              </button>
-            
+
+            <button
+              type="submit"
+              className="bg-[#4BCBEB] px-2 py-2 w-72 rounded-2xl"
+            >
+              Sign Up
+            </button>
+
             <br />
             <br />
 

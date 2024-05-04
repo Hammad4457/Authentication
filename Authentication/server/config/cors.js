@@ -1,4 +1,4 @@
-// config/cors.js
+config / cors.js;
 const cors = require("cors");
 
 // Define whitelist of allowed origins
