@@ -89,7 +89,7 @@ function Users() {
 
   return (
     <div>
-      <Header pageName="Users"></Header>
+      <Header pageName="User's"></Header>
       <div className="flex h-auto">
         <div className="flex h-screen w-[16.6%] ">
           <MenuComponent color2={"blue-700"}></MenuComponent>

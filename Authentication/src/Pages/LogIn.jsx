@@ -88,7 +88,7 @@ function LogIn() {
               <label htmlFor="checkbox" className="text-xs ml-1 font-bold">
                 Remember me{" "}
                 <Link to={"/Forget"}>
-                  <button className="text-blue-800 text-xs ml-14">
+                  <button className="text-blue-800 text-xs ml-20">
                     Forget Password?
                   </button>
                 </Link>

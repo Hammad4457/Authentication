@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 
 function MenuComponent({ color1, color2, color3, userOff }) {
   return (
-    <div className="relative ">
-      <h2 className="font-bold mt-10 mx-2">Menu</h2>
+    <div className="relative">
+      <h2 className="font-bold  mt-10 mx-4">Menu</h2>
 
       <br />
       <Link to={"/Dashboard"}>
-        <button className={`relative mt-2 w-[88%] mx-2 h-8 shadow  rounded }`}>
+        <button
+          className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded mx-4`}
+        >
           <svg
             class={`h-6 w-8 text-${color1} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
             fill="none"
@@ -28,7 +30,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
       {!userOff && (
         <Link to={"/Users"}>
           <button
-            className={`relative h-8 mx-2 w-[88%] shadow mt-5 rounded  border  `}
+            className={`relative h-8 mx-4 w-[80%] sm:w-88 shadow mt-5 rounded border`}
           >
             <svg
               className={`h-6  w-8 text-${color2} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
@@ -49,7 +51,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
 
       <Link to={"/Task"}>
         <button
-          className={`relative h-8 mx-2 w-[88%] mt-5 shadow rounded border `}
+          className={`relative h-8 mx-4 w-[80%] sm:w-88 mt-5 shadow rounded border`}
         >
           <svg
             className={`h-6 w-8 text-${color3} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
@@ -74,7 +76,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         </button>
       </Link>
 
-      <button className="relative w-[88%] h-8 mx-2 mt-5 shadow rounded border  ">
+      <button className="relative w-[80%] sm:w-88 h-8 mx-4 mt-5 shadow rounded border">
         <svg
           class="h-6 w-8 text-black absolute ml-2"
           viewBox="0 0 24 24"
@@ -90,9 +92,6 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         </svg>
         <span className="mr-14">Setting</span>
       </button>
-      {/* <Link to="/Notifications">
-        <button>Noti</button>
-      </Link> */}
     </div>
   );
 }
