@@ -25,7 +25,7 @@ function Reset() {
       <div className="w-full sm:w-1/2">
         <div className="flex items-center justify-center">
           <form className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
-            <h1 className="font-bold text-center mr-[30%] mt-36">
+            <h1 className="font-bold text-lg text-center mr-[26%] mt-36">
               Reset your Password
             </h1>
             <p className="text-xs ml-[15%]  mt-1">
