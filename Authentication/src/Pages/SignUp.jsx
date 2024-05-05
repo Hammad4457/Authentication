@@ -39,28 +39,31 @@ function SignUp() {
   }
 
   return (
-    <div className="flex h-full">
-      <div className="w-1/2 h-full bg-[#4BCBEB]">
+    <div className="flex flex-col md:flex-row">
+      <div className="w-full md:w-1/2 bg-[#4BCBEB] md:h-screen">
         <img
-          className=" py-28  w-96  mx-auto "
+          className="py-28 w-96 mx-auto"
           src="src\assets\Signup.PNG"
+          alt="Signup Image"
         ></img>
       </div>
-      <div className="w-1/2  ">
-        <h1 className="text-center items-center justify-center text-lg font-bold mr-4 mt-32">
+      <div className="w-full md:w-1/2">
+        <h1 className="text-center items-center justify-center text-lg  font-bold mr-40 mt-36">
           Sign Up for an Account
         </h1>
 
-        <div className="flex justify-center  ">
-          <form onSubmit={handelSubmit}>
-            <br />
-            <div className="relative ">
-              <div className="flex items-center">
+        <div className="flex justify-center">
+          <form
+            onSubmit={handelSubmit}
+            className="w-full md:w-3/4 lg:w-2/3 xl:w-1/2"
+          >
+            <div className="relative">
+              <div className="flex mt-8 items-center">
                 <div className="absolute left-0  pl-3">
                   <NameSvg />
                 </div>
                 <input
-                  className="pl-10 w-[72] px-3 py-2 ml-2 rounded border border-slate-300"
+                  className="pl-10 w-72 px-3 py-2 ml-2 rounded border border-slate-300"
                   type="text"
                   placeholder="Enter Name"
                   onChange={getName}
@@ -69,16 +72,14 @@ function SignUp() {
               </div>
             </div>
 
-            <br />
-            <br />
             <div>
-              <div className="flex items-center">
+              <div className="flex mt-6 items-center">
                 <div className="absolute  pl-3 ">
                   <EmailSvg />
                 </div>
                 <input
-                  className=" w-[72] px-3 pl-10 ml-2 py-2 rounded border border-slate-300"
-                  type="text"
+                  className="w-72 px-3 pl-10 ml-2 py-2 rounded border border-slate-300"
+                  type="email"
                   placeholder="Enter Email"
                   onChange={getEmail}
                   required
@@ -86,17 +87,14 @@ function SignUp() {
               </div>
             </div>
 
-            <br />
-            <br />
-
             <div className="relative">
-              <div className="flex items-center">
+              <div className="flex mt-6 items-center">
                 <div className="absolute  pl-3">
                   <PasswordSvg />
                 </div>
 
                 <input
-                  className="mt-0.1 w-[72] pl-10 px-3 ml-2 py-2 rounded border border-slate-300"
+                  className="w-72 pl-10 px-3 ml-2 py-2 rounded border border-slate-300"
                   type="password"
                   placeholder="Enter Password"
                   onChange={getPassword}
@@ -105,38 +103,26 @@ function SignUp() {
               </div>
             </div>
 
-            <br />
-            <br />
-            <div className="flex">
-              <div>
-                <input type="checkbox" />
-              </div>
-              <div className="flex">
-                <text className="text-xs px-1">
-                  By creating an account means you to the{" "}
-                  <b>
-                    Terms
-                    <br /> & Conditions
-                  </b>{" "}
-                  and out Privacy Policy & Conditions <br /> and our{" "}
-                  <b>Privacy Policy</b>
-                </text>
-              </div>
+            <div className="flex mt-6 ml-2 items-center">
+              <input type="checkbox" />
+              <text className="text-xs px-1">
+                By creating an account means you agree to the{" "}
+                <b>
+                  Terms
+                  <br /> & Conditions
+                </b>{" "}
+                and our Privacy Policy.
+              </text>
             </div>
-            <br />
-            <br />
 
             <button
               type="submit"
-              className="bg-[#4BCBEB] px-2 py-2 w-60 rounded-2xl"
+              className="bg-[#4BCBEB] ml-2 mt-6 px-2 py-2 w-72 rounded-2xl"
             >
               Sign Up
             </button>
 
-            <br />
-            <br />
-
-            <text className="ml-4 px-1">Already have an Account?</text>
+            <text className="ml-8 mt-4  px-1">Already have an Account?</text>
             <Link to="/Login">
               <button className="text-blue-800">Login</button>
             </Link>

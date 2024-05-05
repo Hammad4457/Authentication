@@ -1,7 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import EmailSvg from "../svg Components/EmailSvg";
 import PasswordSvg from "../svg Components/PasswordSvg";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -32,30 +31,34 @@ function LogIn() {
 
   return (
     <div className="flex flex-wrap">
-      <div className="w-1/2 h-full bg-[#4BCBEB]">
+      <div className="w-full sm:w-1/2 h-full bg-[#4BCBEB]">
         <img
-          className=" py-28  w-96  mx-auto max-w-full"
+          className="py-28 w-96 mx-auto max-w-full"
           src="src\assets\SignIn.jpg"
+          alt="Sign In Image"
         ></img>
       </div>
-      <div className=" w-1/2">
-        <div className="flex  items-center justify-center ">
-          <form onSubmit={onSubmit}>
-            <h1 className="text text-center text-lg font-bold mt-44">
+      <div className="w-full sm:w-1/2">
+        <div className="flex items-center justify-center">
+          <form
+            onSubmit={onSubmit}
+            className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
+          >
+            <h1 className="text text-center mr-16 text-lg font-bold mr-[44%] mt-36">
               Sign In to your Account
             </h1>
-            <p className="text-xs text-center mt-2">
+            <p className="text-xs text-center mt-1 mr-40 ">
               Welcome back! please enter your detail
             </p>
             <br />
 
-            <div className="relative">
+            <div className="relative mt-2">
               <div className="flex items-center">
-                <div className="absolute itmes-center pl-3 ">
+                <div className="absolute items-center pl-3 ">
                   <EmailSvg />
                 </div>
                 <input
-                  className=" w-60 px-3 pl-10  py-2 rounded border border-slate-300"
+                  className="w-72 px-3 pl-10 py-2 rounded border border-slate-300"
                   type="text"
                   placeholder="Enter Email"
                   onChange={getEmail}
@@ -63,17 +66,15 @@ function LogIn() {
                 />
               </div>
             </div>
-            <br />
-            <br />
 
             <div className="relative">
-              <div className="flex items-center">
+              <div className="flex mt-8 items-center">
                 <div className="absolute items-center pl-3">
                   <PasswordSvg />
                 </div>
 
                 <input
-                  className={`mt-0.1 w-60 pl-10 px-3  py-2 rounded border border-slate-300`}
+                  className="w-72 pl-10 px-3 py-2 rounded border border-slate-300"
                   type="password"
                   placeholder="Enter Password"
                   onChange={getPassword}
@@ -81,36 +82,31 @@ function LogIn() {
                 />
               </div>
             </div>
-            <br />
-            <br />
-            <div className="flex">
-              <input type="checkbox" for="checkbox" />
-              <text className="text-xs ml-1   font-bold" for="checkbox">
-                Remember me{"  "}
+
+            <div className="flex mt-6">
+              <input type="checkbox" id="checkbox" />
+              <label htmlFor="checkbox" className="text-xs ml-1 font-bold">
+                Remember me{" "}
                 <Link to={"/Forget"}>
-                  <button className="text-blue-800 text-xs ml-10 ">
+                  <button className="text-blue-800 text-xs ml-14">
                     Forget Password?
                   </button>
                 </Link>
-              </text>
+              </label>
             </div>
 
-            <br />
-            <br />
-
-            <button className="bg-[#4BCBEB] px-2 py-2 w-64 rounded-2xl">
-              Login
+            <button className="bg-[#4BCBEB] mt-8 px-2 py-2 w-72 rounded-2xl">
+              Sign In
             </button>
 
-            <br />
-            <br />
-
-            <text className="text-xs px-12">
-              Don't have an Account?
+            <p className="text-xs mt-8 px-12">
+              Don't have an Account?{" "}
               <Link to={"/"}>
-                <button className="text-blue-900">SignUp</button>
+                <button className="text-blue-800">
+                  <b>Sign Up</b>
+                </button>
               </Link>
-            </text>
+            </p>
           </form>
         </div>
       </div>
