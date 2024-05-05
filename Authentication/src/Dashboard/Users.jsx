@@ -96,8 +96,8 @@ function Users() {
         </div>
         <div className="w-[84.4%]  border-1 h-[100%]  bg-gray-200">
           <div className="  w-[82%] mx-auto mt-12 mb-12 bg-white">
-            <h1 className="font-bold mx-2">Online User</h1>
-            <div className="flex mt-4 ">
+            <h1 className="font-bold  mx-2">Online User</h1>
+            <div className="flex mt-4  ">
               <text className="font-bold px-8">Customer Name</text>
               <text className="font-bold px-10">Project Name</text>
               <text className="font-bold px-10">Task Start Date</text>

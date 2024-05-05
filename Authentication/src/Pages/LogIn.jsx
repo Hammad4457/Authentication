@@ -3,13 +3,15 @@ import EmailSvg from "../svg Components/EmailSvg";
 import PasswordSvg from "../svg Components/PasswordSvg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function getPassword(e) {
-    e.preventDefault();
     setPassword(e.target.value);
   }
 
@@ -17,17 +19,28 @@ function LogIn() {
     setEmail(e.target.value);
   }
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+    axios
+      .post("http://localhost:3000/api/users/login", { email, password })
+      .then((result) => {
+        navigate("/dashboard");
+        console.log(result);
+      })
+      .catch((err) => console.log(err));
+  };
+
   return (
-    <div className="flex">
+    <div className="flex flex-wrap">
       <div className="w-1/2 h-full bg-[#4BCBEB]">
         <img
           className=" py-28  w-96  mx-auto max-w-full"
           src="src\assets\SignIn.jpg"
         ></img>
       </div>
-      <div className="w-1/2">
-        <div className="flex items-center justify-center ">
-          <form>
+      <div className=" w-1/2">
+        <div className="flex  items-center justify-center ">
+          <form onSubmit={onSubmit}>
             <h1 className="text text-center text-lg font-bold mt-44">
               Sign In to your Account
             </h1>
@@ -84,11 +97,11 @@ function LogIn() {
 
             <br />
             <br />
-            <Link to={"/Dashboard"}>
-              <button className="bg-[#4BCBEB] px-2 py-2 w-64 rounded-2xl">
-                Login
-              </button>
-            </Link>
+
+            <button className="bg-[#4BCBEB] px-2 py-2 w-64 rounded-2xl">
+              Login
+            </button>
+
             <br />
             <br />
 

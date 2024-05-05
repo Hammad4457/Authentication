@@ -4,11 +4,13 @@ import NameSvg from "../svg Components/NameSvg";
 import EmailSvg from "../svg Components/EmailSvg";
 import PasswordSvg from "../svg Components/PasswordSvg";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   function getName(e) {
     setName(e.target.value);
@@ -29,7 +31,10 @@ function SignUp() {
         email: email,
         password: password,
       })
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        navigate("/login");
+      })
       .catch((err) => console.log(err));
   }
 
@@ -42,11 +47,11 @@ function SignUp() {
         ></img>
       </div>
       <div className="w-1/2  ">
-        <h1 className="text text-center text-lg font-bold mt-36">
+        <h1 className="text-center items-center justify-center text-lg font-bold mr-4 mt-32">
           Sign Up for an Account
         </h1>
 
-        <div className="flex  justify-center ">
+        <div className="flex justify-center  ">
           <form onSubmit={handelSubmit}>
             <br />
             <div className="relative ">
@@ -55,7 +60,7 @@ function SignUp() {
                   <NameSvg />
                 </div>
                 <input
-                  className="pl-10 w-72 px-3 py-2  rounded border border-slate-300"
+                  className="pl-10 w-[72] px-3 py-2 ml-2 rounded border border-slate-300"
                   type="text"
                   placeholder="Enter Name"
                   onChange={getName}
@@ -72,7 +77,7 @@ function SignUp() {
                   <EmailSvg />
                 </div>
                 <input
-                  className=" w-72 px-3 pl-10  py-2 rounded border border-slate-300"
+                  className=" w-[72] px-3 pl-10 ml-2 py-2 rounded border border-slate-300"
                   type="text"
                   placeholder="Enter Email"
                   onChange={getEmail}
@@ -91,7 +96,7 @@ function SignUp() {
                 </div>
 
                 <input
-                  className="mt-0.1 w-72 pl-10 px-3  py-2 rounded border border-slate-300"
+                  className="mt-0.1 w-[72] pl-10 px-3 ml-2 py-2 rounded border border-slate-300"
                   type="password"
                   placeholder="Enter Password"
                   onChange={getPassword}
@@ -123,7 +128,7 @@ function SignUp() {
 
             <button
               type="submit"
-              className="bg-[#4BCBEB] px-2 py-2 w-72 rounded-2xl"
+              className="bg-[#4BCBEB] px-2 py-2 w-60 rounded-2xl"
             >
               Sign Up
             </button>
@@ -131,7 +136,7 @@ function SignUp() {
             <br />
             <br />
 
-            <text className="px-3">Already have an Account?</text>
+            <text className="ml-4 px-1">Already have an Account?</text>
             <Link to="/Login">
               <button className="text-blue-800">Login</button>
             </Link>
