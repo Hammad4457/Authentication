@@ -48,7 +48,7 @@ function SignUp() {
         ></img>
       </div>
       <div className="w-full md:w-1/2">
-        <h1 className="text-center items-center justify-center text-lg  font-bold mr-40 mt-36">
+        <h1 className="text-center items-center justify-center text-lg  font-bold mr-40 mt-32">
           Sign Up for an Account
         </h1>
 
@@ -103,29 +103,24 @@ function SignUp() {
               </div>
             </div>
 
-            <div className="flex mt-6 ml-2 items-center">
+            <div className="flex mt-10 ml-2 items-center">
               <input type="checkbox" />
-              <text className="text-xs px-1">
-                By creating an account means you agree to the{" "}
-                <b>
-                  Terms
-                  <br /> & Conditions
-                </b>{" "}
-                and our Privacy Policy.
-              </text>
+              <p className="text-xs px-1">
+                By creating an account means you agree to the
+                <b>Terms & Conditions</b> and our <b>Privacy Policy</b>.
+              </p>
             </div>
 
-            <button
-              type="submit"
-              className="bg-[#4BCBEB] ml-2 mt-6 px-2 py-2 w-72 rounded-2xl"
-            >
+            <button className="bg-[#4BCBEB] ml-2 mt-8 px-2 py-2 w-72 rounded-2xl">
               Sign Up
             </button>
 
-            <text className="ml-8 mt-4  px-1">Already have an Account?</text>
-            <Link to="/Login">
-              <button className="text-blue-800">Login</button>
-            </Link>
+            <p className="ml-8 mt-4  px-1">
+              Already have an Account?
+              <Link to="/Login">
+                <button className="text-blue-800">Login</button>
+              </Link>
+            </p>
           </form>
         </div>
       </div>
