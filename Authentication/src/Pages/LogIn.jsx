@@ -23,6 +23,7 @@ function LogIn() {
     axios
       .post("http://localhost:3000/api/users/login", { email, password })
       .then((result) => {
+         // Assuming username is returned in the response
         navigate("/dashboard");
         console.log(result);
       })
@@ -44,7 +45,7 @@ function LogIn() {
             onSubmit={onSubmit}
             className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
           >
-            <h1 className="text text-center mr-16 text-lg font-bold mr-[44%] mt-36">
+            <h1 className="text text-center  text-lg font-bold mr-[44%] mt-36">
               Sign In to your Account
             </h1>
             <p className="text-xs text-center mt-1 mr-40 ">

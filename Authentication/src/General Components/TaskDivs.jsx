@@ -7,18 +7,25 @@ const TaskDivs = ({ task }) => {
     setShowTodo(!showTodo);
   };
 
+  const colors = ['bg-red-500', 'bg-blue-500', 'bg-yellow-500', 'bg-green-500', 'bg-purple-500'];
   const getRandomColor = () => {
-    const colors = ["red", "yellow", "orange", "pink", "purple"];
     const randomIndex = Math.floor(Math.random() * colors.length);
     return colors[randomIndex];
   };
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  };
+
   return (
+    
     <div
       key={task.id}
-      className="mx-auto lg:w-[400px] lg:max-w-[calc(100%-64px)] sm:w-full sm:max-w-[calc(100%-32px)] md:w-full md:max-w-[calc(50%-32px)] mt-4 mb-8 border-1 rounded bg-white"
+      
+      className=" mx-auto lg:w-[400px] rounded-xl lg:max-w-[calc(100%-64px)] sm:w-full sm:max-w-[calc(100%-32px)] md:w-full md:max-w-[calc(50%-32px)] mt-4 mb-8 border-1 bg-white"
     >
-      <div className="p-4 rounded bg-orange-500"></div>
+      <div className={`p-4 rounded-t-xl rounded ${getRandomColor()}`}></div>
       <div className="flex">
         <h4 className="font-bold px-2">Title:</h4>
         <p className="ml-auto">
@@ -34,7 +41,7 @@ const TaskDivs = ({ task }) => {
       <h6 className="font-bold mt-2 px-2">Attachment:</h6>
       <div>
         <img
-          className="w-60 h-24 mx-auto mt-2 mb-2"
+          className="w-[100%] h-28 mx-auto mt-2 mb-2"
           src="src\assets\Flower.png"
           alt="Attachment"
         />
@@ -44,10 +51,11 @@ const TaskDivs = ({ task }) => {
         <h8 className="font-bold ml-auto mr-6">End Date:</h8>
       </div>
       <div className="flex mt-2">
-        <p className="px-2">{task.startDate}</p>
-        <p className="ml-auto mr-4">{task.endDate}</p>
+        <p className="px-2">{formatDate(task.startDate)}</p>
+        <p className="ml-auto mr-4">{formatDate(task.endDate)}</p>
       </div>
     </div>
+    
   );
 };
 

@@ -10,6 +10,7 @@ function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordStrength, setPasswordStrength] = useState("");
   const navigate = useNavigate();
 
   function getName(e) {
@@ -19,7 +20,22 @@ function SignUp() {
     setEmail(e.target.value);
   }
   function getPassword(e) {
-    setPassword(e.target.value);
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    setPasswordStrength(checkPasswordStrength(newPassword));
+  }
+
+  function checkPasswordStrength(password) {
+    // Check password strength here
+    // You can use a library like zxcvbn to evaluate password strength
+    // For simplicity, let's just check the length in this example
+    if (password.length >= 8) {
+      return "Strong Password";
+    } else if (password.length >= 5) {
+      return "Medium Strength";
+    } else {
+      return "Weak Password";
+    }
   }
 
   function handelSubmit(e) {
@@ -101,6 +117,7 @@ function SignUp() {
                   required
                 />
               </div>
+              <div className="text-red-500">{passwordStrength}</div>
             </div>
 
             <div className="flex mt-10 ml-2 items-center">

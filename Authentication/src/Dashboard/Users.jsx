@@ -1,110 +1,100 @@
-import React from "react";
+import { Link } from "react-router-dom";
 import MenuComponent from "../General Components/MenuComponent";
 import Header from "../General Components/Header";
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import Todo from "../General Components/Todo";
+
 function Users() {
-  const data = [
-    {
-      CustomerName: "John Wick",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "01-03-2024",
-      OverdueDay: "3",
-    },
-    {
-      CustomerName: "Adam Smith",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "01-03-2024",
-      OverdueDay: "2",
-    },
-    {
-      CustomerName: "Hamza Khalid",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "04-03-2024",
-      OverdueDay: "2",
-    },
-    {
-      CustomerName: "Azaan Noor",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "07-03-2024",
-      OverdueDay: "5",
-    },
-    {
-      CustomerName: "Ibrahim Pasha",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "08-03-2024",
-      OverdueDay: "3",
-    },
-    {
-      CustomerName: "Haider Ali",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "11-03-2024",
-      OverdueDay: "7",
-    },
-    {
-      CustomerName: "Nasar Haroon",
-      ProjectName: "Lorem ipsum",
-      TaskStartDate: "Ross Gellar",
-      TaskEndDate: "09-03-2024",
-      OverdueDay: "3",
-    },
-  ];
+  const [userData, setUserData] = useState([]);
+  const [userNames, setUserNames] = useState([]);
+  
+  const names = ["Hammad", "Ali", "Haider", "Hamza", "Azaan", "Noor", "Musa", "Ibrahim"];
 
-  function dotButton() {
-    return (
-      <div>
-        <img
-          className="w-[28%] h-[28%] bg-blue-900"
-          src="src\assets\Actions.png"
-        ></img>
-      </div>
-    );
-  }
+function randomName() {
+  
+  const randomIndex = Math.floor(Math.random() * names.length);
+  return names[randomIndex];
+}
 
-  const renderedData = data.map((item, index) => {
-    return (
-      <div key={index} className="flex">
-        <img
-          className="h-6 rounded ml-10 mt-8"
-          src="src\assets\Avatar.png"
-        ></img>
-        <p className="w-1/5 px-2 mt-8 text-blue-700 underline">
-          {item.CustomerName}
-        </p>
-        <p className="w-1/5 ml-8 mt-8">{item.ProjectName}</p>
-        <p className="w-1/5 ml-12 mt-8">{item.TaskStartDate}</p>
-        <p className="w-1/5 mx-auto ml-8 mt-8">{item.TaskEndDate}</p>
-        <p className="w-1/5 px-20 mt-8">{item.OverdueDay}</p>
+  
+  const fetchUserData = async () => {
+    try {
+      const tasksResponse = await axios.get("http://localhost:3000/api/tasks");
+      const userResponse = await axios.get("http://localhost:3000/api/users");
+      setUserData(tasksResponse.data);
+      setUserNames(userResponse.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
-        <button className="mt-8 " onClick={dotButton}>
-          <img className=" ml-auto w-6 mr-16" src="src\assets\Frame.png"></img>
-        </button>
-      </div>
-    );
-  });
+  // useEffect hook to fetch user data when the component mounts
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    return `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, '0')}-${date.getDate().toString().padStart(2, '0')}`;
+  };
+
+  const calculateDaysLeft = (startDate, endDate) => {
+    const start = new Date(startDate);
+    const end = new Date(endDate);
+    const diffInMs = end - start;
+    const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
+    return diffInDays;
+  };
 
   return (
     <div>
-      <Header pageName="User's"></Header>
-      <div className="flex h-auto">
-        <div className="flex h-screen w-[16.6%] ">
-          <MenuComponent color2={"blue-700"}></MenuComponent>
+      <Header pageName="User's" />
+      <div className="flex flex-col md:flex-row h-auto">
+        <div className="md:w-1/6">
+          <MenuComponent color2={"blue-700"} />
         </div>
-        <div className="w-[84.4%]  border-1 h-[100%]  bg-gray-200">
-          <div className="  w-[82%] mx-auto mt-12 mb-12 bg-white">
-            <h1 className="font-bold  mx-2">Online User</h1>
-            <div className="flex mt-4 ml-12 ">
-              <p className="font-bold mr-20">Customer Name</p>
-              <p className="font-bold mr-20">Project Name</p>
-              <p className="font-bold mr-20">Task Start Date</p>
-              <p className="font-bold mr-20">Task End Date</p>
-              <p className="font-bold  mr-20">Overdue Day</p>
-            </div>
-            <div> {renderedData}</div>
+        <div className="mt-11 ml-11 w-[1150px] h-[600px] bg-white rounded-xl border-[1.45px]  drop-shadow-md truncate">
+          <h1 className="m-5 font-bold text-2xl">Online User</h1>
+          <div className="ml-5 mb-5 flex space-x-32">
+            <h1 className="text-lg font-medium">Customer Name</h1>
+            <h1 className="text-lg font-medium">Project Name</h1>
+            <h1 className="text-lg font-medium">Start Date</h1>
+            <h1 className="px-5 text-lg font-medium">End Date</h1>
+            <h1 className="text-lg font-medium">OverDue day</h1>
+          </div>
+          <div className="overflow-y-auto h-[450px]">
+            
+            {userData.map((item, index) => {
+              return (
+                
+                <div key={index} className="mb-3 py-3 flex border-b space-x-24">
+                <div className="ml-12 underline text-blue-700">Hammad</div>
+                  
+                  <div className="w-20 px-24">{item.title}</div>
+                  <div className=" w-24 px-4">{formatDate(item.startDate)}</div>
+                  <div className="px-14 w-30">{formatDate(item.endDate)}</div>
+                  <div className="w-32 gap-x-10 flex justify-end items-center gap-12">
+                    {calculateDaysLeft(item.startDate, item.endDate)}
+                    <button>
+                    <svg
+                      className="ml-5"
+                      width="28"
+                      height="28"
+                      viewBox="0 0 32 32"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M13 16C13 17.654 14.346 19 16 19C17.654 19 19 17.654 19 16C19 14.346 17.654 13 16 13C14.346 13 13 14.346 13 16ZM13 26C13 27.654 14.346 29 16 29C17.654 29 19 27.654 19 26C19 24.346 17.654 23 16 23C14.346 23 13 24.346 13 26ZM13 6C13 7.654 14.346 9 16 9C17.654 9 19 7.654 19 6C19 4.346 17.654 3 16 3C14.346 3 13 4.346 13 6Z"
+                        fill="#4BCBEB"
+                      />
+                    </svg>
+                    </button>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>

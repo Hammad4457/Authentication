@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function MenuComponent({ color1, color2, color3, userOff }) {
   return (
     <div className="relative">
-      <h2 className="font-bold  mt-10 mx-4">Menu</h2>
+      <h2 className="font-bold text-lg  mt-10 mx-4">Menu</h2>
 
       <br />
       <Link to={"/Dashboard"}>
@@ -12,7 +12,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
           className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded mx-4`}
         >
           <svg
-            class={`h-6 w-8 text-${color1} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
+            className={`h-6 w-8 text-${color1} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -33,7 +33,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
             className={`relative h-8 mx-4 w-[80%] sm:w-88 shadow mt-5 rounded border`}
           >
             <svg
-              className={`h-6  w-8 text-${color2} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
+              className={`h-6  w-8  text-${color2} absolute  top-1/2 transform -translate-y-1/2 ml-2`}
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -44,7 +44,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
               <circle cx="12" cy="7" r="4" />
             </svg>
-            <span className={`mr-20 text-${color2}`}>User</span>
+            <span className={`mr-20 ml-2 text-${color2}`}>User's</span>
           </button>
         </Link>
       )}

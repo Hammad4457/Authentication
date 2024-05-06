@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Header({ pageName }) {
+function Header({pageName}){
   return (
     <>
       <div className="flex  flex-wrap  justify-center items-center">
         <div className=" sm:w-[16.4%] absolute left-0  border-2 border-gray-100 rounded items-center flex">
-          <img className="ml-0 w-8" src="src\assets\Vector.png" alt="Logo" />
+          <img className="ml-2 w-8" src="src\assets\Vector.png" alt="Logo" />
           <h1 className="text-left ml-2  h-12 content-center text-blue-900">
             Task List Manager
           </h1>
