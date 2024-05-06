@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setloading] = useState(false);
   const navigate = useNavigate();
 
   function getPassword(e) {
@@ -20,14 +21,16 @@ function LogIn() {
 
   const onSubmit = (e) => {
     e.preventDefault();
+    setloading(true);
     axios
       .post("http://localhost:3000/api/users/login", { email, password })
       .then((result) => {
-         // Assuming username is returned in the response
+        // Assuming username is returned in the response
         navigate("/dashboard");
         console.log(result);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setloading(false));
   };
 
   return (

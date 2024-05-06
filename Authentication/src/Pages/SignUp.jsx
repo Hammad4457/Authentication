@@ -11,6 +11,7 @@ function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordStrength, setPasswordStrength] = useState("");
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   function getName(e) {
@@ -26,9 +27,6 @@ function SignUp() {
   }
 
   function checkPasswordStrength(password) {
-    // Check password strength here
-    // You can use a library like zxcvbn to evaluate password strength
-    // For simplicity, let's just check the length in this example
     if (password.length >= 8) {
       return "Strong Password";
     } else if (password.length >= 5) {
@@ -40,6 +38,7 @@ function SignUp() {
 
   function handelSubmit(e) {
     e.preventDefault();
+    setLoading(true);
 
     axios
       .post("http://localhost:3000/api/users/register", {
@@ -51,7 +50,8 @@ function SignUp() {
         console.log(result);
         navigate("/login");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
   }
 
   return (

@@ -10,8 +10,10 @@ function Task() {
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [loading, setloading] = useState(false);
 
   function fetchTasks() {
+    setloading(true);
     axios
       .get("http://localhost:3000/api/tasks")
       .then((response) => {
@@ -21,13 +23,15 @@ function Task() {
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
-      });
+      })
+      .finally(() => setloading(false));
   }
   useEffect(() => {
     fetchTasks();
   }, []);
 
   function handleModalSubmit(data) {
+    setloading(true);
     axios
       .post("http://localhost:3000/api/tasks/addTasks", data)
       .then((response) => {
@@ -40,13 +44,14 @@ function Task() {
       })
       .catch((error) => {
         console.error("Error adding task:", error);
-      });
+      })
+      .finally(() => setloading(false));
   }
 
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
-    setSearchQuery(query); 
-    const filteredTasks = tasks.filter(task =>
+    setSearchQuery(query);
+    const filteredTasks = tasks.filter((task) =>
       task.title.toLowerCase().includes(query)
     );
     setFilteredTasks(filteredTasks);
@@ -60,42 +65,50 @@ function Task() {
           <MenuComponent color3={"blue-700"} />
         </div>
         <div className="md:w-5/6 border-1 bg-gray-200">
-          <div className="flex flex-col md:flex-row items-center justify-between mt-12 ml-8">
-            <h1 className="font-bold text-xl mb-4 md:mb-0">Start date:</h1>
-            <h2 className="font-bold text-xl mb-4 ml-[23%] md:mb-0">End date:</h2>
-            <button
-              className="ml-auto md:mr-8"
-              onClick={() => setShowModal(true)}
-            >
-              <img src="src\assets\Add Task.png" alt="Add Task" />
-            </button>
+          <div className="flex flex-col md:flex-row mt-8 md:items-center">
+            <div className="md:ml-8 md:mb-0">
+              <h1 className="font-bold text-xl mb-4 md:mb-0">Start date:</h1>
+              <div className="flex items-center">
+                <input
+                  className="w-[300px] h-12 mt-4 md:mt-4 rounded-xl"
+                  type="date"
+                  placeholder="15-Apr-2024"
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="md:ml-12 md:mb-0 mt-4 md:mt-0">
+              <h1 className="font-bold text-xl mb-4 md:mb-0">End Date:</h1>
+              <input
+                className=" w-[300px] h-12 mt-4 rounded-xl"
+                type="date"
+                placeholder="15-Apr-2024"
+                required
+              />
+            </div>
+
+            <div className="md:ml-8 md:mt-0 mt-4">
+              <button
+                onClick={() => setShowModal(true)}
+                className="ml-20 md:ml-80"
+              >
+                <img src="src\assets\Add Task.png" alt="Add Task" />
+              </button>
+            </div>
           </div>
-          <div className="flex flex-col md:flex-row items-center">
-            <input
-              className="ml-8 w-full md:w-1/4 h-12 mt-4 rounded"
-              type="date"
-              placeholder="15-Apr-2024"
-              required
-            />
-            <input
-              className="ml-4 md:ml-16 w-full md:w-1/4 h-12 mt-4 rounded"
-              type="date"
-              placeholder="15-Apr-2024"
-              required
-            />
-          </div>
+
           <h3 className="font-bold ml-8 mt-4 text-xl">Enter Title:</h3>
           <div className="flex border-1 border-blue-700">
             <input
-              className="rounded rounded-l-md ml-8 w-full md:w-[47%] h-12 mt-4 px-2"
-              
+              className="rounded rounded-l-xl ml-8 w-full md:w-[44%] h-12 mt-4 px-2"
               type="search"
               placeholder="Search"
               value={searchQuery}
               onChange={handleSearchChange}
               required
             />
-            <button className="bg-blue-200 rounded-r-md w-full md:w-1/12 h-12 mt-4">
+            <button className="bg-blue-200 rounded-r-xl w-full md:w-1/12 h-12 mt-4">
               Search
             </button>
           </div>
