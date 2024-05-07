@@ -6,7 +6,6 @@ import PasswordSvg from "../svg Components/PasswordSvg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -25,12 +24,10 @@ function SignUp() {
   function getPassword(e) {
     const newPassword = e.target.value;
     setPassword(newPassword);
-    setPasswordStrength(checkPasswordStrength(newPassword));
-  }
-
-  function checkPasswordStrength(password) {
-    if(password <=4){
-      setError("Password ")
+    if (newPassword.length < 6) {
+      setPasswordStrength("Password length should be greater than 5");
+    } else {
+      setPasswordStrength("");
     }
   }
 
@@ -48,10 +45,7 @@ function SignUp() {
         console.log(result);
         navigate("/login");
       })
-      .catch((err) => {
-        setError("Password length can't be less than 5");
-
-        })
+      .catch((err) => {})
       .finally(() => setLoading(false));
   }
 
@@ -118,8 +112,11 @@ function SignUp() {
                   required
                 />
               </div>
-              {error && <p className="text-red-500 text-xs">error</p>}
-              <div className="text-red-500">{passwordStrength}</div>
+              {passwordStrength && (
+                <p className="text-red-500 ml-2 mt-1 text-xs">
+                  {passwordStrength}
+                </p>
+              )}
             </div>
 
             <div className="flex mt-10 ml-2 items-center">

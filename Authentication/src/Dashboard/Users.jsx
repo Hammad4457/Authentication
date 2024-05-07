@@ -6,28 +6,18 @@ import axios from "axios";
 import Pagination from "@mui/material/Pagination";
 import Stack from "@mui/material/Stack";
 import TablePagination from "@mui/material/TablePagination";
+import { CircularProgress } from "@mui/material";
 
 function Users() {
   const [userData, setUserData] = useState([]);
-  const [userNames, setUserNames] = useState([]);
-  const [loading, setloading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(false);
+
   const itemsPerPage = 6;
 
-  const names = [
-    "Hammad",
-    "Ali",
-    "Haider",
-    "Hamza",
-    "Azaan",
-    "Noor",
-    "Musa",
-    "Ibrahim",
-  ];
-
   const fetchUserData = async () => {
+    setIsLoading(true);
     try {
-      setloading(true);
       const tasksResponse = await axios.get("http://localhost:3000/api/tasks");
       const userResponse = await axios.get("http://localhost:3000/api/users");
       setUserData(tasksResponse.data);
@@ -35,7 +25,7 @@ function Users() {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -62,7 +52,7 @@ function Users() {
   const currentItems = userData.slice(indexOfFirstItem, indexOfLastItem);
 
   const handlePageChange = (event, value) => {
-    setCurrentPage(value); // Update current page
+    setCurrentPage(value);
   };
 
   return (
@@ -72,26 +62,37 @@ function Users() {
         <div className="md:w-1/6">
           <MenuComponent color2={"blue-700"} />
         </div>
-        <div className="mt-11 ml-11 w-[1150px] h-[600px] bg-white rounded-xl border-[1.45px]  drop-shadow-md truncate">
+        <div className="mt-11 ml-11 w-[1150px] h-[600px] bg-white rounded-xl border-[1.45px] drop-shadow-md truncate">
           <h1 className="m-5 font-bold text-2xl">Online User</h1>
-          <div className="ml-5 mb-5 flex space-x-32">
-            <h1 className="text-lg font-medium">Customer Name</h1>
-            <h1 className="text-lg font-medium">Project Name</h1>
-            <h1 className="text-lg font-medium">Start Date</h1>
-            <h1 className="px-5 text-lg font-medium">End Date</h1>
-            <h1 className="text-lg font-medium">OverDue day</h1>
+          <div className="flex">
+            <h1 className="text-lg font-medium w-32 mx-8">Customer Name</h1>
+            <h1 className="text-lg font-medium w-28 mx-[8%]">Start Date</h1>
+            <h1 className="text-lg font-medium w-28 mx-[8%]">End Date</h1>
+            <h1 className="text-lg font-medium w-32 mx-[9%]">Overdue Days</h1>
           </div>
-          <div className="overflow-y-auto h-[450px]">
-          {currentItems.map((item, index) => {
-              return (
-                <div key={index} className="mb-3 py-3 flex border-b space-x-24">
-                  <div className="ml-12 underline text-blue-700">Hammad</div>
 
-                  <div className="w-20 px-24">{item.title}</div>
-                  <div className=" w-24 px-4">{formatDate(item.startDate)}</div>
-                  <div className="px-14 w-30">{formatDate(item.endDate)}</div>
-                  <div className="w-32 gap-x-10 flex justify-end items-center gap-12">
+          {isLoading && (
+            <div className="flex justify-center items-center min-h-screen">
+              <div className="absolute top-[250px]">
+                <CircularProgress />
+              </div>
+            </div>
+          )}
+          <div className="h-[450px]">
+            {currentItems.map((item, index) => {
+              return (
+                <div key={index} className="mb-3 py-3 flex">
+                  <div className="w-20 mx-8">{item.customerName}</div>
+                  <div className="w-12 mx-[12%] ">
+                    {formatDate(item.startDate)}
+                  </div>
+                  <div className="w-12 mx-[10%]">
+                    {formatDate(item.endDate)}
+                  </div>
+                  <div className="w-12 mx-auto px-4">
                     {calculateDaysLeft(item.startDate, item.endDate)}
+                  </div>
+                  <div className="w-12 flex justify-end items-center gap-12">
                     <button>
                       <svg
                         className="ml-5"
@@ -108,19 +109,19 @@ function Users() {
                       </svg>
                     </button>
                   </div>
+                  <hr className="border-1 border-black"></hr>
                 </div>
               );
             })}
-            <div className="flex">
-            <p className="ml-12 text-xs">rows per page</p>
-            <div className=" ml-96 justify-center">
-            <Pagination
-            count={Math.ceil(userData.length / itemsPerPage)}
-            page={currentPage}
-            onChange={handlePageChange}
-          />
           </div>
-
+          <div className="flex px-5 mb-2">
+            <p className="text-xs mx-right">rows per page</p>
+            <div className="mx-auto ">
+              <Pagination
+                count={Math.ceil(userData.length / itemsPerPage)}
+                page={currentPage}
+                onChange={handlePageChange}
+              />
             </div>
           </div>
         </div>
