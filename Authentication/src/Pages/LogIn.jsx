@@ -9,6 +9,7 @@ function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setloading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   function getPassword(e) {
@@ -29,7 +30,9 @@ function LogIn() {
         navigate("/dashboard");
         console.log(result);
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setError("Invalid email or password. Please try again.");
+      })
       .finally(() => setloading(false));
   };
 
@@ -86,6 +89,7 @@ function LogIn() {
                 />
               </div>
             </div>
+            {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
 
             <div className="flex mt-6">
               <input type="checkbox" id="checkbox" />
@@ -99,8 +103,19 @@ function LogIn() {
               </label>
             </div>
 
-            <button className="bg-[#4BCBEB] mt-8 px-2 py-2 w-72 rounded-2xl">
-              Sign In
+            <button
+              className="bg-[#4BCBEB] mt-8 px-2 py-2 w-72 rounded-2xl"
+              type="submit"
+              disabled={loading} // Disable button when loading
+            >
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#FFF] mr-2"></div>
+                  <span>Loading</span>
+                </div>
+              ) : (
+                "Sign In"
+              )}
             </button>
 
             <p className="text-xs mt-8 px-12">

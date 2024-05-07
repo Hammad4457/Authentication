@@ -6,12 +6,14 @@ import PasswordSvg from "../svg Components/PasswordSvg";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+
 function SignUp() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordStrength, setPasswordStrength] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   function getName(e) {
@@ -27,12 +29,8 @@ function SignUp() {
   }
 
   function checkPasswordStrength(password) {
-    if (password.length >= 8) {
-      return "Strong Password";
-    } else if (password.length >= 5) {
-      return "Medium Strength";
-    } else {
-      return "Weak Password";
+    if(password <=4){
+      setError("Password ")
     }
   }
 
@@ -50,7 +48,10 @@ function SignUp() {
         console.log(result);
         navigate("/login");
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        setError("Password length can't be less than 5");
+
+        })
       .finally(() => setLoading(false));
   }
 
@@ -117,6 +118,7 @@ function SignUp() {
                   required
                 />
               </div>
+              {error && <p className="text-red-500 text-xs">error</p>}
               <div className="text-red-500">{passwordStrength}</div>
             </div>
 
@@ -128,8 +130,19 @@ function SignUp() {
               </p>
             </div>
 
-            <button className="bg-[#4BCBEB] ml-2 mt-8 px-2 py-2 w-72 rounded-2xl">
-              Sign Up
+            <button
+              className="bg-[#4BCBEB] ml-2 mt-8 px-2 py-2 w-72 rounded-2xl"
+              type="submit"
+              disabled={loading} // Disable button when loading
+            >
+              {loading ? (
+                <div className="flex justify-center items-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-[#FFF] mr-2"></div>
+                  <span>Loading</span>
+                </div>
+              ) : (
+                "Sign Up"
+              )}
             </button>
 
             <p className="ml-8 mt-4  px-1">

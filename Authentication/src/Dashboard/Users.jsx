@@ -82,7 +82,7 @@ function Users() {
             <h1 className="text-lg font-medium">OverDue day</h1>
           </div>
           <div className="overflow-y-auto h-[450px]">
-            {userData.map((item, index) => {
+          {currentItems.map((item, index) => {
               return (
                 <div key={index} className="mb-3 py-3 flex border-b space-x-24">
                   <div className="ml-12 underline text-blue-700">Hammad</div>
@@ -111,12 +111,16 @@ function Users() {
                 </div>
               );
             })}
-            <div className="mt-9 flex justify-center">
-              <Pagination
-                count={Math.ceil(userData.length / itemsPerPage)}
-                page={currentPage}
-                onChange={handlePageChange}
-              />
+            <div className="flex">
+            <p className="ml-12 text-xs">rows per page</p>
+            <div className=" ml-96 justify-center">
+            <Pagination
+            count={Math.ceil(userData.length / itemsPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+          />
+          </div>
+
             </div>
           </div>
         </div>

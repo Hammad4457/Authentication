@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+
 function MenuComponent({ color1, color2, color3, userOff }) {
+  const [error1,setErro1]=useState("");
   return (
     <div className="relative">
       <div className="md:block">
@@ -9,7 +11,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         <br />
         <Link to={"/Dashboard"}>
           <button
-            className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded mx-4`}
+            className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded-lg mx-4`}
           >
             <svg
               className={`h-6 w-8 text-${color1} absolute top-1/2 transform -translate-y-1/2 ml-2`}
@@ -32,7 +34,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         {!userOff && (
           <Link to={"/Users"}>
             <button
-              className={`relative h-8 mx-4 w-[80%] sm:w-88 shadow mt-5 rounded border`}
+              className={`relative h-8 mx-4 w-[80%] sm:w-88  mt-5 `}
             >
               <svg
                 className={`h-6 w-8 text-${color2} absolute top-1/2 transform -translate-y-1/2 ml-2`}
@@ -56,7 +58,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         )}
         <Link to={"/Task"}>
           <button
-            className={`relative h-8 mx-4 w-[80%] sm:w-88 mt-5 shadow rounded border`}
+            className={`relative h-8 mx-4 w-[80%] sm:w-88 mt-5 `}
           >
             <svg
               className={`h-6 w-8 text-${color3} absolute top-1/2 transform -translate-y-1/2 ml-2`}
@@ -84,7 +86,7 @@ function MenuComponent({ color1, color2, color3, userOff }) {
         </Link>
       </div>
       <div className="md:block">
-        <button className="relative w-[80%] sm:w-88 h-8 mx-4 mt-5 shadow rounded border">
+        <button className="relative w-[80%] sm:w-88 h-8 mx-4 mt-5 ">
           <svg
             className="h-6 w-8 text-black absolute ml-2"
             viewBox="0 0 24 24"

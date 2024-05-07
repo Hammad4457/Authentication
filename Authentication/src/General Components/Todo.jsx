@@ -3,7 +3,7 @@ import {React} from "react";
 function Todo(){
         console.log("I am from To do");
     return (
-        <div className="bg-white border-2 mr-2">
+        <div className="absolute bg-white border-2 mr-2">
             <div className="flex mt-2 px-4">
             <button>
             <img className="" src="src\assets\Delete.png"></img>

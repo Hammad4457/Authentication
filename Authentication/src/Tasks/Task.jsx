@@ -10,10 +10,9 @@ function Task() {
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(true); // State for loading indicator
 
   function fetchTasks() {
-    setloading(true);
     axios
       .get("http://localhost:3000/api/tasks")
       .then((response) => {
@@ -24,14 +23,17 @@ function Task() {
       .catch((error) => {
         console.error("Error fetching tasks:", error);
       })
-      .finally(() => setloading(false));
+      .finally(() => {
+        setLoading(false); // Stop loading when fetching is done
+      });
   }
+
   useEffect(() => {
     fetchTasks();
   }, []);
 
   function handleModalSubmit(data) {
-    setloading(true);
+    setLoading(true); // Start loading when submitting modal data
     axios
       .post("http://localhost:3000/api/tasks/addTasks", data)
       .then((response) => {
@@ -45,7 +47,9 @@ function Task() {
       .catch((error) => {
         console.error("Error adding task:", error);
       })
-      .finally(() => setloading(false));
+      .finally(() => {
+        setLoading(false); // Stop loading after submitting modal data
+      });
   }
 
   const handleSearchChange = (e) => {
@@ -60,48 +64,52 @@ function Task() {
   return (
     <div>
       <Header pageName="Task" />
+      {loading && ( // Render loader if loading is true
+        <div className="fixed top-0 left-0 w-full h-full bg-gray-500 opacity-50 flex items-center justify-center z-50">
+          <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+        </div>
+      )}
       <div className="flex flex-col md:flex-row h-auto">
         <div className="md:w-1/6">
           <MenuComponent color3={"blue-700"} />
         </div>
         <div className="md:w-5/6 border-1 bg-gray-200">
           <div className="flex flex-col md:flex-row mt-8 md:items-center">
-            <div className="md:ml-8 md:mb-0">
+            <div className="md:ml-14 md:mb-0">
               <h1 className="font-bold text-xl mb-4 md:mb-0">Start date:</h1>
               <div className="flex items-center">
                 <input
-                  className="w-[300px] h-12 mt-4 md:mt-4 rounded-xl"
+                  className="w-[220px] px-2 h-12 mt-4 md:mt-4 rounded-xl"
                   type="date"
-                  placeholder="15-Apr-2024"
+                  placeholder
                   required
                 />
               </div>
             </div>
 
-            <div className="md:ml-12 md:mb-0 mt-4 md:mt-0">
+            <div className="md:ml-14 md:mb-0 mt-4 md:mt-0">
               <h1 className="font-bold text-xl mb-4 md:mb-0">End Date:</h1>
               <input
-                className=" w-[300px] h-12 mt-4 rounded-xl"
+                className=" w-[220px] px-2 h-12 mt-4 rounded-xl"
                 type="date"
-                placeholder="15-Apr-2024"
+                placeholder
                 required
               />
             </div>
 
-            <div className="md:ml-8 md:mt-0 mt-4">
+            <div className="md:ml-auto mr-16 md:mt-0 mt-4">
               <button
                 onClick={() => setShowModal(true)}
-                className="ml-20 md:ml-80"
               >
                 <img src="src\assets\Add Task.png" alt="Add Task" />
               </button>
             </div>
           </div>
 
-          <h3 className="font-bold ml-8 mt-4 text-xl">Enter Title:</h3>
+          <h3 className="font-bold ml-14 mt-4 text-xl">Enter Title:</h3>
           <div className="flex border-1 border-blue-700">
             <input
-              className="rounded rounded-l-xl ml-8 w-full md:w-[44%] h-12 mt-4 px-2"
+              className=" rounded-l-xl ml-14 w-full md:w-[31%] h-12 mt-4 px-2"
               type="search"
               placeholder="Search"
               value={searchQuery}
