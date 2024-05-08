@@ -1,6 +1,5 @@
 import Task from "../models/tasksModal.js";
 
-// Get all tasks
 export const getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find();
@@ -9,8 +8,6 @@ export const getAllTasks = async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 };
-
-// Get a single task by ID
 export const getTaskById = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -24,11 +21,9 @@ export const getTaskById = async (req, res) => {
   }
 };
 
-// Create a new task
 export const createTask = async (req, res) => {
   const { title, description, startDate, endDate } = req.body;
 
-  // Validate input
   if (!title || !description || !startDate || !endDate) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -39,8 +34,6 @@ export const createTask = async (req, res) => {
       description,
       startDate,
       endDate,
-
-      // Add other task properties here
     });
     const newTask = await task.save();
     res.status(201).json(newTask);
@@ -71,14 +64,21 @@ export const updateTask = async (req, res) => {
 // Delete a task by ID
 export const deleteTask = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id);
-    if (task) {
-      await task.remove();
-      res.json({ message: "Task deleted" });
-    } else {
-      res.status(404).json({ message: "Task not found" });
+    const taskId = req.params.id;
+
+    // Check if the task exists
+    const task = await Task.findById(taskId);
+    if (!task) {
+      return res.status(404).json({ error: "Task not found" });
     }
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+
+    // Delete the task
+    await Task.findByIdAndDelete(taskId);
+
+    // Respond with success message
+    res.status(200).json({ message: "Task deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting task:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
 };
