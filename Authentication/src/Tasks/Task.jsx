@@ -33,7 +33,7 @@ function Task() {
 
   // Fetch tasks on component mount
   useEffect(() => {
-    setShowModal(false);
+    
     fetchTasks();
   }, []);
 
@@ -65,6 +65,20 @@ function Task() {
     const filteredTasks = tasks.filter((task) =>
       task.title.toLowerCase().includes(query)
     );
+    setFilteredTasks(filteredTasks);
+  };
+
+  const handleSearchDateChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    const filteredTasks = tasks.filter((task) => {
+      // Filter by title
+      const titleMatch = task.title.toLowerCase().includes(query);
+      // Filter by start and end dates
+      const startDateMatch = formatDate(task.startDate).includes(query);
+      const endDateMatch = formatDate(task.endDate).includes(query);
+      return titleMatch || startDateMatch || endDateMatch;
+    });
     setFilteredTasks(filteredTasks);
   };
 
@@ -112,6 +126,8 @@ function Task() {
       .toString()
       .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
   };
+
+  
 
   // Function to render individual task divs
   const renderTaskDivs = () => {
@@ -180,7 +196,7 @@ function Task() {
 
   return (
     <div>
-      <Header pageName="Task" />
+      <Header pageName="Task"  />
       {loading && ( // Render loader if loading is true
         <div className="fixed top-0 left-0 w-full h-full bg-gray-500 opacity-50 flex items-center justify-center z-50">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
@@ -198,6 +214,7 @@ function Task() {
                 <input
                   className="w-[220px] px-2 h-12 mt-4 md:mt-4 rounded-xl"
                   type="date"
+                  onChange={handleSearchDateChange}
                   placeholder
                   required
                 />
@@ -209,6 +226,7 @@ function Task() {
               <input
                 className=" w-[220px] px-2 h-12 mt-4 rounded-xl"
                 type="date"
+                onChange={handleSearchDateChange}
                 placeholder
                 required
               />
@@ -216,7 +234,7 @@ function Task() {
             {getRole() !== "Admin" && (
               <button
                 className="h-10 ml-auto"
-                onClick={() => setShowModal(true)}
+                onClick={() => setShowModal(false)}
               >
                 <AddModal />
               </button>

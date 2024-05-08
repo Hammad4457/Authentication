@@ -40,6 +40,7 @@ function SignUp() {
         name: name,
         email: email,
         password: password,
+        role:"user",
       })
       .then((result) => {
         console.log(result);

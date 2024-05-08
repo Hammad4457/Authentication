@@ -57,7 +57,7 @@ export const loginUser = async (req, res) => {
     const token = user.createJWT();
     res
       .status(200)
-      .json({ user: { email: user.email, name: user.name }, token });
+      .json({ user: { email: user.email, name: user.name  }, token });
   } catch (err) {
     res.status(500).json({ message: err.message });
   }

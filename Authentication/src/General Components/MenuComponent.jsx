@@ -1,61 +1,90 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
 
 
-function MenuComponent({ color1, color2, color3, userOff }) {
-  const [error1,setErro1]=useState("");
+function MenuComponent({ color1, color2, color3,  }) {
+  const [activeLink, setActiveLink] = useState(location.pathname);
+  const [userRole, setUserRole] = useState(null);
+  console.log(activeLink)
+
+  const handleSetActiveLink = (link) => {
+    setActiveLink(link);
+  };
+
+  useEffect(() => {
+    // Function to retrieve user role from token in local storage
+    const getUserRoleFromToken = () => {
+      try {
+        const token = localStorage.getItem('jsonwebtoken');
+        console.log("Token from localStorage:", token); // Log token
+        if (token) {
+          
+          const tokenPayload = token.split('.')[1]; // Extracting payload part
+          const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
+          console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
+          setUserRole(decodedPayload.role); // Set user role
+          console.log("Decoded Token Role:", decodedPayload.role); // Log user role
+        }
+      } catch (error) {
+        console.error("Error decoding token:", error);
+      }
+    };
+
+    getUserRoleFromToken(); // Call the function when component mounts
+  }, []);
+   
+
   return (
     <div className="relative">
       <div className="md:block">
         <h2 className="font-bold text-lg mt-10 mx-4">Menu</h2>
         <br />
-        <Link to={"/Dashboard"}>
-          <button
-            className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded-lg mx-4`}
-          >
-            <svg
-              className={`h-6 w-8 text-${color1} absolute top-1/2 transform -translate-y-1/2 ml-2`}
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-              />
-            </svg>
-            <span className={`md:inline-block md:mr-8 text-${color1}`}>
-              Dashboard
-            </span>
-          </button>
-        </Link>
-        {!userOff && (
-          <Link to={"/Users"}>
-            <button
-              className={`relative h-8 mx-4 w-[80%] sm:w-88  mt-5 `}
-            >
-              <svg
-                className={`h-6 w-8 text-${color2} absolute top-1/2 transform -translate-y-1/2 ml-2`}
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-                <circle cx="12" cy="7" r="4" />
-              </svg>
-              <span
-                className={`md:inline-block md:mr-20 md:ml-2 text-${color2}`}
-              >
-                User's
-              </span>
-            </button>
-          </Link>
-        )}
+        {userRole === "user" && (
+  <Link to={"/Dashboard"}>
+    <button className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded-lg mx-4`}>
+      <svg
+        className={`h-6 w-8 text-${color1} absolute top-1/2 transform -translate-y-1/2 ml-2`}
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="2"
+          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+        />
+      </svg>
+      <span className={`md:inline-block md:mr-8 text-${color1}`}>
+        Dashboard
+      </span>
+    </button>
+  </Link>
+)}
+{userRole === "admin" && (
+  <Link to={"/Users"}>
+    <button className={`relative h-8 mx-4 w-[80%] sm:w-88  mt-5 `}>
+      <svg
+        className={`h-6 w-8 text-${color2} absolute top-1/2 transform -translate-y-1/2 ml-2`}
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </svg>
+      <span
+        className={`md:inline-block md:mr-20 md:ml-2 text-${color2}`}
+      >
+        User's
+      </span>
+    </button>
+  </Link>
+)}
+
         <Link to={"/Task"}>
           <button
             className={`relative h-8 mx-4 w-[80%] sm:w-88 mt-5 `}

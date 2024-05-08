@@ -9,7 +9,7 @@ function Todo({ onDelete }) {
   return (
     <div className="absolute bg-white border-2 mr-2">
       <div className="flex mt-2 px-4">
-        <button onClick={onDelete}>
+        <button onClick={handleDelete}>
           <img className="" src="src\assets\Delete.png"></img>
         </button>
         <text className="ml-2">Delete</text>

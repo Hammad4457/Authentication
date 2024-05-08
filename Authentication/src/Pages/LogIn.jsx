@@ -23,18 +23,27 @@ function LogIn() {
   const onSubmit = (e) => {
     e.preventDefault();
     setloading(true);
+    console.log("loading")
     axios
       .post("http://localhost:3000/api/users/login", { email, password })
-      .then((result) => {
-        // Assuming username is returned in the response
+      .then((response) => {
+        
+        const token = response.data.token; 
+        localStorage.setItem('jsonwebtoken',token);
+        
         navigate("/dashboard");
-        console.log(result);
+        console.log("User Role:", result.data.user.role);
+        console.log("hello")
+        
+        console.log(response);
       })
       .catch((err) => {
         setError("Invalid email or password. Please try again.");
       })
       .finally(() => setloading(false));
   };
+  
+  
 
   return (
     <div className="flex flex-wrap">
