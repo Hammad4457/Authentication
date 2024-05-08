@@ -2,12 +2,21 @@ import Task from "../models/tasksModal.js";
 
 export const getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    let tasks;
+    // Check if the user is admin
+    if (req.user.role === "admin") {
+      // If user is admin, fetch all tasks
+      tasks = await Task.find();
+    } else {
+      // If user is not admin, fetch tasks associated with the authenticated user
+      tasks = await Task.find({ user: req.user._id });
+    }
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
 };
+
 export const getTaskById = async (req, res) => {
   try {
     const task = await Task.findById(req.params.id);
@@ -34,10 +43,12 @@ export const createTask = async (req, res) => {
       description,
       startDate,
       endDate,
+      user: req.user._id,
     });
     const newTask = await task.save();
     res.status(201).json(newTask);
   } catch (err) {
+    console.error("Error creating task:", err.message);
     res.status(400).json({ message: err.message });
   }
 };

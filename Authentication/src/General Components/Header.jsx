@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 
-function Header({pageName}){
+function Header({ pageName }) {
+  const [userName, setUserName] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchUserName = async () => {
+      try {
+        const token = localStorage.getItem("jsonwebtoken");
+        if (!token) {
+          console.error("No token found in local storage");
+          setIsLoading(false);
+          return;
+        }
+
+        const decodedToken = jwtDecode(token);
+        const userId = decodedToken.userId;
+
+        const response = await axios.get(
+          `http://localhost:3000/api/users/${userId}`
+        );
+        const userData = response.data;
+        setUserName(userData.name);
+        console.log(userData);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching user details:", error);
+        setIsLoading(false);
+      }
+    };
+    fetchUserName();
+  }, []);
+
   return (
     <>
       <div className="flex  flex-wrap  justify-center items-center">
@@ -31,7 +64,7 @@ function Header({pageName}){
               alt="User Icon"
             />
             <div className="ml-3">
-              <h1 className="font-bold">Hammad Khalil</h1>
+              <h1 className="font-bold">{userName}</h1>
               <p>Status 200</p>
             </div>
             <img

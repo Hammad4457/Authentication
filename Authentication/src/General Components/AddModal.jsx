@@ -6,25 +6,24 @@ function AddModal({ onSubmit }) {
     description: "",
     attachment: "",
     startDate: "",
-    endDate: ""
+    endDate: "",
   });
   const [cross, setCross] = useState(true);
-
-  function crossDisplay() {
-    setCross(!cross);
-  }
 
   function handleChange(e) {
     const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
     onSubmit(data);
+  }
+  function crossDisplay() {
+    setCross(!cross);
   }
 
   return (
@@ -56,7 +55,8 @@ function AddModal({ onSubmit }) {
             </div>
 
             <p>
-              Fill the information below to add a new task as per your requirement.
+              Fill the information below to add a new task as per your
+              requirement.
             </p>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">

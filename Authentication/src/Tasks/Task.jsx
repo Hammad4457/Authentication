@@ -3,6 +3,7 @@ import Header from "../General Components/Header";
 import MenuComponent from "../General Components/MenuComponent";
 import AddModal from "../General Components/AddModal";
 import axios from "axios";
+import Todo from "../General Components/Todo";
 
 import { getRole } from "../utils/GettingRole";
 
@@ -11,53 +12,147 @@ function Task() {
   const [showModal, setShowModal] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredTasks, setFilteredTasks] = useState([]);
+  const [dotStatus, setDotStatus] = useState(false);
   const [loading, setLoading] = useState(true); // State for loading indicator
-  const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [userRole, setUserRole] = useState(null);
 
   // Function to fetch tasks from the server
+  const getRandomColor = () => {
+    const colors = [
+      "bg-red-500",
+      "bg-blue-500",
+      "bg-yellow-500",
+      "bg-green-500",
+      "bg-purple-500",
+    ];
+    const randomIndex = Math.floor(Math.random() * colors.length);
+    return colors[randomIndex];
+  };
+
+  // Fetch tasks on component mount
+  useEffect(() => {
+    setShowModal(false);
+    fetchTasks();
+  }, []);
+
+  const getUserRoleFromToken = () => {
+    try {
+      const token = localStorage.getItem("jsonwebtoken");
+      if (token) {
+        const tokenPayload = token.split(".")[1];
+        const decodedPayload = JSON.parse(atob(tokenPayload));
+        setUserRole(decodedPayload.role);
+      }
+    } catch (error) {
+      console.error("Error decoding token:", error);
+    }
+  };
+  const getUserIdFromToken = () => {
+    try {
+      const token = localStorage.getItem("jsonwebtoken");
+      console.log("Token:", token);
+      if (token) {
+        const decodedToken = jwtDecode(token);
+        console.log("Decoded Token:", decodedToken);
+        const userId = decodedToken.userId;
+        console.log("User ID:", userId); // Add this line to check the extracted user ID
+        return userId;
+      }
+      return null;
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return null;
+    }
+  };
+
   function fetchTasks() {
+    setLoading(true);
+    const token = localStorage.getItem("jsonwebtoken");
+    if (!token) {
+      console.error("No token found in local storage");
+      setLoading(false);
+      return;
+    }
+    let url = "http://localhost:3000/api/tasks";
     axios
-      .get("http://localhost:3000/api/tasks")
+      .get(url, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const tasks = response.data;
         setTasks(tasks);
         setFilteredTasks(tasks);
+        console.log(response);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
       })
       .finally(() => {
-        setLoading(false); // Stop loading when fetching is done
+        setLoading(false);
       });
   }
-
-  // Fetch tasks on component mount
-  useEffect(() => {
-    
-    fetchTasks();
-  }, []);
 
   // Function to handle submission of modal data
   function handleModalSubmit(data) {
-    setLoading(true); // Start loading when submitting modal data
+    const token = localStorage.getItem("jsonwebtoken");
+    if (!token) {
+      console.error("No token found in local storage");
+      return;
+    }
+
     axios
-      .post("http://localhost:3000/api/tasks/addTasks", data)
+      .post("http://localhost:3000/api/tasks/addTasks", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
-        const newTask = {
-          id: response.data._id,
-          ...data,
-        };
-        setTasks([...tasks, newTask]);
+        setSubmittedData([...submittedData, data]);
+        setFilteredTasks([...filteredTasks, data]);
         setShowModal(false);
+        console.log(response);
       })
       .catch((error) => {
         console.error("Error adding task:", error);
-      })
-      .finally(() => {
-        setLoading(false); // Stop loading after submitting modal data
       });
   }
 
+  const handleDeleteTask = (taskId) => {
+    axios
+      .delete(`http://localhost:3000/api/tasks/${taskId}`)
+      .then((response) => {
+        const updatedTasks = filteredTasks.filter(
+          (task) => task._id !== taskId
+        );
+        setFilteredTasks(updatedTasks);
+        if (selectedTaskId === taskId) {
+          setSelectedTaskId(null);
+        }
+      })
+      .catch((error) => {
+        console.error("Error deleting task:", error);
+      });
+  };
+
+  const handleTodoDelete = () => {
+    if (selectedTaskId) {
+      handleDeleteTask(selectedTaskId);
+    }
+  };
+
+  const handleTodoClose = () => {
+    setSelectedTaskId(null);
+  };
+
+  const handleTodoClick = (taskId) => {
+    if (selectedTaskId === taskId) {
+      setSelectedTaskId(null);
+    } else {
+      setSelectedTaskId(taskId);
+    }
+  };
   // Function to handle search input change
   const handleSearchChange = (e) => {
     const query = e.target.value.toLowerCase();
@@ -82,43 +177,6 @@ function Task() {
     setFilteredTasks(filteredTasks);
   };
 
-  // Function to handle task deletion
-  const handleDeleteTask = (taskId) => {
-    axios
-      .delete(`http://localhost:3000/api/tasks/${taskId}`)
-      .then((response) => {
-        // Remove the deleted task from UI
-        console.log(response);
-        const updatedTasks = tasks.filter((task) => task._id !== taskId);
-        setTasks(updatedTasks);
-        // Close Todo component if the deleted task is the one being displayed
-        if (selectedTaskId === taskId) {
-          setSelectedTaskId(null);
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting task:", error);
-      });
-  };
-
-  // Function to handle click on a task
-  const handleClick = (taskId) => {
-    setSelectedTaskId(selectedTaskId === taskId ? null : taskId);
-  };
-
-  // Function to get a random color
-  const getRandomColor = () => {
-    const colors = [
-      "bg-red-500",
-      "bg-blue-500",
-      "bg-yellow-500",
-      "bg-green-500",
-      "bg-purple-500",
-    ];
-    const randomIndex = Math.floor(Math.random() * colors.length);
-    return colors[randomIndex];
-  };
-
   // Function to format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
@@ -126,8 +184,6 @@ function Task() {
       .toString()
       .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
   };
-
-  
 
   // Function to render individual task divs
   const renderTaskDivs = () => {
@@ -140,33 +196,15 @@ function Task() {
         <div className="flex">
           <h4 className="font-bold px-2">Title:</h4>
           <p className="ml-auto">
-            <button onClick={() => handleClick(task._id)}>
-              <img src="src\assets\Frame.png" alt="Expand" />
-              {selectedTaskId === task._id && (
-                <div className="absolute bg-white border-2 mr-2">
-                  <div className="flex mt-2 px-4">
-                    <button onClick={() => handleDeleteTask(task._id)}>
-                      <img
-                        className=""
-                        src="src\assets\Delete.png"
-                        alt="Delete"
-                      />
-                    </button>
-                    <text className="ml-2">Delete</text>
-                  </div>
-                  <div className="flex mt-2 px-4">
-                    <button>
-                      <img src="src\assets\Eye.png" alt="View" />
-                    </button>
-                    <text className="ml-2">View</text>
-                  </div>
-                  <div className="flex mt-2 px-4">
-                    <button>
-                      <img src="src\assets\Edit.png" alt="Edit" />
-                    </button>
-                    <text className="ml-2">Edit</text>
-                  </div>
-                </div>
+            <button
+              onClick={() => {
+                setDotStatus(!dotStatus);
+                handleTodoClick(item._id);
+              }}
+            >
+              <img src="src/assets/Frame.png" alt="Expand" />
+              {dotStatus && (
+                <Todo onDelete={handleTodoDelete} onClose={handleTodoClose} />
               )}
             </button>
           </p>
@@ -178,7 +216,7 @@ function Task() {
         <div>
           <img
             className="w-[80%] h-28 mx-auto mt-2 mb-2"
-            src="src\assets\Flower.png"
+            src="src/assets/Flower.png"
             alt="Attachment"
           />
         </div>
@@ -196,7 +234,7 @@ function Task() {
 
   return (
     <div>
-      <Header pageName="Task"  />
+      <Header pageName="Task" />
       {loading && ( // Render loader if loading is true
         <div className="fixed top-0 left-0 w-full h-full bg-gray-500 opacity-50 flex items-center justify-center z-50">
           <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
@@ -231,12 +269,12 @@ function Task() {
                 required
               />
             </div>
-            {getRole() !== "Admin" && (
+            {userRole !== "admin" && (
               <button
                 className="h-10 ml-auto"
-                onClick={() => setShowModal(false)}
+                onClick={() => setShowModal(!showModal)}
               >
-                <AddModal />
+                {showModal && <AddModal />}
               </button>
             )}
 

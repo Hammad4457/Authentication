@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setloading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -22,28 +22,24 @@ function LogIn() {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setloading(true);
-    console.log("loading")
+    setLoading(true);
     axios
       .post("http://localhost:3000/api/users/login", { email, password })
-      .then((response) => {
-        
-        const token = response.data.token; 
-        localStorage.setItem('jsonwebtoken',token);
-        
-        navigate("/dashboard");
+      .then((result) => {
+        const token = result.data.token; // Assuming token is returned in the response
+        localStorage.setItem("jsonwebtoken", token);
         console.log("User Role:", result.data.user.role);
-        console.log("hello")
-        
-        console.log(response);
+        console.log("User Role:", result.data.username);
+        // onLogin();
+        navigate("/dashboard");
+        console.log(result);
       })
       .catch((err) => {
-        setError("Invalid email or password. Please try again.");
-      })
-      .finally(() => setloading(false));
+        setLoading(false);
+        setError("Incorrect email or password.");
+        console.log(err);
+      });
   };
-  
-  
 
   return (
     <div className="flex flex-wrap">

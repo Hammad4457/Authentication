@@ -1,7 +1,8 @@
 import express from "express";
 const router = express.Router();
 import * as taskController from "../controllers/tasksController.js";
-
+import { AuthenticateToken } from "../Middlewares/AuthenticateToken.js";
+router.use(AuthenticateToken);
 // Get all tasks
 router.get("/", taskController.getAllTasks);
 

@@ -1,34 +1,30 @@
-import { React } from "react";
-import PropTypes from "prop-types";
-function Todo({ onDelete }) {
-  const handleDelete = () => {
-    // Assuming taskId is provided by the parent component
-    onDelete();
-  };
+import React from "react";
 
+const Todo = ({ onDelete }) => {
   return (
-    <div className="absolute bg-white border-2 mr-2">
-      <div className="flex mt-2 px-4">
-        <button onClick={handleDelete}>
-          <img className="" src="src\assets\Delete.png"></img>
+    <div className="absolute bg-white">
+      <div className="flex mt-2 px-4 " onClick={onDelete}>
+        <button>
+          <img className="" src="src/assets/Delete.png" alt="Delete" />
         </button>
         <text className="ml-2">Delete</text>
       </div>
       <div className="flex mt-2 px-4">
         <button>
-          <img src="src\assets\Eye.png"></img>
+          <img src="src/assets/Eye.png" alt="View" />
         </button>
         <text className="ml-2">View</text>
       </div>
       <div className="flex mt-2 px-4">
         <button>
-          <img src="src\assets\Edit.png"></img>
+          <img src="src/assets/Edit.png" alt="Edit" />
         </button>
         <text className="ml-2">Edit</text>
       </div>
     </div>
   );
-}
+};
+
 Todo.propTypes = {
   onDelete: PropTypes.func.isRequired,
 };
