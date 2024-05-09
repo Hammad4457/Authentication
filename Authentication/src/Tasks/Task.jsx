@@ -48,24 +48,24 @@ function Task() {
       console.error("Error decoding token:", error);
     }
   };
-  const getUserIdFromToken = () => {
-    try {
-      // console.log("UserIdFromToken");
-      const token = localStorage.getItem("jsonwebtoken");
-      console.log("Token:", token);
-      if (token) {
-        const decodedToken = jwtDecode(token);
-        console.log("Decoded Token:", decodedToken);
-        const userId = decodedToken.userId;
-        console.log("User ID:", userId); // Add this line to check the extracted user ID
-        return userId;
-      }
-      return null;
-    } catch (error) {
-      console.error("Error decoding token:", error);
-      return null;
-    }
-  };
+  // const getUserIdFromToken = () => {
+  //   try {
+  //     // console.log("UserIdFromToken");
+  //     const token = localStorage.getItem("jsonwebtoken");
+  //     console.log("Token:", token);
+  //     if (token) {
+  //       const decodedToken = jwtDecode(token);
+  //       console.log("Decoded Token:", decodedToken);
+  //       const userId = decodedToken.userId;
+  //       console.log("User ID:", userId); // Add this line to check the extracted user ID
+  //       return userId;
+  //     }
+  //     return null;
+  //   } catch (error) {
+  //     console.error("Error decoding token:", error);
+  //     return null;
+  //   }
+  // };
 
   function fetchTasks() {
     setLoading(true);

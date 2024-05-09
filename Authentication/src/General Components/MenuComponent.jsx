@@ -1,25 +1,30 @@
-import React, { useState,useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import LogoutSvg from "../svg Components/LogoutSvg";
 
-
-function MenuComponent({ color1, color2, color3,  }) {
+function MenuComponent({ color1, color2, color3 }) {
+  const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [userRole, setUserRole] = useState(null);
-  console.log(activeLink)
+  console.log(activeLink);
 
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem("jsonwebtoken"); // Remove JWT token from local storage
+    navigate("/login"); // Redirect to login page
   };
 
   useEffect(() => {
     // Function to retrieve user role from token in local storage
     const getUserRoleFromToken = () => {
       try {
-        const token = localStorage.getItem('jsonwebtoken');
+        const token = localStorage.getItem("jsonwebtoken");
         console.log("Token from localStorage:", token); // Log token
         if (token) {
-          
-          const tokenPayload = token.split('.')[1]; // Extracting payload part
+          const tokenPayload = token.split(".")[1]; // Extracting payload part
           const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
           console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
           setUserRole(decodedPayload.role); // Set user role
@@ -32,63 +37,62 @@ function MenuComponent({ color1, color2, color3,  }) {
 
     getUserRoleFromToken(); // Call the function when component mounts
   }, []);
-   
 
   return (
     <div className="relative">
       <div className="md:block">
         <h2 className="font-bold text-lg mt-10 mx-4">Menu</h2>
         <br />
-        {userRole === "user" && (
-  <Link to={"/Dashboard"}>
-    <button className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded-lg mx-4`}>
-      <svg
-        className={`h-6 w-8 text-${color1} absolute top-1/2 transform -translate-y-1/2 ml-2`}
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth="2"
-          d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-        />
-      </svg>
-      <span className={`md:inline-block md:mr-8 text-${color1}`}>
-        Dashboard
-      </span>
-    </button>
-  </Link>
-)}
-{userRole === "admin" && (
-  <Link to={"/Users"}>
-    <button className={`relative h-8 mx-4 w-[80%] sm:w-88  mt-5 `}>
-      <svg
-        className={`h-6 w-8 text-${color2} absolute top-1/2 transform -translate-y-1/2 ml-2`}
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </svg>
-      <span
-        className={`md:inline-block md:mr-20 md:ml-2 text-${color2}`}
-      >
-        User's
-      </span>
-    </button>
-  </Link>
-)}
+
+        <Link to={"/Dashboard"}>
+          <button
+            className={`relative mt-2 w-[80%] sm:w-88 h-8 shadow rounded-lg mx-4`}
+          >
+            <svg
+              className={`h-6 w-8 text-${color1} absolute top-1/2 transform -translate-y-1/2 ml-2`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
+              />
+            </svg>
+            <span className={`md:inline-block md:mr-8 text-${color1}`}>
+              Dashboard
+            </span>
+          </button>
+        </Link>
+
+        {userRole === "admin" && (
+          <Link to={"/Users"}>
+            <button className={`relative h-8 mx-4 w-[80%] sm:w-88  mt-5 `}>
+              <svg
+                className={`h-6 w-8 text-${color2} absolute top-1/2 transform -translate-y-1/2 ml-2`}
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              <span
+                className={`md:inline-block md:mr-20 md:ml-2 text-${color2}`}
+              >
+                User's
+              </span>
+            </button>
+          </Link>
+        )}
 
         <Link to={"/Task"}>
-          <button
-            className={`relative h-8 mx-4 w-[80%] sm:w-88 mt-5 `}
-          >
+          <button className={`relative h-8 mx-4 w-[80%] sm:w-88 mt-5 `}>
             <svg
               className={`h-6 w-8 text-${color3} absolute top-1/2 transform -translate-y-1/2 ml-2`}
               width="24"
@@ -129,6 +133,21 @@ function MenuComponent({ color1, color2, color3,  }) {
             <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
           </svg>
           <span className="md:inline-block md:mr-14">Setting</span>
+        </button>
+
+        <button
+          className={`px-7 mt-6 font-small text-md text-black ${
+            activeLink === "/logout"
+          }`}
+          onClick={() => {
+            handleLogout();
+            handleSetActiveLink("/logout");
+          }}
+        >
+          <div className="flex">
+            <LogoutSvg></LogoutSvg>
+            <p className="ml-2">Logout</p>
+          </div>
         </button>
       </div>
     </div>

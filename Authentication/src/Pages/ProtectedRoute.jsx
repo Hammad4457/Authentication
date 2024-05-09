@@ -1,14 +1,14 @@
-import React from "react";
-import { Navigate } from "react-router-dom";
-import PropTypes from "prop-types";
+import { Outlet, useNavigate } from "react-router-dom";
 
-const ProtectedRoute = ({ element, loggedIn, ...rest }) => {
-  return loggedIn ? element : <Navigate to="/login" />;
-};
+function PrivateRoute() {
+  const isAuthenticated = localStorage.getItem("jsonwebtoken"); // replace this with your actual authentication check
+  const navigate = useNavigate();
 
-ProtectedRoute.propTypes = {
-  element: PropTypes.element.isRequired,
-  loggedIn: PropTypes.bool.isRequired,
-};
+  if (!isAuthenticated) {
+    navigate("/login");
+    return null;
+  }
 
-export default ProtectedRoute;
+  return <Outlet />;
+}
+export default PrivateRoute;

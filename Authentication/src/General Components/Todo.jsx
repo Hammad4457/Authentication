@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import PropTypes from "prop-types";
 import AddModal from "./AddModal";
@@ -7,9 +7,11 @@ import AddModal from "./AddModal";
 const Todo = ({ onDelete, onEdit, task }) => {
   const [modalStatus, setModalStatus] = useState(false);
 
-  function handleClick() {
-    setModalStatus(!modalStatus);
-  }
+  const handleClick = () => {
+    console.log("Status before update:", modalStatus);
+    setModalStatus((prevModalStatus) => !prevModalStatus);
+    console.log("Status after update:", modalStatus);
+  };
 
   const handleEditSubmit = (updatedData) => {
     // Pass the updated data to the parent component

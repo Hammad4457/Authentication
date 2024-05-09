@@ -6,7 +6,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
-function LogIn({ onLogin }) {
+function LogIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,7 +30,7 @@ function LogIn({ onLogin }) {
         const token = result.data.token; // Assuming token is returned in the response
         localStorage.setItem("jsonwebtoken", token);
         console.log("User Role:", result.data.user.role);
-        onLogin();
+
         navigate("/dashboard");
         console.log(result);
       })
@@ -136,9 +136,6 @@ function LogIn({ onLogin }) {
       </div>
     </div>
   );
-  Login.propTypes = {
-    onLogin: PropTypes.func.isRequired,
-  };
 }
 
 export default LogIn;
