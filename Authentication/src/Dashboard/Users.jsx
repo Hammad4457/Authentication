@@ -66,13 +66,13 @@ function Users() {
         <Header name="Users"></Header>
         <div className="mt-11 ml-11 w-[1150px] h-[600px] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md truncate relative">
           <h1 className="m-5 font-bold text-2xl">Online User</h1>
-          <div className="ml-4 mb-5 flex space-x-28">
+          {/* <div className="ml-4 mb-5 flex space-x-28">
             <h1 className="text-lg font-medium">Customer Name</h1>
             <h1 className="text-lg font-medium">Project Name</h1>
             <h1 className="px-3 text-lg font-medium">Start Date</h1>
             <h1 className="px-7 text-lg font-medium">End Date</h1>
             <h1 className="text-lg font-medium">OverDue day</h1>
-          </div>
+          </div> */}
           {isLoading && (
             <div className="flex justify-center items-center min-h-screen">
               <div className="absolute top-[250px]">

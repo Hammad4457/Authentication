@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-function AddModal({ onSubmit }) {
+function AddModal({ onSubmit, initialData }) {
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -9,6 +9,12 @@ function AddModal({ onSubmit }) {
     endDate: "",
   });
   const [cross, setCross] = useState(true);
+
+  useEffect(() => {
+    if (initialData) {
+      setData(initialData);
+    }
+  }, [initialData]);
 
   function handleChange(e) {
     const { name, value } = e.target;

@@ -4,7 +4,7 @@ import MenuComponent from "../General Components/MenuComponent";
 import AddModal from "../General Components/AddModal";
 import axios from "axios";
 import Todo from "../General Components/Todo";
-
+import { jwtDecode } from "jwt-decode";
 import { getRole } from "../utils/GettingRole";
 
 function Task() {
@@ -15,6 +15,7 @@ function Task() {
   const [dotStatus, setDotStatus] = useState(false);
   const [loading, setLoading] = useState(true); // State for loading indicator
   const [userRole, setUserRole] = useState(null);
+  const [selectedTaskId, setSelectedTaskId] = useState(null);
 
   // Function to fetch tasks from the server
   const getRandomColor = () => {
@@ -31,8 +32,8 @@ function Task() {
 
   // Fetch tasks on component mount
   useEffect(() => {
-    setShowModal(false);
     fetchTasks();
+    getUserRoleFromToken(); // Call function to retrieve user role
   }, []);
 
   const getUserRoleFromToken = () => {
@@ -49,6 +50,7 @@ function Task() {
   };
   const getUserIdFromToken = () => {
     try {
+      // console.log("UserIdFromToken");
       const token = localStorage.getItem("jsonwebtoken");
       console.log("Token:", token);
       if (token) {
@@ -109,7 +111,7 @@ function Task() {
         },
       })
       .then((response) => {
-        setSubmittedData([...submittedData, data]);
+        setTasks([...tasks, data]);
         setFilteredTasks([...filteredTasks, data]);
         setShowModal(false);
         console.log(response);
@@ -118,10 +120,45 @@ function Task() {
         console.error("Error adding task:", error);
       });
   }
+  //Editing the Task
+  const handleEditTask = (updatedTask) => {
+    // Update the task in the tasks array
+    const updatedTasks = tasks.map((task) => {
+      if (task._id === updatedTask._id) {
+        return updatedTask;
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+
+    // Close the edit modal
+    setSelectedTaskId(null);
+
+    // Update the task on the server
+    const token = localStorage.getItem("jsonwebtoken");
+    axios
+      .put(`http://localhost:3000/api/tasks/${updatedTask._id}`, updatedTask, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        console.log("Task updated successfully:", response);
+      })
+      .catch((error) => {
+        console.error("Error updating task:", error);
+      });
+  };
 
   const handleDeleteTask = (taskId) => {
+    console.log("Attempting to Delete");
+    const token = localStorage.getItem("jsonwebtoken");
     axios
-      .delete(`http://localhost:3000/api/tasks/${taskId}`)
+      .delete(`http://localhost:3000/api/tasks/${taskId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((response) => {
         const updatedTasks = filteredTasks.filter(
           (task) => task._id !== taskId
@@ -134,6 +171,12 @@ function Task() {
       .catch((error) => {
         console.error("Error deleting task:", error);
       });
+  };
+
+  const handleTodoEdit = () => {
+    if (selectedTaskId) {
+      handleEditTask(selectedTaskId);
+    }
   };
 
   const handleTodoDelete = () => {
@@ -199,12 +242,18 @@ function Task() {
             <button
               onClick={() => {
                 setDotStatus(!dotStatus);
-                handleTodoClick(item._id);
+                handleTodoClick(task._id);
               }}
             >
               <img src="src/assets/Frame.png" alt="Expand" />
-              {dotStatus && (
-                <Todo onDelete={handleTodoDelete} onClose={handleTodoClose} />
+              {dotStatus && selectedTaskId === task._id && (
+                <Todo
+                  //task={task}
+                  onDelete={handleTodoDelete}
+                  onClose={handleTodoClose}
+                  onClick={handleDeleteTask}
+                  onEdit={handleTodoEdit}
+                />
               )}
             </button>
           </p>
@@ -269,20 +318,21 @@ function Task() {
                 required
               />
             </div>
-            {userRole !== "admin" && (
-              <button
-                className="h-10 ml-auto"
-                onClick={() => setShowModal(!showModal)}
-              >
-                {showModal && <AddModal />}
-              </button>
-            )}
 
-            <div className="md:ml-auto mr-16 md:mt-0 mt-4">
-              <button onClick={() => setShowModal(true)}>
-                <img src="src\assets\Add Task.png" alt="Add Task" />
-              </button>
-            </div>
+            <button
+              className="h-10 ml-auto"
+              onClick={() => setShowModal(!showModal)}
+            >
+              {showModal && <AddModal />}
+            </button>
+
+            {userRole !== "admin" && (
+              <div className="md:ml-auto mr-16 md:mt-0 mt-4">
+                <button onClick={() => setShowModal(true)}>
+                  <img src="src\assets\Add Task.png" alt="Add Task" />
+                </button>
+              </div>
+            )}
           </div>
 
           <h3 className="font-bold ml-14 mt-4 text-xl">Enter Title:</h3>

@@ -4,8 +4,9 @@ import PasswordSvg from "../svg Components/PasswordSvg";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
-function LogIn() {
+function LogIn({ onLogin }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -29,8 +30,7 @@ function LogIn() {
         const token = result.data.token; // Assuming token is returned in the response
         localStorage.setItem("jsonwebtoken", token);
         console.log("User Role:", result.data.user.role);
-        console.log("User Role:", result.data.username);
-        // onLogin();
+        onLogin();
         navigate("/dashboard");
         console.log(result);
       })
@@ -136,6 +136,9 @@ function LogIn() {
       </div>
     </div>
   );
+  Login.propTypes = {
+    onLogin: PropTypes.func.isRequired,
+  };
 }
 
 export default LogIn;
