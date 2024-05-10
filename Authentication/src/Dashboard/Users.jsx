@@ -39,6 +39,19 @@ function Users() {
     setSelectedTaskId(null);
   };
 
+  const deleteUser = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/users/${userId}`);
+      // If successful, update the user data by refetching it
+      fetchUserData();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      // setError(
+      //   "An error occurred while deleting the user. Please try again later."
+      // );
+    }
+  };
+
   const fetchUserData = async () => {
     setIsLoading(true);
     try {
@@ -62,18 +75,7 @@ function Users() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-  const deleteUser = async (userId) => {
-    try {
-      await axios.delete(`http://localhost:3000/api/users/${userId}`);
-      // If deletion is successful, you may want to refetch the user data to update the UI
-      fetchUserData();
-    } catch (error) {
-      console.error("Error deleting user:", error);
-      setError(
-        "An error occurred while deleting the user. Please try again later."
-      );
-    }
-  };
+
   console.log("Selected User Id:", selectedUser);
 
   return (
@@ -125,7 +127,13 @@ function Users() {
                       <img src="src\assets\Frame.png"></img>
                     </button>
                     {dotStatus && selectedUser === item._id && (
-                      <TodoUser userId={selectedUser}></TodoUser>
+                      <TodoUser
+                        onDelete={() => {
+                          console.log("Deleting the userId", selectedUser);
+                          deleteUser(item._id);
+                          onclose = { handleTodoClose };
+                        }}
+                      ></TodoUser>
                     )}
                   </div>
                 </div>
