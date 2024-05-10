@@ -6,7 +6,6 @@ function MenuComponent({ color1, color2, color3 }) {
   const navigate = useNavigate();
   const [activeLink, setActiveLink] = useState(location.pathname);
   const [userRole, setUserRole] = useState(null);
-  console.log(activeLink);
 
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
@@ -22,13 +21,13 @@ function MenuComponent({ color1, color2, color3 }) {
     const getUserRoleFromToken = () => {
       try {
         const token = localStorage.getItem("jsonwebtoken");
-        console.log("Token from localStorage:", token); // Log token
+        //  console.log("Token from localStorage:", token); // Log token
         if (token) {
           const tokenPayload = token.split(".")[1]; // Extracting payload part
           const decodedPayload = JSON.parse(atob(tokenPayload)); // Decode and parse payload
-          console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
+          //console.log("Decoded Token Payload:", decodedPayload); // Log decoded payload
           setUserRole(decodedPayload.role); // Set user role
-          console.log("Decoded Token Role:", decodedPayload.role); // Log user role
+          //console.log("Decoded Token Role:", decodedPayload.role); // Log user role
         }
       } catch (error) {
         console.error("Error decoding token:", error);

@@ -11,6 +11,7 @@ export const getAllTasks = async (req, res) => {
       // If user is not admin, fetch tasks associated with the authenticated user
       tasks = await Task.find({ user: req.user._id });
     }
+
     res.json(tasks);
   } catch (err) {
     res.status(500).json({ message: err.message });

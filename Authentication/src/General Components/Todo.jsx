@@ -1,17 +1,22 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-import PropTypes from "prop-types";
 import AddModal from "./AddModal";
 
 const Todo = ({ onDelete, onEdit, task }) => {
   const [modalStatus, setModalStatus] = useState(false);
+  const [status, setStatus] = useState(false);
 
   const handleClick = () => {
     console.log("Status before update:", modalStatus);
-    // setModalStatus(!modalStatus);
+    setModalStatus(!modalStatus);
     console.log("Status after update:", modalStatus);
   };
+  //   const handleClick2 = () => {
+  //     console.log("Before changing:", status);
+  //     setStatus(!setStatus);
+  //     console.log("After Changing:", status);
+  //   };
 
   const handleEditSubmit = (updatedData) => {
     // Pass the updated data to the parent component
@@ -26,12 +31,7 @@ const Todo = ({ onDelete, onEdit, task }) => {
         </button>
         <text className="ml-2">Delete</text>
       </div>
-      <div className="flex mt-2 px-4">
-        <button>
-          <img src="src/assets/Eye.png" alt="View" />
-        </button>
-        <text className="ml-2">View</text>
-      </div>
+
       <div className="flex mt-2 px-4">
         <button onClick={handleClick}>
           <img className="flex" src="src/assets/Edit.png" alt="Edit" />
@@ -41,12 +41,6 @@ const Todo = ({ onDelete, onEdit, task }) => {
       {modalStatus && <AddModal />}
     </div>
   );
-};
-
-Todo.propTypes = {
-  onDelete: PropTypes.func.isRequired,
-  onEdit: PropTypes.func.isRequired,
-  task: PropTypes.object.isRequired,
 };
 
 export default Todo;

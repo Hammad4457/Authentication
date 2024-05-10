@@ -25,7 +25,7 @@ function Header({ pageName }) {
         );
         const userData = response.data;
         setUserName(userData.name);
-        console.log(userData);
+
         setIsLoading(false);
       } catch (error) {
         console.error("Error fetching user details:", error);
