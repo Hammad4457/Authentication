@@ -16,8 +16,17 @@ function Users() {
   const [error, setError] = useState(null);
   const [dotStatus, setDotStatus] = useState(false);
 
-  function handleClick() {
+  const [selectedUser, setSelectedUser] = useState();
+
+  // function handleClick(userID) {
+  //   setDotStatus(!dotStatus);
+  //   deleteUser(userId);
+  // }
+
+  function handleTodoClick(userId) {
     setDotStatus(!dotStatus);
+
+    setSelectedUser(userId);
   }
 
   const itemsPerPage = 6; // Number of items per page
@@ -25,6 +34,10 @@ function Users() {
   useEffect(() => {
     fetchUserData();
   }, []);
+
+  const handleTodoClose = () => {
+    setSelectedTaskId(null);
+  };
 
   const fetchUserData = async () => {
     setIsLoading(true);
@@ -41,21 +54,6 @@ function Users() {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return `${date.getFullYear()}-${(date.getMonth() + 1)
-      .toString()
-      .padStart(2, "0")}-${date.getDate().toString().padStart(2, "0")}`;
-  };
-
-  const calculateDaysLeft = (startDate, endDate) => {
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-    const diffInMs = end - start;
-    const diffInDays = Math.ceil(diffInMs / (1000 * 60 * 60 * 24));
-    return diffInDays;
-  };
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
 
@@ -64,6 +62,19 @@ function Users() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
+  const deleteUser = async (userId) => {
+    try {
+      await axios.delete(`http://localhost:3000/api/users/${userId}`);
+      // If deletion is successful, you may want to refetch the user data to update the UI
+      fetchUserData();
+    } catch (error) {
+      console.error("Error deleting user:", error);
+      setError(
+        "An error occurred while deleting the user. Please try again later."
+      );
+    }
+  };
+  console.log("Selected User Id:", selectedUser);
 
   return (
     <div className="flex h-screen">
@@ -93,15 +104,29 @@ function Users() {
           )}
           <div className=" h-[450px] ">
             {currentItems.map((item, index) => {
+              console.log(item._id);
               return (
-                <div key={index} className="mb-3 py-3 flex border-b space-x-20">
+                <div
+                  key={item._id}
+                  className="mb-3 py-3 flex border-b space-x-20"
+                >
                   <div className="w-32 px-20 ml-44 ">{item.name}</div>
                   <div className="mr-80 w-32 ">{item.email}</div>{" "}
                   <div className="w-32 flex justify-end items-center ">
-                    <button className="mx-auto" onClick={handleClick}>
+                    <button
+                      className="mx-auto"
+                      onClick={() => {
+                        console.log("User id going:", item._id);
+
+                        handleTodoClick(item._id);
+                        console.log(dotStatus);
+                      }}
+                    >
                       <img src="src\assets\Frame.png"></img>
                     </button>
-                    {dotStatus && <TodoUser></TodoUser>}
+                    {dotStatus && selectedUser === item._id && (
+                      <TodoUser userId={selectedUser}></TodoUser>
+                    )}
                   </div>
                 </div>
               );

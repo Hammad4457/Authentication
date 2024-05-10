@@ -9,7 +9,7 @@ const Todo = ({ onDelete, onEdit, task }) => {
 
   const handleClick = () => {
     console.log("Status before update:", modalStatus);
-    setModalStatus((prevModalStatus) => !prevModalStatus);
+    // setModalStatus(!modalStatus);
     console.log("Status after update:", modalStatus);
   };
 
@@ -38,9 +38,7 @@ const Todo = ({ onDelete, onEdit, task }) => {
         </button>
         <text className="ml-2">Edit</text>
       </div>
-      {modalStatus && (
-        <AddModal onSubmit={handleEditSubmit} initialData={task} />
-      )}
+      {modalStatus && <AddModal />}
     </div>
   );
 };

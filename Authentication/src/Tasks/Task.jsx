@@ -246,6 +246,7 @@ function Task() {
               }}
             >
               <img src="src/assets/Frame.png" alt="Expand" />
+              {console.log("tASK ID:", task._id)}
               {dotStatus && selectedTaskId === task._id && (
                 <Todo
                   //task={task}
