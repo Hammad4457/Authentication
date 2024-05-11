@@ -32,9 +32,9 @@ export const getTaskById = async (req, res) => {
 };
 
 export const createTask = async (req, res) => {
-  const { title, description, startDate, endDate } = req.body;
+  const { title, description, startDate, endDate, attachment } = req.body;
 
-  if (!title || !description || !startDate || !endDate) {
+  if (!title || !description || !startDate || !endDate || !attachment) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -44,6 +44,7 @@ export const createTask = async (req, res) => {
       description,
       startDate,
       endDate,
+      attachment,
       user: req.user._id,
     });
     const newTask = await task.save();
@@ -61,7 +62,9 @@ export const updateTask = async (req, res) => {
     if (task) {
       task.title = req.body.title || task.title;
       task.description = req.body.description || task.description;
-      // Update other task properties here
+      task.attachment = req.body.attachment || task.attachment;
+      task.startDate = req.body.startDate || task.startDate;
+      task.endDate = req.body.endDate || task.endDate;
 
       const updatedTask = await task.save();
       res.json(updatedTask);

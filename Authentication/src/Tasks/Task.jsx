@@ -16,6 +16,7 @@ function Task() {
   const [loading, setLoading] = useState(true); // State for loading indicator
   const [userRole, setUserRole] = useState(null);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
+  const [editModal, setEditModal] = useState(false);
 
   // Function to fetch tasks from the server
   const getRandomColor = () => {
@@ -48,24 +49,6 @@ function Task() {
       console.error("Error decoding token:", error);
     }
   };
-  // const getUserIdFromToken = () => {
-  //   try {
-  //     // console.log("UserIdFromToken");
-  //     const token = localStorage.getItem("jsonwebtoken");
-  //     console.log("Token:", token);
-  //     if (token) {
-  //       const decodedToken = jwtDecode(token);
-  //       console.log("Decoded Token:", decodedToken);
-  //       const userId = decodedToken.userId;
-  //       console.log("User ID:", userId); // Add this line to check the extracted user ID
-  //       return userId;
-  //     }
-  //     return null;
-  //   } catch (error) {
-  //     console.error("Error decoding token:", error);
-  //     return null;
-  //   }
-  // };
 
   function fetchTasks() {
     setLoading(true);
@@ -113,42 +96,59 @@ function Task() {
       .then((response) => {
         setTasks([...tasks, data]);
         setFilteredTasks([...filteredTasks, data]);
-        setShowModal(false);
+        //   setShowModal(false);
         console.log(response);
       })
       .catch((error) => {
         console.error("Error adding task:", error);
       });
   }
-  //Editing the Task
   const handleEditTask = (updatedTask) => {
-    // Update the task in the tasks array
+    // Implement edit task functionality here
+    console.log("Edited task:", updatedTask);
+
+    // Update the state with the edited task
     const updatedTasks = tasks.map((task) => {
       if (task._id === updatedTask._id) {
         return updatedTask;
+      } else {
+        return task;
       }
-      return task;
     });
+
     setTasks(updatedTasks);
-
-    // Close the edit modal
+    setFilteredTasks(updatedTasks);
     setSelectedTaskId(null);
-
-    // Update the task on the server
-    const token = localStorage.getItem("jsonwebtoken");
-    axios
-      .put(`http://localhost:3000/api/tasks/${updatedTask._id}`, updatedTask, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-      .then((response) => {
-        console.log("Task updated successfully:", response);
-      })
-      .catch((error) => {
-        console.error("Error updating task:", error);
-      });
   };
+  //Editing the Task
+  // const handleEditTask = (updatedTask) => {
+  //   // Update the task in the tasks array
+  //   const updatedTasks = tasks.map((task) => {
+  //     if (task._id === updatedTask._id) {
+  //       return updatedTask;
+  //     }
+  //     return task;
+  //   });
+  //   setTasks(updatedTasks);
+
+  //   // Close the edit modal
+  //   setSelectedTaskId(null);
+
+  //   // Update the task on the server
+  //   const token = localStorage.getItem("jsonwebtoken");
+  //   axios
+  //     .put(`http://localhost:3000/api/tasks/${updatedTask._id}`, updatedTask, {
+  //       headers: {
+  //         Authorization: `Bearer ${token}`,
+  //       },
+  //     })
+  //     .then((response) => {
+  //       console.log("Task updated successfully:", response);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error updating task:", error);
+  //     });
+  // };
 
   const handleDeleteTask = (taskId) => {
     console.log("Attempting to Delete");
@@ -246,17 +246,20 @@ function Task() {
               }}
             >
               <img src="src/assets/Frame.png" alt="Expand" />
-              {console.log("tASK ID:", task._id)}
-              {dotStatus && selectedTaskId === task._id && (
-                <Todo
-                  //task={task}
-                  onDelete={handleTodoDelete}
-                  onClose={handleTodoClose}
-                  onClick={handleDeleteTask}
-                  onEdit={handleTodoEdit}
-                />
-              )}
             </button>
+
+            {dotStatus && selectedTaskId === task._id && (
+              <Todo
+                task={task}
+                handleEditTask={handleEditTask}
+                onDelete={handleTodoDelete}
+                onClose={handleTodoClose}
+                onClick={handleDeleteTask}
+                onEdit={handleTodoEdit}
+                setEditModal={setEditModal}
+                editModal={editModal}
+              />
+            )}
           </p>
         </div>
         <p className="px-2">{task.title}</p>
@@ -264,9 +267,10 @@ function Task() {
         <p className="px-2 mt-2">{task.description}</p>
         <h6 className="font-bold mt-2 px-2">Attachment:</h6>
         <div>
+          {console.log(task.attachment)}
           <img
             className="w-[80%] h-28 mx-auto mt-2 mb-2"
-            src="src/assets/Flower.png"
+            src={task.attachment}
             alt="Attachment"
           />
         </div>
@@ -320,13 +324,6 @@ function Task() {
               />
             </div>
 
-            <button
-              className="h-10 ml-auto"
-              onClick={() => setShowModal(!showModal)}
-            >
-              {showModal && <AddModal />}
-            </button>
-
             {userRole !== "admin" && (
               <div className="md:ml-auto mr-16 md:mt-0 mt-4">
                 <button onClick={() => setShowModal(true)}>
@@ -353,6 +350,7 @@ function Task() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 px-8 mt-4 border-1 rounded">
             {renderTaskDivs()}
           </div>
+
           {showModal && <AddModal onSubmit={handleModalSubmit} />}
         </div>
       </div>

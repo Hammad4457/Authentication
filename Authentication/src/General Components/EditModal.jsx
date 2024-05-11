@@ -1,32 +1,59 @@
-import { useState, React } from "react";
+import React, { useState, useEffect } from "react";
 
-function AddModal({ onSubmit }) {
-  const [data, setData] = useState();
+function EditModal({ onSubmit, task }) {
   const [cross, setCross] = useState(true);
+  const [data, setData] = useState({
+    title: "",
+    description: "",
+    attachment: "",
+    startDate: "",
+    endDate: "",
+  });
+
+  useEffect(() => {
+    if (task) {
+      const { title, description, attachment, startDate, endDate } = task;
+      // Format startDate and endDate here
+      const formattedStartDate = startDate
+        ? new Date(startDate).toISOString().split("T")[0]
+        : "";
+      const formattedEndDate = endDate
+        ? new Date(endDate).toISOString().split("T")[0]
+        : "";
+      setData({
+        title,
+        description,
+        attachment,
+        startDate: formattedStartDate,
+        endDate: formattedEndDate,
+      });
+    }
+  }, [task]);
+
+  function handleChange(e) {
+    const { name, value, files } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: files ? files[0] : value,
+    }));
+  }
+
+  function handleFormSubmit(e) {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("attachment", data.attachment);
+    formData.append("startDate", data.startDate);
+    formData.append("endDate", data.endDate);
+
+    onSubmit(formData);
+  }
+
   function crossDisplay() {
     setCross(!cross);
   }
-  const modalData = [
-    {
-      title: "",
-      description: "",
-      attachemnt: "",
-      startDate: "",
-      endDate: "",
-    },
-  ];
-  function handleChange(e) {
-    const { name, value } = e.target;
-    setData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-
-    onSubmit(data);
-  };
 
   return (
     <>
@@ -35,7 +62,7 @@ function AddModal({ onSubmit }) {
           <div className="bg-white p-8 rounded-lg">
             <div className="flex">
               <h2 className="text-xl font-bold mx-auto mb-4 mt-1 text-center">
-                Add Task
+                Edit Task
               </h2>
 
               <button onClick={crossDisplay} className="">
@@ -57,7 +84,8 @@ function AddModal({ onSubmit }) {
             </div>
 
             <p>
-              Fill the information below to add new task as per your requirment.
+              Fill the information below to edit the task as per your
+              requirement.
             </p>
             <form onSubmit={handleFormSubmit}>
               <div className="mb-4">
@@ -67,43 +95,42 @@ function AddModal({ onSubmit }) {
                 <input
                   type="text"
                   name="title"
-                  value={modalData.title}
+                  value={data.title}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
               <div className="mb-4">
-                <label htmlFor="value2" className="block mb-1 font-bold">
+                <label htmlFor="description" className="block mb-1 font-bold">
                   Description:
                 </label>
                 <input
                   type="text"
                   name="description"
-                  value={modalData.description}
+                  value={data.description}
                   onChange={handleChange}
                   className="w-full border border-gray-300 rounded-md py-1 px-3"
                 />
               </div>
-              <label htmlFor="value3" className="block mb-1 font-bold">
+              <label htmlFor="attachment" className="block mb-1 font-bold">
                 Attachment:
               </label>
               <input
                 type="file"
                 name="attachment"
-                value={modalData.attachemnt}
                 onChange={handleChange}
                 className="w-full h-40 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">
-                <p className="text-xs">Support format PNG, JPEJ</p>
-                <p className="text-xs ml-48">Support format PNG, JPEJ</p>
+                <p className="text-xs">Supports PNG, JPEG formats</p>
               </div>
               <label className="block mb-1 font-bold">Start Date:</label>
               <input
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="startDate"
-                value={modalData.startDate}
+                value={data.startDate}
+                onChange={handleChange}
                 required
               ></input>
               <label className="block mb-1 font-bold">End Date:</label>
@@ -111,7 +138,8 @@ function AddModal({ onSubmit }) {
                 className="w-full border border-gray-300 rounded-md py-1 px-3"
                 type="date"
                 name="endDate"
-                value={modalData.endDate}
+                value={data.endDate}
+                onChange={handleChange}
                 required
               ></input>
               <button
@@ -127,4 +155,5 @@ function AddModal({ onSubmit }) {
     </>
   );
 }
-export default AddModal;
+
+export default EditModal;
