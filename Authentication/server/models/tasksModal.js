@@ -9,10 +9,6 @@ const taskSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  attachment: {
-    type: String,
-    required: true,
-  },
 
   startDate: {
     type: Date,

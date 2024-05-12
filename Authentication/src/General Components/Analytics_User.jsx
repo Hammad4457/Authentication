@@ -48,8 +48,8 @@ function Analytics_User() {
   const completedTask = totalTasks - (pendingTasks + declinedTasks);
 
   return (
-    <div className="bg-gray-100 w-auto h-screen border">
-      <div className="bg-white rounded-md border-blue-300 border-1  h-5/6 mt-12  mx-4 sm:mx-16 ">
+    <div className="bg-gray-100  w-auto h-screen border">
+      <div className="bg-white rounded-xl border-blue-800  h-5/6 mt-12  mx-4 sm:mx-16 ">
         <h1 className="text-lg font-bold mx-4 ">Analytics</h1>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4 py-8">
           <div className="h-32 rounded-md border-1 bg-purple-50">

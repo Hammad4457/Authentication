@@ -4,6 +4,7 @@ import EditModal from "./EditModal";
 
 function Todo({
   onDelete,
+  selectedTaskId,
   //onEdit,
   handleEditTask,
   task,
@@ -36,7 +37,13 @@ function Todo({
           <span className="ml-2">Edit</span>
         </div>
       </div>
-      {editModal && <EditModal onSubmit={handleEditSubmit} task={task} />}
+      {editModal && (
+        <EditModal
+          onSubmit={handleEditSubmit}
+          task={task}
+          selectedTaskId={selectedTaskId}
+        />
+      )}
     </>
   );
 }

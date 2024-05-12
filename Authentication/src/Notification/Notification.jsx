@@ -6,7 +6,7 @@ function Notification() {
     <div>
       <Header pageName="Notifications"></Header>
       <div className="flex h-auto">
-        <div className="flex h-screen w-[16.6%] ">
+        <div className="flex h-screen w-[16.8%] ">
           <MenuComponent color1="blue-900" userOff={true}></MenuComponent>
         </div>
         <div className="w-[84.4%] border-1 bg-gray-100">

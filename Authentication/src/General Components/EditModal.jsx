@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 
-function EditModal({ onSubmit, task }) {
+function EditModal({ onSubmit, task, selectedTaskId }) {
   const [cross, setCross] = useState(true);
   const [data, setData] = useState({
     title: "",
@@ -9,48 +10,52 @@ function EditModal({ onSubmit, task }) {
     startDate: "",
     endDate: "",
   });
+  console.log(task);
 
   useEffect(() => {
-    if (task) {
-      const { title, description, attachment, startDate, endDate } = task;
-      // Format startDate and endDate here
-      const formattedStartDate = startDate
-        ? new Date(startDate).toISOString().split("T")[0]
-        : "";
-      const formattedEndDate = endDate
-        ? new Date(endDate).toISOString().split("T")[0]
-        : "";
-      setData({
-        title,
-        description,
-        attachment,
-        startDate: formattedStartDate,
-        endDate: formattedEndDate,
-      });
-    }
+    const formattedData = {
+      ...task,
+      startDate: task.startDate
+        ? new Date(task.startDate).toISOString().split("T")[0]
+        : "",
+      endDate: task.endDate
+        ? new Date(task.endDate).toISOString().split("T")[0]
+        : "",
+    };
+    setData(formattedData); // Set initial data when task prop changes
   }, [task]);
 
   function handleChange(e) {
-    const { name, value, files } = e.target;
+    const { name, value } = e.target;
     setData((prevData) => ({
       ...prevData,
-      [name]: files ? files[0] : value,
+      [name]: value,
     }));
   }
-
-  function handleFormSubmit(e) {
+  async function handleFormSubmit(e) {
     e.preventDefault();
 
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("attachment", data.attachment);
-    formData.append("startDate", data.startDate);
-    formData.append("endDate", data.endDate);
+    try {
+      const token = localStorage.getItem("jsonwebtoken");
+      if (!token) {
+        console.error("No token found in local storage");
+        return;
+      }
+      const response = await axios.put(
+        `http://localhost:3000/api/tasks/${selectedTaskId}`,
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
-    onSubmit(formData);
+      onSubmit(response.data); // Pass updated task data to parent component
+    } catch (error) {
+      console.error("Error updating task:", error);
+    }
   }
-
   function crossDisplay() {
     setCross(!cross);
   }

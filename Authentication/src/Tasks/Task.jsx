@@ -4,8 +4,6 @@ import MenuComponent from "../General Components/MenuComponent";
 import AddModal from "../General Components/AddModal";
 import axios from "axios";
 import Todo from "../General Components/Todo";
-import { jwtDecode } from "jwt-decode";
-import { getRole } from "../utils/GettingRole";
 
 function Task() {
   const [tasks, setTasks] = useState([]);
@@ -69,7 +67,6 @@ function Task() {
         const tasks = response.data;
         setTasks(tasks);
         setFilteredTasks(tasks);
-        console.log(response);
       })
       .catch((error) => {
         console.error("Error fetching tasks:", error);
@@ -103,52 +100,20 @@ function Task() {
         console.error("Error adding task:", error);
       });
   }
+  //console.log(updateTask);
   const handleEditTask = (updatedTask) => {
-    // Implement edit task functionality here
-    console.log("Edited task:", updatedTask);
-
-    // Update the state with the edited task
+    // Update the task in the tasks array
     const updatedTasks = tasks.map((task) => {
       if (task._id === updatedTask._id) {
         return updatedTask;
-      } else {
-        return task;
       }
+      return task;
     });
-
     setTasks(updatedTasks);
-    setFilteredTasks(updatedTasks);
-    setSelectedTaskId(null);
+
+    // Close the edit modal
+    setEditModal(false);
   };
-  //Editing the Task
-  // const handleEditTask = (updatedTask) => {
-  //   // Update the task in the tasks array
-  //   const updatedTasks = tasks.map((task) => {
-  //     if (task._id === updatedTask._id) {
-  //       return updatedTask;
-  //     }
-  //     return task;
-  //   });
-  //   setTasks(updatedTasks);
-
-  //   // Close the edit modal
-  //   setSelectedTaskId(null);
-
-  //   // Update the task on the server
-  //   const token = localStorage.getItem("jsonwebtoken");
-  //   axios
-  //     .put(`http://localhost:3000/api/tasks/${updatedTask._id}`, updatedTask, {
-  //       headers: {
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log("Task updated successfully:", response);
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error updating task:", error);
-  //     });
-  // };
 
   const handleDeleteTask = (taskId) => {
     console.log("Attempting to Delete");
@@ -250,6 +215,7 @@ function Task() {
 
             {dotStatus && selectedTaskId === task._id && (
               <Todo
+                selectedTaskId={selectedTaskId}
                 task={task}
                 handleEditTask={handleEditTask}
                 onDelete={handleTodoDelete}
@@ -267,7 +233,6 @@ function Task() {
         <p className="px-2 mt-2">{task.description}</p>
         <h6 className="font-bold mt-2 px-2">Attachment:</h6>
         <div>
-          {console.log(task.attachment)}
           <img
             className="w-[80%] h-28 mx-auto mt-2 mb-2"
             src={task.attachment}
@@ -300,7 +265,7 @@ function Task() {
         </div>
         <div className="md:w-5/6 border-1 bg-gray-200">
           <div className="flex flex-col md:flex-row mt-8 md:items-center">
-            <div className="md:ml-14 md:mb-0">
+            <div className="md:ml-[5%] md:mb-0">
               <h1 className="font-bold text-xl mb-4 md:mb-0">Start date:</h1>
               <div className="flex items-center">
                 <input
@@ -313,7 +278,7 @@ function Task() {
               </div>
             </div>
 
-            <div className="md:ml-14 md:mb-0 mt-4 md:mt-0">
+            <div className="md:ml-[4%] md:mb-0 mt-4 md:mt-0">
               <h1 className="font-bold text-xl mb-4 md:mb-0">End Date:</h1>
               <input
                 className=" w-[220px] px-2 h-12 mt-4 rounded-xl"
@@ -333,10 +298,10 @@ function Task() {
             )}
           </div>
 
-          <h3 className="font-bold ml-14 mt-4 text-xl">Enter Title:</h3>
+          <h3 className="font-bold ml-[5%] mt-4 text-xl">Enter Title:</h3>
           <div className="flex border-1 border-blue-700">
             <input
-              className=" rounded-l-xl ml-14 w-full md:w-[31%] h-12 mt-4 px-2"
+              className=" rounded-l-xl ml-[5%] w-full md:w-[31%] h-12 mt-4 px-2"
               type="search"
               placeholder="Search"
               value={searchQuery}

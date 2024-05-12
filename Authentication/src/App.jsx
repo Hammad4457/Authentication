@@ -31,7 +31,7 @@ function App() {
           <Route index element={<Users />} />
         </Route>
 
-        <Route path="/Notification" element={<PrivateRoute />}>
+        <Route path="/Notifications" element={<PrivateRoute />}>
           <Route index element={<Notification />} />
         </Route>
 
