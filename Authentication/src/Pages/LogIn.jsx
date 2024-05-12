@@ -50,13 +50,13 @@ function LogIn() {
           alt="Sign In Image"
         ></img>
       </div>
-      <div className="w-full sm:w-1/2">
+      <div className="w-full sm:w-1/2 ">
         <div className="flex items-center justify-center">
           <form
             onSubmit={onSubmit}
             className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2"
           >
-            <h1 className="text text-center  text-lg font-bold mr-[44%] mt-36">
+            <h1 className="text text-center sm:text-center text-lg font-bold mr-[44%] mt-36">
               Sign In to your Account
             </h1>
             <p className="text-xs text-center mt-1 mr-40 ">

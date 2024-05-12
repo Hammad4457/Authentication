@@ -45,7 +45,7 @@ function Header({ pageName }) {
           </h1>
         </div>
         <div className="w-full sm:w-4/5 bg-white flex items-center bg-gray-50 h-12 ml-48 content-center">
-          <h2 className="font-bold text-left ml-4 text-xl flex-grow">
+          <h2 className="font-bold text-left ml-2 text-xl flex-grow">
             {pageName}
           </h2>
           <div className="flex w-12 ml-auto mr-4 px-2">

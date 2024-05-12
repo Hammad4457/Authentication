@@ -149,7 +149,7 @@ function MenuComponent({ color1, color2, color3 }) {
           </button>
 
           <button
-            className={`px-7 mt-6 font-small text-md text-black ${
+            className={`px-7 w-[80%] sm:w-88   mt-6  font-small text-md text-black ${
               activeLink === "/logout"
             }`}
             onClick={() => {
@@ -159,7 +159,7 @@ function MenuComponent({ color1, color2, color3 }) {
           >
             <div className="flex">
               <LogoutSvg></LogoutSvg>
-              <p className="ml-2">Logout</p>
+              <span className="ml-2">Logout</span>
             </div>
           </button>
         </div>
