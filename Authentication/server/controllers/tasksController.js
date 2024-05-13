@@ -32,9 +32,9 @@ export const getTaskById = async (req, res) => {
 };
 
 export const createTask = async (req, res) => {
-  const { title, description, startDate, endDate, attachment } = req.body;
+  const { title, description, startDate, endDate } = req.body;
 
-  if (!title || !description || !startDate || !endDate || !attachment) {
+  if (!title || !description || !startDate || !endDate) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
@@ -44,13 +44,12 @@ export const createTask = async (req, res) => {
       description,
       startDate,
       endDate,
-      attachment,
-      user: req.user._id,
+      user: req.user._id, // Associate the task with the authenticated user
     });
     const newTask = await task.save();
     res.status(201).json(newTask);
   } catch (err) {
-    console.error("Error creating task:", err.message);
+    console.error("Error creating task:", err.message); // Log detailed error message
     res.status(400).json({ message: err.message });
   }
 };

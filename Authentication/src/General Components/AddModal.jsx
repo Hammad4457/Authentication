@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function AddModal({ onSubmit }) {
+function AddModal({ onSubmit, setShowModal }) {
   const [data, setData] = useState({
     title: "",
     description: "",
@@ -10,37 +10,22 @@ function AddModal({ onSubmit }) {
   });
   const [cross, setCross] = useState(true);
 
+  function crossDisplay() {
+    setCross(!cross);
+  }
+
   function handleChange(e) {
-    if (e.target.name === "attachment") {
-      // Handle file input separately
-      setData((prevData) => ({
-        ...prevData,
-        attachment: e.target.files[0], // Update attachment with file object
-      }));
-    } else {
-      const { name, value } = e.target;
-      setData((prevData) => ({
-        ...prevData,
-        [name]: value,
-      }));
-    }
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   }
 
   function handleFormSubmit(e) {
     e.preventDefault();
-
-    // Create form data object
-    const formData = new FormData();
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("attachment", data.attachment); // Append file object
-    formData.append("startDate", data.startDate);
-    formData.append("endDate", data.endDate);
-
-    onSubmit(formData); // Submit form data
-  }
-  function crossDisplay() {
-    setCross(!cross);
+    onSubmit(data);
+    setShowModal(false);
   }
 
   return (
