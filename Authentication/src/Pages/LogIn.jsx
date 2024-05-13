@@ -64,13 +64,13 @@ function LogIn() {
             </p>
             <br />
 
-            <div className="relative mt-2">
+            <div className="relative mt-2 ">
               <div className="flex items-center">
                 <div className="absolute items-center pl-3 ">
                   <EmailSvg />
                 </div>
                 <input
-                  className="w-72 px-3 pl-10 py-2 rounded border border-slate-300"
+                  className="w-72  px-3 pl-10 py-2 rounded border border-slate-300"
                   type="text"
                   placeholder="Enter Email"
                   onChange={getEmail}

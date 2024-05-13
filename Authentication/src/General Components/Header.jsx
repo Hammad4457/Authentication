@@ -4,7 +4,7 @@ import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
 function Header({ pageName }) {
-  const [userName, setUserName] = useState("");
+  const [userName, setUserName] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ function Header({ pageName }) {
       <div className="flex  flex-wrap   justify-center items-center">
         <div className=" sm:w-[16.7%]  absolute left-0 w-full border-2 border-gray-100 rounded items-center flex">
           <img className="ml-2 w-8" src="src\assets\Vector.png" alt="Logo" />
-          <h1 className="text-left ml-2  h-12 content-center text-blue-900">
+          <h1 className="text-left ml-2 hidden sm:block  h-12 content-center text-blue-900">
             Task List Manager
           </h1>
         </div>
@@ -65,10 +65,10 @@ function Header({ pageName }) {
             />
             <div className="ml-3">
               <h1 className="font-bold ml-[10%]">{userName}</h1>
-              <p className="text-xs">Status 200</p>
+              <p className="hidden sm:block text-xs">Status 200</p>
             </div>
             <img
-              className="mt-2 ml-6 items-center h-6 w-4"
+              className="hidden sm:block mt-2 ml-6 items-center h-6 w-4"
               src="src\assets\GreaterThan.png"
               alt="Arrow Icon"
             />

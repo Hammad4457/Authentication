@@ -198,7 +198,7 @@ function Task() {
     return filteredTasks.map((task) => (
       <div
         key={task.id}
-        className="mx-auto lg:w-[400px] rounded-xl lg:max-w-[calc(100%-64px)] sm:w-full sm:max-w-[calc(100%-32px)] md:w-full md:max-w-[calc(50%-32px)] mt-4 mb-8 border-1 bg-white"
+        className="mx-auto w-[80%] lg:w-[400px] rounded-xl lg:max-w-[calc(100%-64px)] sm:w-full sm:max-w-[calc(100%-32px)] md:w-full md:max-w-[calc(50%-32px)] mt-4 mb-8 border-1 bg-white"
       >
         <div className={`p-4 rounded-t-xl rounded ${getRandomColor()}`}></div>
         <div className="flex">
@@ -313,7 +313,7 @@ function Task() {
               Search
             </button>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-8 px-8 mt-4 border-1 rounded">
+          <div className="grid grid-cols-1 sm:grid-cols-2  md:grid-cols-2  lg:grid-cols-3 gap-y-4 gap-x-8 px-8 mt-4 border-1 rounded">
             {renderTaskDivs()}
           </div>
 
