@@ -12,7 +12,7 @@ function AdminDashboard() {
         <div className="w-[16.7%] h-auto">
           <MenuComponent color1="blue-800"></MenuComponent>
         </div>
-        <div className="w-[84.4%] h-auto">
+        <div className="w-[84.4%] ">
           <AnalyticsUser></AnalyticsUser>
         </div>
       </div>

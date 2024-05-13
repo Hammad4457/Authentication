@@ -233,9 +233,10 @@ function Task() {
         <p className="px-2 mt-2">{task.description}</p>
         <h6 className="font-bold mt-2 px-2">Attachment:</h6>
         <div>
+        
           <img
             className="w-[80%] h-28 mx-auto mt-2 mb-2"
-            src={task.attachment}
+            src="src\assets\Flower.png"
             alt="Attachment"
           />
         </div>
@@ -263,10 +264,10 @@ function Task() {
         <div className="md:w-1/6">
           <MenuComponent color3={"blue-700"} />
         </div>
-        <div className="md:w-5/6 border-1 bg-gray-200">
+        <div className="md:w-5/6  border-1 bg-gray-200">
           <div className="flex flex-col md:flex-row mt-8 md:items-center">
-            <div className="md:ml-[5%] md:mb-0">
-              <h1 className="font-bold text-xl mb-4 md:mb-0">Start date:</h1>
+            <div className="ml-4 md:ml-[5%] md:mb-0">
+              <h1 className="font-bold md-ml-4  text-xl mb-4 md:mb-0">Start date:</h1>
               <div className="flex items-center">
                 <input
                   className="w-[220px] px-2 h-12 mt-4 md:mt-4 rounded-xl"
@@ -278,8 +279,8 @@ function Task() {
               </div>
             </div>
 
-            <div className="md:ml-[4%] md:mb-0 mt-4 md:mt-0">
-              <h1 className="font-bold text-xl mb-4 md:mb-0">End Date:</h1>
+            <div className="ml-4 md:ml-[4%] md:mb-0 mt-4 md:mt-0">
+              <h1 className="font-bold text-xl  mb-4 md:mb-0">End Date:</h1>
               <input
                 className=" w-[220px] px-2 h-12 mt-4 rounded-xl"
                 type="date"
@@ -290,7 +291,7 @@ function Task() {
             </div>
 
             {userRole !== "admin" && (
-              <div className="md:ml-auto mr-16 md:mt-0 mt-4">
+              <div className="md:ml-auto md:w-[20%] sm:mt-4 mr-16 md:mt-0 mt-4">
                 <button onClick={() => setShowModal(true)}>
                   <img src="src\assets\Add Task.png" alt="Add Task" />
                 </button>
@@ -312,7 +313,7 @@ function Task() {
               Search
             </button>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-y-4 gap-x-8 px-8 mt-4 border-1 rounded">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-y-4 gap-x-8 px-8 mt-4 border-1 rounded">
             {renderTaskDivs()}
           </div>
 

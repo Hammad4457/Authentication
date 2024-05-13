@@ -44,8 +44,8 @@ function Header({ pageName }) {
             Task List Manager
           </h1>
         </div>
-        <div className="w-full sm:w-4/5 bg-white flex items-center bg-gray-50 h-12 ml-48 content-center">
-          <h2 className="font-bold text-left ml-2 text-xl flex-grow">
+        <div className="w-full sm:w-4/5 bg-white flex items-center  h-12 ml-48 content-center">
+          <h2 className="font-bold  text-xl ml-4 flex-grow">
             {pageName}
           </h2>
           <div className="flex w-12 ml-auto mr-4 px-2">
@@ -64,7 +64,7 @@ function Header({ pageName }) {
               alt="User Icon"
             />
             <div className="ml-3">
-              <h1 className="font-bold ml-[20%]">{userName}</h1>
+              <h1 className="font-bold ml-[10%]">{userName}</h1>
               <p className="text-xs">Status 200</p>
             </div>
             <img

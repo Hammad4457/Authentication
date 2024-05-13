@@ -57,7 +57,7 @@ function Users() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-
+  console.log(dotStatus);
   return (
     <div>
       <Header name="Users" />
@@ -67,11 +67,12 @@ function Users() {
         </div>
 
         <div className="flex-grow bg-[#F6F8FA]">
-          <div className="mt-11 ml-11 w-[1150px] h-[600px] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md truncate relative">
+          <div className="mt-11 ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md truncate relative">
             <h1 className="m-5 font-bold text-2xl">Online User</h1>
             <div className="ml-60 mb-5 flex space-x-28">
-              <h1 className="text-lg font-medium">UserName</h1>
-              <h1 className="text-lg font-medium">email</h1>
+              <h1 className="text-lg font-medium">UserNames</h1>
+              <h1 className="text-lg font-medium">Emails</h1>
+              <h1 className="text-lg px-28 font-medium">Roles</h1>
             </div>
             {isLoading && (
               <div className="flex justify-center items-center min-h-screen">
@@ -93,18 +94,23 @@ function Users() {
                 >
                   <div className="w-32 px-20 ml-44 ">{item.name}</div>
                   <div className="mr-80 w-32 ">{item.email}</div>{" "}
-                  <div className="w-32 flex justify-end items-center ">
+                  <div className="mr-80 w-32 px-24 ">{item.role}</div>{" "}
+                  <div className="w-32  flex justify-end items-center ">
                     <button
                       className="mx-auto"
-                      onClick={() => setSelectedUser(item._id)}
+                      onClick={() => {
+                      setSelectedUser(item._id)
+                      setDotStatus(!dotStatus)
+                      }}
                     >
                       <img src="src\assets\Frame.png" alt="Todo" />
                     </button>
                     {dotStatus && selectedUser === item._id && (
                       <TodoUser
                         onDelete={() => {
+                          
                           deleteUser(item._id);
-                          setSelectedUser(null);
+                         // setSelectedUser(null);
                         }}
                       />
                     )}

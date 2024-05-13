@@ -46,64 +46,100 @@ function Analytics_User() {
       });
   };
   const completedTask = totalTasks - (pendingTasks + declinedTasks);
+  const pending =(pendingTasks/totalTasks)*100
+  const decline =(declinedTasks/totalTasks)*100
+  const complete =(totalTasks/100)*100
 
   return (
-    <div className="bg-gray-100  w-auto h-screen border">
+    <div className="bg-gray-100  w-auto h-full border">
       <div className="bg-white rounded-xl border-blue-800  h-5/6 mt-12  mx-4 sm:mx-16 ">
         <h1 className="text-lg font-bold mx-4 ">Analytics</h1>
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4 py-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 px-4 py-4">
           <div className="h-32 rounded-md border-1 bg-purple-50">
             <p className="mx-6 mt-2">Total Task</p>
             <p className="text-xl mt-2 px-6 text-gray-600">{totalTasks}/100</p>
-            <img
-              className="mt-4 mx-auto"
-              src="src\assets\Line1.png"
-              alt="Total Task"
-            />
+            <svg
+                className="mx-auto mt-4 "
+            width="201"
+            height="20"
+            viewBox="0 0 201 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="0.5" y="0.5" width="200" height="20" rx="4" fill="#DCDCDC" />
+            <rect x="1" y="1" width={`${complete}%`} height="18" rx="4" fill="#4BCBEB" />
+          </svg>
           </div>
           <div className="h-32 rounded-md border-1 bg-blue-100">
             <p className="mx-6 mt-2">Completed Task</p>
             <p className="text-xl px-6 mt-2 text-gray-600">
               {completedTask}/{totalTasks}
             </p>
-            <img
-              className="mt-4 mx-auto"
-              src="src\assets\Line2.png"
-              alt="Completed Task"
-            />
+           
+            <svg
+                className="mx-auto mt-4 "
+            width="201"
+            height="20"
+            viewBox="0 0 201 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="0.5" y="0.5" width="200" height="20" rx="4" fill="#DCDCDC" />
+            <rect x="1" y="1" width={`${completedTask}%`} height="18" rx="4" fill="#5CB85C" />
+          </svg>
           </div>
           <div className="h-32 rounded-md border-1 bg-yellow-100">
             <p className="mx-6 mt-2">Pending Task</p>
             <p className="text-xl px-6 mt-2 text-gray-600">
               {pendingTasks}/{totalTasks}
             </p>
-            <img
-              className="mt-4 mx-auto"
-              src="src\assets\Line3.png"
-              alt="Pending Task"
-            />
+            
+            <svg
+                className="mx-auto mt-4 "
+            width="201"
+            height="20"
+            viewBox="0 0 201 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="0.5" y="0.5" width="200" height="20" rx="4" fill="#DCDCDC" />
+            <rect x="1" y="1" width={`${pending}%`} height="18" rx="4" fill="#F0AD4E" />
+          </svg>
           </div>
           <div className="h-32 rounded-md border-1 bg-green-100">
             <p className="mx-6 mt-2">Decline Task</p>
             <p className="text-xl px-6 mt-2 text-gray-600">
               {declinedTasks}/{totalTasks}
             </p>
-            <img
+            {/* <img
               className="mt-4 mx-auto"
               src="src\assets\Line4.png"
               alt="Decline Task"
-            />
+            /> */}
+            <svg
+                className="mx-auto mt-4 "
+            width="201"
+            height="20"
+            viewBox="0 0 201 20"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <rect x="0.5" y="0.5" width="200" height="20" rx="4" fill="#DCDCDC" />
+            <rect x="1" y="1" width={`${decline}%`} height="18" rx="4" fill="#D9534F" />
+          </svg>
           </div>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-32 px-4 mt-20 bg-white">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-80 px-4 mt-12 bg-white">
           <div className="h-52 rounded-md border-1 bg-white">
             <p className="mx-4 sm:mx-40 font-bold">Total Task Ratio</p>
-            <div className="px-4 sm:px-8">
-              <Chart />
+            <div className="px-4  sm:px-8">
+              
             </div>
+            <Chart />
           </div>
+          
           <div className="h-52 rounded-md border-1 bg-white">
-            <div className="px-4 sm:px-24">
+            <div className="px-4 md:mt-4 sm:px-28  ">
               <Calendar />
             </div>
           </div>

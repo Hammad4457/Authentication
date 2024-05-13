@@ -8,7 +8,7 @@ const TodoUser = ({ onDelete }) => {
   };
 
   return (
-    <div className="absolute right-80  bg-white">
+    <div className="absolute right-12  bg-white">
       <div className="flex mt-2 px-4 ">
         <button onClick={handleDelete}>
           <img className="" src="src/assets/Delete.png" alt="Delete" />

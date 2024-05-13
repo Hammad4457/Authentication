@@ -69,7 +69,7 @@ function MenuComponent({ color1, color2, color3 }) {
                   d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
                 />
               </svg>
-              <span className={`md:inline-block md:mr-8 text-${color1}`}>
+              <span className={`sm:block md:mr-8 text-${color1}`}>
                 Dashboard
               </span>
             </button>
@@ -93,7 +93,7 @@ function MenuComponent({ color1, color2, color3 }) {
                   <circle cx="12" cy="7" r="4" />
                 </svg>
                 <span
-                  className={`md:inline-block md:mr-20 md:ml-2 text-${color2}`}
+                  className={`sm:block md:mr-20 ml-2 md:ml-2 text-${color2}`}
                 >
                   User's
                 </span>
@@ -123,7 +123,7 @@ function MenuComponent({ color1, color2, color3 }) {
                 <line x1="11" y1="12" x2="20" y2="12" />
                 <line x1="11" y1="18" x2="20" y2="18" />
               </svg>
-              <span className={`md:inline-block md:mr-20 text-${color3}`}>
+              <span className={`sm:block ml-2 md:mr-20 text-${color3}`}>
                 Task
               </span>
             </button>
@@ -131,10 +131,10 @@ function MenuComponent({ color1, color2, color3 }) {
         )}
       </div>
       {menu && (
-        <div className="md:block">
-          <button className="relative w-[80%] sm:w-88 h-8 mx-4 mt-5 ">
+        <div >
+          <button className="relative w-[80%]  sm:w-88 h-8 mx-4 mt-5 ">
             <svg
-              className="h-6 w-8 text-black absolute ml-2"
+              className="h-6 w-8 text-black absolute top-1/2 transform -translate-y-1/2 ml-2"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -145,26 +145,38 @@ function MenuComponent({ color1, color2, color3 }) {
               <circle cx="12" cy="12" r="3" />
               <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
             </svg>
-            <span className="md:inline-block md:mr-14">Setting</span>
+            <span className=" ml-2 sm:block  md:mr-14">Setting</span>
           </button>
+          </div>
+        )}
+        
+        <div >
+  <button className=" relative w-[80%] sm:w-88 h-8 mx-6 mt-5 " onClick={() => {
+    handleLogout();
+    handleSetActiveLink("/logout");
+  }}>
+    <svg
+      class="h-6 w-8 text-black absolute top-1/2 transform -translate-y-1/2 "
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      stroke-width="2"
+      stroke="currentColor"
+      fill="none"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" />
+      <path d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2" />
+      <path d="M20 12h-13l3 -3m0 6l-3 -3" />
+    </svg>
+    <span className=" text-center md:mr-16">Logout</span>
+  </button>
+</div>
 
-          <button
-            className={`px-7 w-[80%] sm:w-88   mt-6  font-small text-md text-black ${
-              activeLink === "/logout"
-            }`}
-            onClick={() => {
-              handleLogout();
-              handleSetActiveLink("/logout");
-            }}
-          >
-            <div className="flex">
-              <LogoutSvg></LogoutSvg>
-              <span className="ml-2">Logout</span>
-            </div>
-          </button>
-        </div>
-      )}
-    </div>
+  </div>
+      
+  
   );
 }
 
