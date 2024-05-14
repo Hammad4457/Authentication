@@ -1,9 +1,14 @@
 import express from "express";
-// import mongoose from "mongoose";
 import connectDB from "./config/DB.js";
-// import corsMiddleware from "./config/Cors.js";
 import userRouter from "./routes/userRoutes.js";
 import cors from "cors";
+import { createTask } from "./controllers/tasksController.js";
+import path from "path"
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app = express();
 
@@ -23,6 +28,13 @@ app.get("/", (req, res) => {
   res.send("Welcome to the Express server!");
 });
 
+// Serve the uploads folder statically
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+app.get("/", (req, res) => {
+  res.send("Welcome to the Express server!");
+});
+
 console.log("Hammad");
 console.log("Here");
 
@@ -30,6 +42,7 @@ console.log("Here");
 import userRoutes from "./routes/userRoutes.js";
 import taskRoutes from "./routes/tasksRoutes.js";
 import notificationRoutes from "./routes/notificationRoutes.js";
+import upload from "./config/multer.js";
 
 app.use("/api/users", userRoutes);
 app.use("/api/tasks", taskRoutes);

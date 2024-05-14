@@ -51,7 +51,8 @@ function EditModal({ onSubmit, task, selectedTaskId , setEditModal }) {
         }
       );
 
-      onSubmit(response.data); // Pass updated task data to parent component
+      onSubmit(response.data);
+      window.location.href="/Task" // Pass updated task data to parent component
       setEditModal(false);
     } catch (error) {
       console.error("Error updating task:", error);

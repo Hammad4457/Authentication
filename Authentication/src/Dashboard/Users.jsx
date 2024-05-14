@@ -15,7 +15,7 @@ function Users() {
   const [dotStatus, setDotStatus] = useState(false);
   const [selectedUser, setSelectedUser] = useState(null);
 
-  const itemsPerPage = 6; // Number of items per page
+  const itemsPerPage = 5; // Number of items per page
 
   useEffect(() => {
     fetchUserData();
@@ -67,7 +67,7 @@ function Users() {
         </div>
 
         <div className=" flex-grow h-full bg-gray-100 ">
-          <div className=" mb-[12.5%]  mt-11 ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md  ">
+          <div className=" mb-[8%]  mt-11 ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md  ">
             <h1 className="m-5 font-bold text-2xl">Online User</h1>
             <div className="ml-60 mb-5 flex space-x-28">
               <h1 className="text-lg font-medium">UserNames</h1>
@@ -92,7 +92,7 @@ function Users() {
                   key={item._id}
                   className="mb-3 py-3 flex border-b space-x-20"
                 >
-                  <div className="w-32 px-20 ml-44 ">{item.name}</div>
+                  <div className="w-32 px-20 ml-44 underline text-blue-700">{item.name}</div>
                   <div className="mr-80 w-32 ">{item.email}</div>{" "}
                   <div className="mr-80 w-32 px-24 ">{item.role}</div>{" "}
                   <div className="w-32  flex justify-end items-center ">

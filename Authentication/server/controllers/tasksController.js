@@ -38,12 +38,14 @@ export const createTask = async (req, res) => {
     return res.status(400).json({ message: "All fields are required" });
   }
 
+  console.log(req.user)
   try {
     const task = new Task({
       title,
       description,
       startDate,
       endDate,
+      attachment: req.file.path,
       user: req.user._id, // Associate the task with the authenticated user
     });
     const newTask = await task.save();

@@ -84,10 +84,20 @@ function Task() {
       return;
     }
 
+    console.log("data: ", data)
+
+    const formData = new FormData(); 
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("startDate", data.startDate);
+    formData.append("endDate", data.endDate);
+    formData.append("attachment", data.attachment);
+
     axios
-      .post("http://localhost:3000/api/tasks/addTasks", data, {
+      .post("http://localhost:3000/api/tasks/addTasks", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
         },
       })
       .then((response) => {
@@ -100,6 +110,7 @@ function Task() {
         console.error("Error adding task:", error);
       });
   }
+
   //console.log(updateTask);
   const handleEditTask = (updatedTask) => {
     // Update the task in the tasks array
@@ -198,7 +209,7 @@ function Task() {
     return filteredTasks.map((task) => (
       <div
         key={task.id}
-        className="mx-auto w-[80%] lg:w-[400px] rounded-xl lg:max-w-[calc(100%-64px)] sm:w-full sm:max-w-[calc(100%-32px)] md:w-full md:max-w-[calc(50%-32px)] mt-4 mb-8 border-1 bg-white"
+        className="mx-auto w-[80%] lg:w-[400px] rounded-xl  sm:w-full sm:max-w-[calc(100%-32px)] md:w-full  mt-4 mb-8 border-1 bg-white"
       >
         <div className={`p-4 rounded-t-xl rounded ${getRandomColor()}`}></div>
         <div className="flex">
@@ -232,12 +243,9 @@ function Task() {
         <h5 className="font-bold mt-2 px-2">Description:</h5>
         <p className="px-2 mt-2">{task.description}</p>
         <h6 className="font-bold mt-2 px-2">Attachment:</h6>
-        <div>
-          <img
-            className="w-[80%] h-28 mx-auto mt-2 mb-2"
-            src="src\assets\Flower.png"
-            alt="Attachment"
-          />
+        
+        <div className=" mx-auto w-[80%] h-32">
+        <img className="w-full h-24 object-cover " src={"http://localhost:3000/" + task.attachment}  />
         </div>
         <div className="flex mt-2">
           <h7 className="font-bold px-2">Start Date:</h7>
@@ -265,13 +273,13 @@ function Task() {
         </div>
         <div className="md:w-5/6  border-1 bg-gray-200">
           <div className="flex flex-col md:flex-row mt-8 md:items-center">
-            <div className="ml-4 md:ml-[5%] md:mb-0">
+            <div className="ml-4 md:ml-[3.5%] md:mb-0">
               <h1 className="font-bold md-ml-4  text-xl mb-4 md:mb-0">
                 Start date:
               </h1>
               <div className="flex items-center">
                 <input
-                  className="w-[220px] px-2 h-12 mt-4 md:mt-4 rounded-xl"
+                  className="w-[220px] px-2 h-12 mt-4 md:mt-4 rounded-xl border border-blue-200"
                   type="date"
                   onChange={handleSearchDateChange}
                   placeholder
@@ -283,7 +291,7 @@ function Task() {
             <div className="ml-4 md:ml-[4%] md:mb-0 mt-4 md:mt-0">
               <h1 className="font-bold text-xl  mb-4 md:mb-0">End Date:</h1>
               <input
-                className=" w-[220px] px-2 h-12 mt-4 rounded-xl"
+                className=" w-[220px] px-2 h-12 mt-4 rounded-xl border border-blue-200"
                 type="date"
                 onChange={handleSearchDateChange}
                 placeholder
@@ -300,17 +308,17 @@ function Task() {
             )}
           </div>
 
-          <h3 className="font-bold ml-[5%] mt-4 text-xl">Enter Title:</h3>
+          <h3 className="font-bold ml-[3.5%] mt-4 text-xl">Enter Title:</h3>
           <div className="flex border-1 border-blue-700">
             <input
-              className=" rounded-l-xl ml-[5%] w-full md:w-[31%] h-12 mt-4 px-2"
+              className=" rounded-l-xl ml-[3.5%] w-[35%] md:w-[31%] h-12 mt-4 px-2 border border-blue-200"
               type="search"
               placeholder="Search"
               value={searchQuery}
               onChange={handleSearchChange}
               required
             />
-            <button className="bg-blue-200 rounded-r-xl w-full md:w-1/12 h-12 mt-4">
+            <button className="bg-blue-200 rounded-r-xl w-[10%] md:w-1/12 h-12 mt-4 border-1 ">
               Search
             </button>
           </div>

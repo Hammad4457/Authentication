@@ -20,7 +20,10 @@ function Todo({
   return (
     <>
       <div className="absolute bg-white">
-        <div className="flex mt-2 px-4 " onClick={onDelete}>
+        <div className="flex mt-2 px-4 " onClick={()=>{
+          onDelete
+          
+          }}>
           <button>
             <img className="" src="src/assets/Delete.png" alt="Delete" />
           </button>

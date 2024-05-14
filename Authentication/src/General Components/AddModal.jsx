@@ -22,6 +22,17 @@ function AddModal({ onSubmit, setShowModal }) {
     }));
   }
 
+
+  // Function to handle file selection
+  function handleFileSelect(event) {
+    const selectedFile = event.target.files[0];
+    console.log(selectedFile)
+    setData((prevData) => ({
+      ...prevData,
+      attachment: selectedFile,
+    }));
+  }
+
   function handleFormSubmit(e) {
     e.preventDefault();
     onSubmit(data);
@@ -91,8 +102,8 @@ function AddModal({ onSubmit, setShowModal }) {
               <input
                 type="file"
                 name="attachment"
-                value={data.attachment}
-                onChange={handleChange}
+                // value={data.attachment}
+                onChange={handleFileSelect}
                 className="w-full h-40 border border-gray-300 rounded-md py-1 px-3"
               />
               <div className="flex">

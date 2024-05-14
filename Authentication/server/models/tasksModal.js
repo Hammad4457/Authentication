@@ -24,6 +24,9 @@ const taskSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
+  attachment: {
+    type: String
+  },
 
   // Other task properties
 });
