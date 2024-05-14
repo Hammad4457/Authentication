@@ -59,7 +59,7 @@ function Analytics_User() {
             <p className="mx-6 mt-2">Total Task</p>
             <p className="text-xl mt-2 px-6 text-gray-600">{totalTasks}/100</p>
             <svg
-                className="mx-auto mt-4 "
+                className="mx-auto mt-4  md:w-[40%] lg:w-full "
             width="201"
             height="20"
             viewBox="0 0 201 20"
@@ -77,7 +77,7 @@ function Analytics_User() {
             </p>
            
             <svg
-                className="mx-auto mt-4 "
+                className="mx-auto mt-4 md:w-[40%] lg:w-full"
             width="201"
             height="20"
             viewBox="0 0 201 20"
@@ -95,7 +95,7 @@ function Analytics_User() {
             </p>
             
             <svg
-                className="mx-auto mt-4 "
+                className="mx-auto mt-4 md:w-[40%] lg:w-full"
             width="201"
             height="20"
             viewBox="0 0 201 20"
@@ -117,7 +117,7 @@ function Analytics_User() {
               alt="Decline Task"
             /> */}
             <svg
-                className="mx-auto mt-4 "
+                className="mx-auto mt-4 md:w-[40%] lg:w-full"
             width="201"
             height="20"
             viewBox="0 0 201 20"

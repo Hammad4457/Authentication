@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-function EditModal({ onSubmit, task, selectedTaskId }) {
+function EditModal({ onSubmit, task, selectedTaskId , setEditModal }) {
   const [cross, setCross] = useState(true);
   const [data, setData] = useState({
     title: "",
@@ -52,6 +52,7 @@ function EditModal({ onSubmit, task, selectedTaskId }) {
       );
 
       onSubmit(response.data); // Pass updated task data to parent component
+      setEditModal(false);
     } catch (error) {
       console.error("Error updating task:", error);
     }

@@ -57,7 +57,7 @@ function Users() {
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
-  console.log(dotStatus);
+  
   return (
     <div>
       <Header pageName="Users" />
@@ -66,8 +66,8 @@ function Users() {
           <MenuComponent color2={"blue-700"} />
         </div>
 
-        <div className=" flex-grow bg-[#F6F8FA]">
-          <div className="mt-11 ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md truncate relative">
+        <div className=" flex-grow h-full bg-gray-100 ">
+          <div className=" mb-[12.5%]  mt-11 ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md  ">
             <h1 className="m-5 font-bold text-2xl">Online User</h1>
             <div className="ml-60 mb-5 flex space-x-28">
               <h1 className="text-lg font-medium">UserNames</h1>

@@ -11,6 +11,7 @@ function Todo({
   setEditModal,
   editModal,
 }) {
+  
   const handleEditSubmit = (updatedData) => {
     // Pass the updated data to the parent component
     handleEditTask(updatedData);
@@ -27,11 +28,9 @@ function Todo({
         </div>
 
         <div className="flex mt-2 px-4">
-          <button
-            onClick={() => {
-              setEditModal(!editModal);
-            }}
-          >
+          <button onClick={()=>{
+            setEditModal(true);
+          }}>
             <img src="src/assets/Edit.png" alt="Edit" />
           </button>
           <span className="ml-2">Edit</span>
@@ -42,6 +41,7 @@ function Todo({
           onSubmit={handleEditSubmit}
           task={task}
           selectedTaskId={selectedTaskId}
+          setEditModal={setEditModal}
         />
       )}
     </>
