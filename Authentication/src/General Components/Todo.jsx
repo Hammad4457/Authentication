@@ -21,7 +21,8 @@ function Todo({
     <>
       <div className="absolute bg-white">
         <div className="flex mt-2 px-4 " onClick={()=>{
-          onDelete
+          onDelete()
+          windows.location.href="/Task"
           
           }}>
           <button>

@@ -101,10 +101,13 @@ function Task() {
         },
       })
       .then((response) => {
-        setTasks([...tasks, data]);
-        setFilteredTasks([...filteredTasks, data]);
-        //   setShowModal(false);
+        const newData=response.data
+        setTasks([...tasks, newData]);
+        setFilteredTasks([...filteredTasks, newData]);
         console.log(response);
+        setShowModal(false);
+       
+       
       })
       .catch((error) => {
         console.error("Error adding task:", error);
@@ -138,6 +141,8 @@ function Task() {
       .then((response) => {
         const updatedTasks = filteredTasks.filter(
           (task) => task._id !== taskId
+          
+         
         );
         setFilteredTasks(updatedTasks);
         if (selectedTaskId === taskId) {
@@ -244,14 +249,14 @@ function Task() {
         <p className="px-2 mt-2">{task.description}</p>
         <h6 className="font-bold mt-2 px-2">Attachment:</h6>
         
-        <div className=" mx-auto w-[80%] h-32">
-        <img className="w-full h-24 object-cover " src={"http://localhost:3000/" + task.attachment}  />
+        <div className=" mx-auto mt-1 w-[80%] h-40">
+        <img className="w-full h-40 object-cover " src={"http://localhost:3000/" + task.attachment}  />
         </div>
         <div className="flex mt-2">
           <h7 className="font-bold px-2">Start Date:</h7>
           <h8 className="font-bold ml-auto mr-6">End Date:</h8>
         </div>
-        <div className="flex mt-2">
+        <div className="flex ">
           <p className="px-2">{formatDate(task.startDate)}</p>
           <p className="ml-auto mr-4">{formatDate(task.endDate)}</p>
         </div>
@@ -300,7 +305,7 @@ function Task() {
             </div>
 
             {userRole !== "admin" && (
-              <div className="md:ml-auto md:w-[20%] sm:mt-4 mr-16 md:mt-0 mt-4">
+              <div className="ml-14 md:ml-auto md:w-[20%] sm:mt-4 mr-16 md:mt-0 mt-4">
                 <button onClick={() => setShowModal(true)}>
                   <img src="src\assets\Add Task.png" alt="Add Task" />
                 </button>
@@ -318,7 +323,7 @@ function Task() {
               onChange={handleSearchChange}
               required
             />
-            <button className="bg-blue-200 rounded-r-xl w-[10%] md:w-1/12 h-12 mt-4 border-1 ">
+            <button className="bg-blue-200 rounded-r-xl w-[13%] md:w-1/12 h-12 mt-4 border-1 ">
               Search
             </button>
           </div>
