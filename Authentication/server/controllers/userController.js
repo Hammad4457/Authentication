@@ -25,6 +25,28 @@ export const getAllUsers = async (req, res) => {
   }
 };
 
+//
+export const doesEmailExist = async (req, res, next) => {
+  const { email } = req.query; // Assuming the email is sent as a query parameter
+
+  try {
+    // Find the user by email
+    const user = await User.findOne({ email });
+
+    // If user not found, return false
+    if (!user) {
+      return res.json({ exists: false });
+    }
+
+    // If user found, return true
+    return res.json({ exists: true });
+  } catch (error) {
+    // Handle errors
+    console.error("Error checking email existence:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
 // Get a single user by ID
 export const getUserById = async (req, res) => {
   try {

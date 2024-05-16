@@ -128,6 +128,7 @@ function AddModal({ onSubmit, setShowModal }) {
                 required
               ></input>
               <button
+              
                 type="submit"
                 className="bg-blue-500 text-white py-2 px-4 ml-48 mt-2 rounded-md"
               >

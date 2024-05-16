@@ -19,6 +19,8 @@ router.delete("/:id", userController.deleteUser);
 
 router.delete("/email", userController.deleteUserByEmail);
 
+router.get("/email", userController.doesEmailExist);
+
 router.post("/login", userController.loginUser);
 
 export default router;

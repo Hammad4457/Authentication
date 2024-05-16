@@ -66,13 +66,13 @@ function Users() {
           <MenuComponent color2={"blue-700"} />
         </div>
 
-        <div className=" flex-grow h-full bg-gray-100 ">
-          <div className=" mb-[8%]  mt-11 ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md  ">
+        <div className=" flex-grow h-full bg-gray-100  ">
+          <div className=" mb-[8%]  mt-11 mx-auto md:ml-11 w-[88%] h-[96%] bg-white rounded-xl border-[1.45px] border-[#4BCBEB] drop-shadow-md  ">
             <h1 className="m-5 font-bold text-2xl">Online User</h1>
-            <div className="ml-60 mb-5 flex space-x-28">
-              <h1 className="text-lg font-medium">UserNames</h1>
-              <h1 className="text-lg font-medium">Emails</h1>
-              <h1 className="text-lg px-28 font-medium">Roles</h1>
+            <div className="ml-10 md:ml-60 mb-5 flex space-x-28">
+              <h1 className="text-lg  font-medium">UserNames</h1>
+              <h1 className="text-lg hidden md:block font-medium">Emails</h1>
+              <h1 className="text-lg hidden md:block px-28 font-medium">Roles</h1>
             </div>
             {isLoading && (
               <div className="flex justify-center items-center min-h-screen">
@@ -92,9 +92,9 @@ function Users() {
                   key={item._id}
                   className="mb-3 py-3 flex border-b space-x-20"
                 >
-                  <div className="w-32 px-20 ml-44 underline text-blue-700">{item.name}</div>
-                  <div className="mr-80 w-32 ">{item.email}</div>{" "}
-                  <div className="mr-80 w-32 px-24 ">{item.role}</div>{" "}
+                  <div className="w-32 ml-10 md:px-20 md:ml-44 underline text-blue-700">{item.name}</div>
+                  <div className="mr-80 w-32 hidden md:block ">{item.email}</div>{" "}
+                  <div className="mr-80 hidden md:block w-32 px-24 ">{item.role}</div>{" "}
                   <div className="w-32  flex justify-end items-center ">
                     <button
                       className="mx-auto"
@@ -117,7 +117,7 @@ function Users() {
                   </div>
                 </div>
               ))}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
+              <div className="absolute bottom-4 ml-[42%] md:ml-0 md:left-1/2 transform -translate-x-1/2">
                 <Pagination
                   count={Math.ceil(userData.length / itemsPerPage)}
                   page={currentPage}

@@ -20,24 +20,26 @@ function Todo({
   return (
     <>
       <div className="absolute bg-white">
-        <div className="flex mt-2 px-4 " onClick={()=>{
+        <div className="flex   mt-2 px-4 " onClick={()=>{
           onDelete()
           windows.location.href="/Task"
           
           }}>
-          <button>
-            <img className="" src="src/assets/Delete.png" alt="Delete" />
+          <button className="flex">
+            <img className="mt-1" src="src/assets/Delete.png" alt="Delete" />
+            <text className="ml-2 ">Delete</text>
           </button>
-          <text className="ml-2">Delete</text>
+          
         </div>
 
         <div className="flex mt-2 px-4">
-          <button onClick={()=>{
+          <button className="flex" onClick={()=>{
             setEditModal(true);
           }}>
-            <img src="src/assets/Edit.png" alt="Edit" />
+            <img className="mt-1" src="src/assets/Edit.png" alt="Edit" />
+            <span className="ml-2">Edit</span>
           </button>
-          <span className="ml-2">Edit</span>
+          
         </div>
       </div>
       {editModal && (

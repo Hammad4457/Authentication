@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+
 import Header from "../General Components/Header";
 import MenuComponent from "../General Components/MenuComponent";
 import AddModal from "../General Components/AddModal";
@@ -15,6 +16,8 @@ function Task() {
   const [userRole, setUserRole] = useState(null);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [editModal, setEditModal] = useState(false);
+  
+  
 
   // Function to fetch tasks from the server
   const getRandomColor = () => {
@@ -32,7 +35,8 @@ function Task() {
   // Fetch tasks on component mount
   useEffect(() => {
     fetchTasks();
-    getUserRoleFromToken(); // Call function to retrieve user role
+    getUserRoleFromToken();
+     // Call function to retrieve user role
   }, []);
 
   const getUserRoleFromToken = () => {
@@ -78,6 +82,7 @@ function Task() {
 
   // Function to handle submission of modal data
   function handleModalSubmit(data) {
+    setLoading(true);
     const token = localStorage.getItem("jsonwebtoken");
     if (!token) {
       console.error("No token found in local storage");
@@ -101,13 +106,15 @@ function Task() {
         },
       })
       .then((response) => {
+        
+        
         const newData=response.data
         setTasks([...tasks, newData]);
         setFilteredTasks([...filteredTasks, newData]);
+        setLoading(false);
         console.log(response);
         setShowModal(false);
-       
-       
+        
       })
       .catch((error) => {
         console.error("Error adding task:", error);
@@ -119,12 +126,14 @@ function Task() {
     // Update the task in the tasks array
     const updatedTasks = tasks.map((task) => {
       if (task._id === updatedTask._id) {
+        console.log(updatedTask)
+       
         return updatedTask;
       }
       return task;
     });
     setTasks(updatedTasks);
-
+    setFilteredTasks(updatedTasks)
     // Close the edit modal
     setEditModal(false);
   };
@@ -157,12 +166,14 @@ function Task() {
   const handleTodoEdit = () => {
     if (selectedTaskId) {
       handleEditTask(selectedTaskId);
+      
     }
   };
 
   const handleTodoDelete = () => {
     if (selectedTaskId) {
       handleDeleteTask(selectedTaskId);
+      window.location.reload();
     }
   };
 
@@ -214,7 +225,7 @@ function Task() {
     return filteredTasks.map((task) => (
       <div
         key={task.id}
-        className="mx-auto w-[80%] lg:w-[400px] rounded-xl  sm:w-full sm:max-w-[calc(100%-32px)] md:w-full  mt-4 mb-8 border-1 bg-white"
+        className="mx-auto w-[90%] lg:w-[400px] rounded-xl  sm:w-full sm:max-w-[calc(100%-32px)] md:w-full  mt-4 mb-8  bg-white"
       >
         <div className={`p-4 rounded-t-xl rounded ${getRandomColor()}`}></div>
         <div className="flex">
@@ -223,6 +234,7 @@ function Task() {
             <button
               onClick={() => {
                 setDotStatus(!dotStatus);
+                
                 handleTodoClick(task._id);
               }}
             >
@@ -316,14 +328,14 @@ function Task() {
           <h3 className="font-bold ml-[3.5%] mt-4 text-xl">Enter Title:</h3>
           <div className="flex border-1 border-blue-700">
             <input
-              className=" rounded-l-xl ml-[3.5%] w-[35%] md:w-[31%] h-12 mt-4 px-2 border border-blue-200"
+              className=" rounded-l-xl ml-[3.5%] w-[43%] md:w-[31%] h-12 mt-4 px-2 border border-blue-200"
               type="search"
               placeholder="Search"
               value={searchQuery}
               onChange={handleSearchChange}
               required
             />
-            <button className="bg-blue-200 rounded-r-xl w-[13%] md:w-1/12 h-12 mt-4 border-1 ">
+            <button className="bg-blue-200 rounded-r-xl w-[14%] md:w-1/12 h-12 mt-4 border-1 ">
               Search
             </button>
           </div>

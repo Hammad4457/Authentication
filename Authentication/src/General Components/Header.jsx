@@ -38,17 +38,17 @@ function Header({ pageName }) {
   return (
     <>
       <div className="flex  flex-wrap   justify-center items-center">
-        <div className=" sm:w-[16.7%]  absolute left-0 w-full border-2 border-gray-100 rounded items-center flex">
+        <div className=" sm:w-[16.7%]  absolute left-0 w-full md:border-2 border-gray-100 rounded items-center flex">
           <img className="ml-2 w-8" src="src\assets\Vector.png" alt="Logo" />
           <h1 className="text-left ml-2 hidden sm:block  h-12 content-center text-blue-900">
             Task List Manager
           </h1>
         </div>
-        <div className="w-full sm:w-4/5 bg-white flex items-center  h-12 ml-48 content-center">
+        <div className="w-full sm:w-4/5 bg-white flex items-center  h-12 ml-10 md:ml-48 content-center">
           <h2 className="font-bold  text-xl ml-4 flex-grow">
             {pageName}
           </h2>
-          <div className="flex w-12 ml-auto mr-4 px-2">
+          <div className="flex w-12  ml-auto mr-4 px-2">
             <Link to="/Notifications">
               <img
                 className="mt-1 mr-4"
@@ -64,7 +64,7 @@ function Header({ pageName }) {
               alt="User Icon"
             />
             <div className="ml-3">
-              <h1 className="font-bold ml-[10%]">{userName}</h1>
+              <h1 className="font-bold  md:ml-[10%]">{userName}</h1>
               <p className="hidden sm:block text-xs">Status 200</p>
             </div>
             <img

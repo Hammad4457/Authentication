@@ -1,13 +1,29 @@
 import React, { useState } from "react";
 import EmailSvg from "../svg Components/EmailSvg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
 function ForgetPassword() {
   const [email, setEmail] = useState("");
+  const [emailExists,setEmailExists]=useState(false);
 
   function getEmail(e) {
     setEmail(e.target.value);
   }
+  
+
+  function checkUserExists(email) {
+    return axios.get(`http://localhost:3000/api/users/${email}`)
+        .then(response => {
+            const answer = response.data;
+            console.log(answer);
+            setEmailExists(answer);
+        })
+        .catch(error => {
+            console.error("Error checking user existence:", error);
+            // You can handle errors here as needed
+            throw error; // Rethrow the error to be handled by the caller
+        });
+}
 
   return (
     <div className="flex flex-col sm:flex-row">
@@ -46,11 +62,16 @@ function ForgetPassword() {
               </div>
             </div>
 
-            <Link to={"/Reset"}>
-              <button className="bg-[#4BCBEB] mt-12 ml-6 px-2 py-2 w-72 rounded-2xl">
+            
+              <button className="bg-[#4BCBEB] mt-12 ml-6 px-2 py-2 w-72 rounded-2xl"
+               onClick={()=>{
+                if(emailExists){
+                  Navigate("/Reset")
+                }
+              }}>
                 Continue
               </button>
-            </Link>
+            
 
             <Link to={"/Login"}>
               <p className="text-blue-800 mt-8 ml-28">Back to Sign In</p>
